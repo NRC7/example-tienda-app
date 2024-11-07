@@ -1,14 +1,15 @@
 import React from 'react';
 import ProductList from '../components/ProductList';
+import TopSellingGalery from '../components/TopSellingGalery';
 import '../styles/HomeStyle.css'
 
 const Home = () => {
     return (
         <main>
             <div className="container">
-                <h1>Bienvenidos a nuestra tienda</h1>
                 {/* ProductList ahora se encarga de obtener los productos */}
-                <ProductList />
+                <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '2px 0px' }}>TOP SELLING</h2>
+                <TopSellingGalery />
             </div>
         </main>
     );

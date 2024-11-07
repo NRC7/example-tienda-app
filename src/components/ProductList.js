@@ -12,7 +12,7 @@ const ProductList = () => {
         const fetchProducts = async () => {
             const data = await productService.getProducts();
             setProducts(data);
-            console.log(data);
+            //console.log(data);
         };
 
         fetchProducts();
