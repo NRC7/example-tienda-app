@@ -1,0 +1,22 @@
+/* Estilos generales del body */
+body {
+    padding: 0; /* Elimina padding predeterminado */
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+    color: #333; /* Color del texto */
+    min-height: 100vh; /* Asegura que el contenido cubra toda la altura de la pantalla */
+}
+
+/* Márgenes en los lados */
+.container {
+    margin: 0 225px; /* Márgenes laterales */
+    padding: 20px; /* Padding interno si lo necesitas */
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        margin: 0 60px; /* Márgenes laterales */
+        text-align: center;
+    }
+
+}

@@ -1,7 +1,7 @@
 // src/components/ProductList.js
 import React, { useState, useEffect } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
-import dummyProducts from '../util/DummyProducts';
+import productService from '../services/ProductService'; // Importamos el servicio
 
 const ProductList = () => {
     // Declara el estado de los productos dentro de ProductList
@@ -10,21 +10,9 @@ const ProductList = () => {
     // Usa useEffect para obtener los productos al montar ProductList
     useEffect(() => {
         const fetchProducts = async () => {
-            try {
-                const response = await fetch(process.env.REACT_APP_BACKEND_URL);
-                const data = await response.json();
-                if (data.status === "ok") {
-                    setProducts(data.products); // Actualiza el estado con los productos obtenidos
-                    console.log(data.products)
-                }
-                else {
-                    console.log("no hay productos, solo dummies")
-                    setProducts(dummyProducts)
-                }
-            } catch (error) {
-                console.log("Error al obtener productos:", error);
-                setProducts(dummyProducts)
-            }
+            const data = await productService.getProducts();
+            setProducts(data);
+            console.log(data);
         };
 
         fetchProducts();

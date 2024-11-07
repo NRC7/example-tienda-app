@@ -149,7 +149,8 @@ body {
 /* Media queries para pantallas pequeñas */
 @media (max-width: 768px) {
     .navbar {
-        padding: 10px 20px; /* Menos espacio en los bordes */
+        padding: 20px 20px; /* Menos espacio en los bordes */
+        font-size: 1.6rem;
     }
 
     .search-bar {
@@ -187,7 +188,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 20px;
+        padding: 20px 20px;
         background-color: white;
         color: black;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
