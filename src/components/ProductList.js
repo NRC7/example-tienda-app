@@ -22,7 +22,8 @@ const ProductList = () => {
                     setProducts(dummyProducts)
                 }
             } catch (error) {
-                console.error("Error al obtener productos:", error);
+                console.log("Error al obtener productos:", error);
+                setProducts(dummyProducts)
             }
         };
 
