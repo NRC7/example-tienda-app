@@ -22,6 +22,10 @@ body {
     margin-top: 60px; /* Ajusta este valor según la altura de tu navbar */
 }
 
+.sidebar {
+    display: none; /* Esto oculta completamente la barra lateral */
+}
+
 /* Estilos para los elementos dentro del navbar */
 .navbar .hamburger,
 .navbar .search-bar,
