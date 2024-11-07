@@ -1,6 +1,7 @@
 // src/components/ProductList.js
 import React, { useState, useEffect } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
+import dummyProducts from '../util/DummyProducts';
 
 const ProductList = () => {
     // Declara el estado de los productos dentro de ProductList
@@ -17,7 +18,8 @@ const ProductList = () => {
                     console.log(data.products)
                 }
                 else {
-                    console.log("no hay productos")
+                    console.log("no hay productos, solo dummies")
+                    setProducts(dummyProducts)
                 }
             } catch (error) {
                 console.error("Error al obtener productos:", error);
