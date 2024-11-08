@@ -3,8 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0px; /* Ajusta el padding lateral para que no quede pegado a los bordes */
-    background-color: white;
+    padding: 16px 0px; /* Ajusta el padding lateral para que no quede pegado a los bordes */
+    background-color: #f9e35c;
     color: black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed; /* Fija el navbar en la parte superior */
@@ -96,6 +96,7 @@ body {
 
 /* Ajustes en la barra de búsqueda */
 .search-bar input {
+    background-color: #f0f0f0;
     width: 100%;
     max-width: 350px;
     padding: 10px;

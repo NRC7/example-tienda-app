@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif; /* Fuente predeterminada */
     color: #333; /* Color del texto */
     min-height: 100vh; /* Asegura que el contenido cubra toda la altura de la pantalla */
+    background-color: #f0f0f0;
 }
 
 /* Márgenes en los lados */

@@ -11,7 +11,7 @@ const Rating = ({ rating }) => {
   const emptyStarsCount = totalStars - fullStarsCount; // Número de estrellas vacías
 
   return (
-    <div style={{ fontSize: '20px', color: 'gold' }}>
+    <div style={{ fontSize: '25px', color: 'black' }}>
       {/* Mostrar las estrellas completas */}
       {Array(fullStarsCount).fill(fullStar)}
       {/* Mostrar las estrellas vacías */}

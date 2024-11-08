@@ -8,9 +8,10 @@ const Home = () => {
         <main>
             <div className="container">
                 {/* ProductList ahora se encarga de obtener los productos */}
-                <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '2px 0px' }}>TOP SELLING</h2>
                 <TopSellingGalery />
             </div>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '10px 0px' }}>Productos seleccionados para ti</h2>
+            <ProductList />
         </main>
     );
 };
