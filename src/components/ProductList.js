@@ -78,47 +78,52 @@ const ProductList = ({ productList }) => {
 
 
     return (
-        <div className="cont">
-            <button className="arrow left" onClick={scrollLeft}>
-                <i className="fas fa-chevron-left"></i>
-            </button>
-            <div className='pr-cont' ref={productListRef}>
-                {filteredProducts.length > 0 ? (
-                    filteredProducts.map((product) => (
-                        <div className='pr-card' key={product.id}>
-                            <h3 className='product-name'>{product.name}</h3>
-                            <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
-                            <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {product.category}</p>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                {product.discountPercentage !== "" ? (
-                                    <>
-                                        <span style={{ textDecoration: 'line-through', color: 'red', margin: '6px 2px', fontSize: '1rem' }}>
-                                            Antes: {formatCurrency(product.normalPrice)}
-                                        </span>
-                                        <span style={{ fontWeight: 'bold', color: 'green', fontSize: '1.2rem', margin: '6px 2px' }}>
-                                            Ahora: {formatCurrency(product.dealPrice)}
-                                        </span>
-                                        <span style={{ color: 'black', margin: '6px 2px', fontSize: '1rem', }}>
-                                            ({product.discountPercentage} de desct.)
-                                        </span>
-                                    </>
-                                ) : (
-                                    // Muestra solo el normalPrice si no hay descuento
-                                    <span style={{ fontWeight: 'bold', color: 'black', fontSize: '1.3rem', margin: '20px 2px' }}>{formatCurrency(product.normalPrice)}</span>
-                                )}
-                            </div>
-                            {/* Mostrar las estrellas de calificación */}
-                            
-                        </div>
-                    ))
-                ) : (
-                    <p>Cargando productos...</p>
-                )}
+        <div>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }}>Productos seleccionados para ti</h2>
+            <div className="cont">
+                <button className="arrow left" onClick={scrollLeft}>
+                    <i className="fas fa-chevron-left"></i>
+                </button>
+                <div className='pr-cont' ref={productListRef}>
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product) => (
+                            <div className='pr-card' key={product.id}>
+                                <h3 className='product-name'>{product.name}</h3>
+                                <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
+                                <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {product.category}</p>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    {product.discountPercentage !== "" ? (
+                                        <>
+                                            <span style={{ textDecoration: 'line-through', color: 'red', margin: '6px 2px', fontSize: '1rem' }}>
+                                                Antes: {formatCurrency(product.normalPrice)}
+                                            </span>
+                                            <span style={{ fontWeight: 'bold', color: 'green', fontSize: '1.2rem', margin: '6px 2px' }}>
+                                                Oferta: {formatCurrency(product.dealPrice)}
+                                            </span>
+                                            <span style={{ color: 'black', margin: '6px 2px', fontSize: '1rem', }}>
+                                                ({product.discountPercentage} de desct.)
+                                            </span>
+                                        </>
+                                            ) : (
+                                                // Muestra solo el normalPrice si no hay descuento
+                                                <span style={{ fontWeight: 'bold', color: 'black', fontSize: '1.3rem', margin: '20px 2px' }}>{formatCurrency(product.normalPrice)}</span>
+                                            )}
+                                        </div>
+                                        {/* Mostrar las estrellas de calificación */}
+                                        <Rating rating={product.rating}></Rating>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Cargando productos...</p>
+                            )}
+                </div>
+                <button className="arrow right" onClick={scrollRight}>
+                    <i className="fas fa-chevron-right"></i>
+                </button>
             </div>
-            <button className="arrow right" onClick={scrollRight}>
-                <i className="fas fa-chevron-right"></i>
-            </button>
         </div>
+
+        
     );
 };
 

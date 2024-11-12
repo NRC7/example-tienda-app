@@ -3,15 +3,17 @@
     position: fixed;
     bottom: 15%;
     left: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: #fff;
+    background-color: #f9e35c;
+    color: #333;
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
     animation: fadeIn 0.5s;
     z-index: 1000;
+    border: 1px solid #d9d9d9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .purchase-popup .popup-image {

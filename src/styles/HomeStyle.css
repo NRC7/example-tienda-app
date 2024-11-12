@@ -9,7 +9,7 @@ body {
 
 /* Márgenes en los lados */
 .container {
-    margin: 0 225px; /* Márgenes laterales */
+    margin: 0 105px; /* Márgenes laterales */
     padding: 20px; /* Padding interno si lo necesitas */
 }
 

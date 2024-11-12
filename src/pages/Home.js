@@ -23,11 +23,9 @@ const Home = () => {
     return (
         <main>
             <div className="container">
-                {/* ProductList ahora se encarga de obtener los productos */}
                 <TopSellingGalery productList={products} />
+                <ProductList productList={products} />
             </div>
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '10px 0px' }}>Productos seleccionados para ti</h2>
-            <ProductList productList={products} />
             <PurchasePopup productList={products} />
             <Footer />
         </main>

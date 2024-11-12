@@ -58,11 +58,11 @@ const TopSellingGallery = ({ productList }) => {
                             <h3 style={{ margin: '6px 2px', fontSize: '1.8rem' }}>{topSellingProducts[currentIndex]?.name}</h3>
                             {topSellingProducts[currentIndex]?.discountPercentage !== "" ? (
                                 <>
-                                    <span style={{ textDecoration: 'line-through', margin: '6px 2px', fontSize: '1rem' }}>
+                                    <span style={{ textDecoration: 'line-through', color: 'red', margin: '6px 2px', fontSize: '1rem' }}>
                                         Antes: {formatCurrency(topSellingProducts[currentIndex]?.normalPrice)}
                                     </span>
                                     <span style={{ fontWeight: 'bold', color: 'green', fontSize: '1.4rem', margin: '6px 2px' }}>
-                                        Ahora: {formatCurrency(topSellingProducts[currentIndex]?.dealPrice)}
+                                        Oferta: {formatCurrency(topSellingProducts[currentIndex]?.dealPrice)}
                                     </span>
                                     <span style={{ color: 'black', margin: '6px 2px', fontSize: '1.1rem', }}>
                                         ({topSellingProducts[currentIndex]?.discountPercentage} de desct.)
@@ -73,8 +73,9 @@ const TopSellingGallery = ({ productList }) => {
                             )}
                             <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {topSellingProducts[currentIndex]?.category}</p>
                             {/* Mostrar las estrellas de calificación */}
-                            
+                            <Rating rating={5}></Rating>
                         </div>
+                        
                     </div>
 
                 <button className="arrow right" onClick={handleNext}>
