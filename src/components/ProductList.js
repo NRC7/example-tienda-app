@@ -2,9 +2,20 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/ProductList.css'
-import { getCachedProducts } from '../util/CachedProducs';
+import cartService from '../services/CartService';
 
 const ProductList = ({ productList }) => {
+
+    // onClick={() => handleAddToCart(product)}
+    const handleAddToCart = (product) => {
+        cartService.addToCart(product);  // Usamos el servicio para agregar el producto al carrito
+        console.log(product)
+    };
+
+    // onClick={() => handleClearCart()}
+    const handleClearCart = () => {
+        cartService.clearCart();
+    };
 
     const productListRef = useRef(null);
     const [imageIndices, setImageIndices] = useState({});
@@ -79,7 +90,7 @@ const ProductList = ({ productList }) => {
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }}>Productos seleccionados para ti</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }} onClick={() => handleClearCart()} >Productos seleccionados para ti</h2>
             <div className="cont">
                 <button className="arrow left" onClick={scrollLeft}>
                     <i className="fas fa-chevron-left"></i>
@@ -87,7 +98,7 @@ const ProductList = ({ productList }) => {
                 <div className='pr-cont' ref={productListRef}>
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
-                            <div className='pr-card' key={product.id}>
+                            <div className='pr-card' key={product.id} onClick={() => handleAddToCart(product)}>
                                 <h3 className='product-name'>{product.name}</h3>
                                 <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
                                 <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {product.category}</p>

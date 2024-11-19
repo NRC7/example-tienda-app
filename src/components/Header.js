@@ -1,5 +1,6 @@
 // src/components/Header.js
 import React, { useState } from 'react';
+import Cart from './Cart';
 import '../styles/NavBar.css'
 
 function Header() {
@@ -54,9 +55,7 @@ function Header() {
             </div>
 
             {/* Icono de carrito */}
-            <div className="cart-icon">
-                <i className="fa fa-shopping-basket"></i> {/* Icono de carrito */}
-            </div>
+            <Cart/>
             
         </nav>
     );

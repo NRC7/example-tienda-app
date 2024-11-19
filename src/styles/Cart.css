@@ -1,0 +1,72 @@
+/* Estilo del carrito cerrado */
+.cart-drawer {
+    background-color: var(--ywcps-layout3-background, #fff);
+    padding: var(--wp--preset--spacing--50, 1.5rem);
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    box-shadow: var(--wp--preset--shadow--deep, 12px 12px 50px rgba(0, 0, 0, 0.4));
+    transform: translateX(100%); /* Empuja el carrito fuera de la pantalla */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Estilo del carrito abierto */
+  .cart-drawer.open {
+    transform: translateX(0); /* Mueve el carrito a su posición visible */
+  }
+  
+  .cart-drawer-heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Icono del carrito en la derecha */
+.cart-icon {
+    font-size: 1.6rem; /* Aumenta el tamaño del carrito */
+    cursor: pointer;
+    margin-right: 150px; /* Ajusta el margen para centrar un poco más */
+    margin-left: 50px;
+}
+
+.close-cart {
+    cursor: pointer;
+    font-size: 24px; /* Tamanho adecuado para la X */
+}
+
+.cart-content {
+    padding: 16px;
+    overflow-y: auto;
+}
+
+.cart-bubble {
+    position: relative;
+    top: -10px; /* Ajusta según el tamaño de la burbuja */
+    right: -2px; /* Ajusta según el tamaño de la burbuja */
+    background-color: red; /* Color de la burbuja */
+    color: white;
+    border-radius: 50%;
+    padding: 5px 5px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.cart-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Necesario para posicionar la burbuja */
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: black;
+}
