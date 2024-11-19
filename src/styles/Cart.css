@@ -10,6 +10,7 @@
     box-shadow: var(--wp--preset--shadow--deep, 12px 12px 50px rgba(0, 0, 0, 0.4));
     transform: translateX(100%); /* Empuja el carrito fuera de la pantalla */
     transition: transform 0.3s ease-in-out;
+    z-index: 1000;
   }
   
   /* Estilo del carrito abierto */
@@ -23,6 +24,25 @@
     padding: 16px;
     font-size: 18px;
     font-weight: bold;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cart-items-container {
+    padding: 2px 2px;
+    text-align: center;
+    max-height: calc(100vh - 120px); /* Altura máxima, ajustada por encabezado y pie */
+    overflow-y: scroll; /* Permite hacer scroll vertical */
+    scrollbar-width: none; /* Oculta la barra de scroll en Firefox */
+    -ms-overflow-style: none; 
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .cart-items-container::-webkit-scrollbar {
+    display: none; /* Oculta la barra de scroll en navegadores basados en WebKit (Chrome, Edge, Safari) */
   }
   
   /* Icono del carrito en la derecha */
@@ -65,8 +85,12 @@
 }
 
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    color: black;
+  margin-bottom: 10px; /* Añade un espacio vertical entre los productos */
+  padding: 10px; /* Espaciado interno para un diseño más limpio */
+  border-bottom: 1px solid #ccc; /* Línea divisoria opcional entre los productos */
+}
+
+.cart-item:last-child {
+  margin-bottom: 0; /* Elimina el margen inferior del último producto */
+  border-bottom: none; /* Opcional: elimina la línea divisoria del último producto */
 }

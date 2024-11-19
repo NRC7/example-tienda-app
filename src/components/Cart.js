@@ -84,9 +84,9 @@ const Cart = () => {
           {cartItems.length === 0 ? (
             <p>No hay productos en el carrito.</p>
           ) : (
-            <div>
+            <div className="cart-items-container">
               {cartItems.map((item) => (
-                <div className='pr-card' key={item.id}>
+                <div className="cart-item" key={item.id}>
                 <h3 className='product-name'>{item.name}</h3>
                 <img src={item.imageResources[0]} alt={item.name} style={{ width: '100%', height: '180px' }} />
                 <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {item.category}</p>
