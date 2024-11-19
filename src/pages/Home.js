@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ProductList from '../components/ProductList';
 import TopSellingGalery from '../components/TopSellingGalery';
 import PurchasePopup from '../components/PurchasePopup';
+import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
 import '../styles/HomeStyle.css'
 import { getCachedProducts } from '../util/CachedProducs';
@@ -17,7 +18,7 @@ const Home = () => {
 
     useEffect(() => {
         fetchProducts();
-        console.log(products);
+        //console.log(products);
     }, []);
 
     return (
@@ -27,6 +28,7 @@ const Home = () => {
                 <ProductList productList={products} />
             </div>
             <PurchasePopup productList={products} />
+            <ChatButton />
             <Footer />
         </main>
     );
