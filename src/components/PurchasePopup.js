@@ -11,13 +11,13 @@ const PurchasePopup = ({ productList }) => {
             const randomProduct = productList[Math.floor(Math.random() * productList.length)]
             setRecentPurchase(randomProduct);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 10000); // Oculta el pop-up después de 10 segundos
+            setTimeout(() => setShowPopup(false), 6000); // Oculta el pop-up después de 10 segundos
     };
 
     useEffect(() => {
         if (productList && productList.length > 0) {
             fetchAndSetRandomProduct(); // Ejecuta al inicio si hay productos
-            const popupInterval = setInterval(fetchAndSetRandomProduct, 30000);
+            const popupInterval = setInterval(fetchAndSetRandomProduct, 63000);
             return () => clearInterval(popupInterval); // Limpia el intervalo al desmontar
         }
     }, [productList]);

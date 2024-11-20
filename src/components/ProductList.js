@@ -98,7 +98,7 @@ const ProductList = ({ productList }) => {
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }} >Productos seleccionados para ti</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }} >Disfruta estas ofertas seleccionadas para ti</h2>
             <div className="cont">
                 <button className="arrow left" onClick={scrollLeft}>
                     <i className="fas fa-chevron-left"></i>

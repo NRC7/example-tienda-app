@@ -54,7 +54,7 @@ const TopSellingGallery = ({ productList }) => {
 
     return (
         <div >
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold' }}>Lo mejor de la semana</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }}>Los más recomendados</h2>
             <div className="top-selling-gallery">
                 <button className="arrow left" onClick={handlePrev}>
                     <i className="fas fa-chevron-left"></i>

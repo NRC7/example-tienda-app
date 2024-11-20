@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ProductList from '../components/ProductList';
+import TopBannerGallery from '../components/TopBannerGallery';
 import TopSellingGalery from '../components/TopSellingGalery';
+import ProductList from '../components/ProductList';
+import StoreInfo from '../components/StoreInfo';
 import PurchasePopup from '../components/PurchasePopup';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
@@ -23,11 +25,13 @@ const Home = () => {
 
     return (
         <main>
+            <TopBannerGallery/>
             <div className="container">
                 <TopSellingGalery productList={products} />
                 <ProductList productList={products} />
             </div>
             <PurchasePopup productList={products} />
+            <StoreInfo />
             <ChatButton />
             <Footer />
         </main>
