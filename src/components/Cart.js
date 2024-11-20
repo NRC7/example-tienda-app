@@ -70,7 +70,7 @@ const Cart = () => {
                     style={{ width: '100%', height: '180px' }}
                   />
                   <p>Cantidad: {item.quantity}</p>
-                  <p>Total: {formatCurrency(item.totalPrice)}</p>
+                  <p>{formatCurrency(item.totalPrice)}</p>
                   <div className="cart-item-controls">
                     <button
                       onClick={() => cartService.decreaseQuantity(item.id)}

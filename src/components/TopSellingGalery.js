@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/TopSellingStyle.css'
+import cartService from '../services/CartService';
 
 const TopSellingGallery = ({ productList }) => {
 
@@ -8,6 +9,20 @@ const TopSellingGallery = ({ productList }) => {
 
     // Estado para el índice del producto visible
     const [currentIndex, setCurrentIndex] = useState(0); 
+
+
+    const handleAddToCart = (product) => {
+        const cartItems = cartService.getCartItems();
+        const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
+    
+        if (existingProductIndex !== -1) {
+          // Si el producto ya está en el carrito, solo aumentamos la cantidad
+          cartService.incrementQuantity(product.id);
+        } else {
+          // Si el producto no está en el carrito, lo agregamos con cantidad 1
+          cartService.addToCart(product);
+        }
+      };
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -74,6 +89,9 @@ const TopSellingGallery = ({ productList }) => {
                             <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {topSellingProducts[currentIndex]?.category}</p>
                             {/* Mostrar las estrellas de calificación */}
                             <Rating rating={5}></Rating>
+                            <button onClick={() => handleAddToCart(topSellingProducts[currentIndex])}>
+                                Añadir al carro
+                            </button>
                         </div>
                         
                     </div>

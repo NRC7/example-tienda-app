@@ -8,9 +8,17 @@ const ProductList = ({ productList }) => {
 
     // onClick={() => handleAddToCart(product)}
     const handleAddToCart = (product) => {
-        cartService.addToCart(product);  // Usamos el servicio para agregar el producto al carrito
-        console.log(product)
-    };
+        const cartItems = cartService.getCartItems();
+        const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
+    
+        if (existingProductIndex !== -1) {
+          // Si el producto ya está en el carrito, solo aumentamos la cantidad
+          cartService.incrementQuantity(product.id);
+        } else {
+          // Si el producto no está en el carrito, lo agregamos con cantidad 1
+          cartService.addToCart(product);
+        }
+      };
 
     // onClick={() => handleClearCart()}
     const handleClearCart = () => {
@@ -90,7 +98,7 @@ const ProductList = ({ productList }) => {
 
     return (
         <div>
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }} onClick={() => handleClearCart()} >Productos seleccionados para ti</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '20px 0px' }} >Productos seleccionados para ti</h2>
             <div className="cont">
                 <button className="arrow left" onClick={scrollLeft}>
                     <i className="fas fa-chevron-left"></i>
@@ -98,7 +106,7 @@ const ProductList = ({ productList }) => {
                 <div className='pr-cont' ref={productListRef}>
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
-                            <div className='pr-card' key={product.id} onClick={() => handleAddToCart(product)}>
+                            <div className='pr-card' key={product.id} >
                                 <h3 className='product-name'>{product.name}</h3>
                                 <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
                                 <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {product.category}</p>
@@ -122,6 +130,9 @@ const ProductList = ({ productList }) => {
                                         </div>
                                         {/* Mostrar las estrellas de calificación */}
                                         <Rating rating={product.rating}></Rating>
+                                        <button onClick={() => handleAddToCart(product)}>
+                                            Añadir al carro
+                                        </button>
                                     </div>
                                 ))
                             ) : (
