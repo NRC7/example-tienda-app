@@ -1,0 +1,24 @@
+/* Estilos generales del body */
+body {
+    margin-top: 80px;
+    padding: 0; /* Elimina padding predeterminado */
+    font-family: 'Poppins', sans-serif; /* Aplicar la fuente Poppins */ /* Fuente predeterminada */
+    color: #333; /* Color del texto */
+    min-height: 100vh; /* Asegura que el contenido cubra toda la altura de la pantalla */
+    background-color: #f0f0f0;
+}
+
+/* Márgenes en los lados */
+.container {
+    margin: 0 105px; /* Márgenes laterales */
+    padding: 20px; /* Padding interno si lo necesitas */
+}
+
+@media (max-width: 768px) {
+
+    .container {
+        margin: 0 60px; /* Márgenes laterales */
+        text-align: center;
+    }
+
+}
