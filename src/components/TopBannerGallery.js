@@ -9,7 +9,6 @@ const TopBannerGallery = () => {
     const fetchImages = async () => {
         const data = await getCachedImages();
         setImages(data);
-        console.log(data);
     };
 
     // Estado para el índice del producto visible
