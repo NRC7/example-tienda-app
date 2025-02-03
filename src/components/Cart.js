@@ -62,24 +62,24 @@ const Cart = () => {
           ) : (
             <div className="cart-items-container">
               {cartItems.map((item) => (
-                <div className="cart-item" key={item.id}>
+                <div className="cart-item" key={item.sku}>
                   <h3 className="product-name">{item.name}</h3>
                   <img
                     src={item.imageResources[0]}
                     alt={item.name}
-                    style={{ width: '100%', height: '180px' }}
+                    style={{ width: '100%', height: '180px', objectFit: 'scale-down' }}
                   />
                   <p>Cantidad: {item.quantity}</p>
                   <p>{formatCurrency(item.totalPrice)}</p>
                   <div className="cart-item-controls">
                     <button
-                      onClick={() => cartService.decreaseQuantity(item.id)}
+                      onClick={() => cartService.decreaseQuantity(item.sku)}
                       disabled={item.quantity === 0}
                     >
                       -
                     </button>
                     <button
-                      onClick={() => cartService.incrementQuantity(item.id)}
+                      onClick={() => cartService.incrementQuantity(item.sku)}
                       disabled={item.quantity === 10}
                     >
                       +

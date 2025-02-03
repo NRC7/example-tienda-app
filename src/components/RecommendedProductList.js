@@ -9,14 +9,16 @@ const RecommendedProductList = ({ productList }) => {
 
     // onClick={() => handleAddToCart(product)}
     const handleAddToCart = (product) => {
+        console.log(product)
         const cartItems = cartService.getCartItems();
-        const existingProductIndex = cartItems.findIndex(item => item.id === product.id);
-    
+        const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
+        console.log(existingProductIndex)
         if (existingProductIndex !== -1) {
           // Si el producto ya está en el carrito, solo aumentamos la cantidad
-          cartService.incrementQuantity(product.id);
+          cartService.incrementQuantity(product.sku);
         } else {
           // Si el producto no está en el carrito, lo agregamos con cantidad 1
+          console.log("addToCart")
           cartService.addToCart(product);
         }
       };
@@ -39,7 +41,7 @@ const RecommendedProductList = ({ productList }) => {
         const initialIndices = {};
         filteredProducts.forEach(product => {
             if (product.imageResources.length > 1) {
-                initialIndices[product.id] = 0;
+                initialIndices[product.sku] = 0;
             }
         });
         setImageIndices(initialIndices);
@@ -51,8 +53,8 @@ const RecommendedProductList = ({ productList }) => {
             setImageIndices(prevIndices => {
                 const newIndices = { ...prevIndices };
                 filteredProducts.forEach(product => {
-                    if (product.imageResources.length > 1) {
-                        newIndices[product.id] = (prevIndices[product.id] + 1) % product.imageResources.length;
+                    if (product.imageResources.length > 1 && product.imageResources.length <= 2) {
+                        newIndices[product.sku] = (prevIndices[product.sku] + 1) % product.imageResources.length;
                     }
                 });
                 return newIndices;
@@ -107,9 +109,9 @@ const RecommendedProductList = ({ productList }) => {
                 <div className='pr-cont' ref={productListRef}>
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
-                            <div className='pr-card' key={product.id} >
+                            <div className='pr-card' key={product.sku} >
                                 <h3 className='product-name'>{product.name}</h3>
-                                <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
+                                <img src={product.imageResources[imageIndices[product.sku] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
                                 <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {sanitizeCategory(product.category)}</p>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     {product.discountPercentage !== "" ? (

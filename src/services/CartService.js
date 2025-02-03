@@ -13,7 +13,7 @@ const cartService = {
       const cart = cartService.getCartItems();
 
       // Buscar si el producto ya existe en el carrito
-      const existingProductIndex = cart.findIndex(item => item.id === product.id);
+      const existingProductIndex = cart.findIndex(item => item.sku === product.sku);
 
       if (existingProductIndex !== -1) {
         // Incrementar cantidad y recalcular precio total
@@ -35,9 +35,9 @@ const cartService = {
       window.dispatchEvent(new Event('cartUpdated'));
     },
   
-    removeFromCart: (productId) => {
+    removeFromCart: (productSku) => {
       const cart = cartService.getCartItems();
-      const updatedCart = cart.filter(item => item.id !== productId);
+      const updatedCart = cart.filter(item => item.sku !== productSku);
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       window.dispatchEvent(new Event('cartUpdated')); // Emitir evento
     },
@@ -47,9 +47,9 @@ const cartService = {
       window.dispatchEvent(new Event('cartUpdated')); // Emitir evento
     },
 
-    incrementQuantity: (productId) => {
+    incrementQuantity: (productSku) => {
       const cart = cartService.getCartItems();
-      const product = cart.find(item => item.id === productId);
+      const product = cart.find(item => item.sku === productSku);
       if (product && product.quantity < 10) {
         product.quantity += 1;
         product.totalPrice = product.quantity * (product.dealPrice || product.normalPrice);
@@ -58,9 +58,9 @@ const cartService = {
       }
     },
   
-    decreaseQuantity: (productId) => {
+    decreaseQuantity: (productSku) => {
       const cart = cartService.getCartItems();
-      const productIndex = cart.findIndex(item => item.id === productId);
+      const productIndex = cart.findIndex(item => item.sku === productSku);
     
       if (productIndex !== -1) {
         const product = cart[productIndex];
