@@ -3,8 +3,9 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/ProductList.css'
 import cartService from '../services/CartService';
+import { sanitizeCategory } from '../util/SanitizeCategory';
 
-const ProductList = ({ productList }) => {
+const RecommendedProductList = ({ productList }) => {
 
     // onClick={() => handleAddToCart(product)}
     const handleAddToCart = (product) => {
@@ -30,7 +31,7 @@ const ProductList = ({ productList }) => {
 
     const filteredProducts = useMemo(() => {
         return productList
-            .filter(product => product.imageResources.length > 1 || product.discountPercentage !== "")
+            .filter(product => product.discountPercentage !== "")
             .sort((b, a) => b.name.localeCompare(a.name));
     }, [productList]);
 
@@ -109,7 +110,7 @@ const ProductList = ({ productList }) => {
                             <div className='pr-card' key={product.id} >
                                 <h3 className='product-name'>{product.name}</h3>
                                 <img src={product.imageResources[imageIndices[product.id] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
-                                <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {product.category}</p>
+                                <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {sanitizeCategory(product.category)}</p>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     {product.discountPercentage !== "" ? (
                                         <>
@@ -149,4 +150,4 @@ const ProductList = ({ productList }) => {
     );
 };
 
-export default ProductList;
+export default RecommendedProductList;

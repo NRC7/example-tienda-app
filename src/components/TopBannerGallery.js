@@ -48,7 +48,7 @@ const TopBannerGallery = () => {
                     <img 
                         src={images[currentIndex]?.imageResources} 
                         alt={images[currentIndex]?.name} 
-                        style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                        style={{ width: '100%', height: '100%', objectFit: 'scale-down' }} 
                     />
                 </div>
                 <button className="arrow right" onClick={handleNext}>

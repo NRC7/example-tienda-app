@@ -2,10 +2,26 @@ import React, { useState, useEffect } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/TopSellingStyle.css'
 import cartService from '../services/CartService';
+import { sanitizeCategory } from '../util/SanitizeCategory';
 
 const TopSellingGallery = ({ productList }) => {
 
-    const topSellingProducts = productList.filter(product => product.rating === 5);
+    const filteredProducts = productList.filter(product => product.rating === 5)
+        .reduce((acc, product) => {
+            // Si aún no hemos agregado dos productos para esta categoría
+            if (!acc[product.category]) {
+            acc[product.category] = [];
+            }
+        
+            // Solo agregamos el producto si hay menos de dos en la categoría
+            if (acc[product.category].length < 2) {
+            acc[product.category].push(product);
+            }
+        
+            return acc;
+        }, {});
+
+    const topSellingProducts = Object.values(filteredProducts).flat();    
 
     // Estado para el índice del producto visible
     const [currentIndex, setCurrentIndex] = useState(0); 
@@ -54,7 +70,7 @@ const TopSellingGallery = ({ productList }) => {
 
     return (
         <div >
-            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }}>Los más recomendados</h2>
+            <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }}>Los más vistos</h2>
             <div className="top-selling-gallery">
                 <button className="arrow left" onClick={handlePrev}>
                     <i className="fas fa-chevron-left"></i>
@@ -66,7 +82,7 @@ const TopSellingGallery = ({ productList }) => {
                             <img 
                                 src={topSellingProducts[currentIndex]?.imageResources} 
                                 alt={topSellingProducts[currentIndex]?.name} 
-                                style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                                style={{ width: '100%', height: '100%', objectFit: 'scale-down' }} 
                             />
                         </div>
                         <div className="product-info">
@@ -86,7 +102,7 @@ const TopSellingGallery = ({ productList }) => {
                             ) : (
                                 <span style={{ fontWeight: 'bold', color: 'black', fontSize: '1.3rem', margin: '20px 2px' }}>{formatCurrency(topSellingProducts[currentIndex]?.normalPrice)}</span>
                             )}
-                            <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {topSellingProducts[currentIndex]?.category}</p>
+                            <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {sanitizeCategory(topSellingProducts[currentIndex].category)}</p>
                             {/* Mostrar las estrellas de calificación */}
                             <Rating rating={5}></Rating>
                             <button onClick={() => handleAddToCart(topSellingProducts[currentIndex])}>

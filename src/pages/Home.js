@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopBannerGallery from '../components/TopBannerGallery';
 import TopSellingGalery from '../components/TopSellingGalery';
-import ProductList from '../components/ProductList';
+import RecommendedProductList from '../components/RecommendedProductList';
 import StoreInfo from '../components/StoreInfo';
 import PurchasePopup from '../components/PurchasePopup';
 import ChatButton from '../components/ChatButton';
@@ -51,7 +51,7 @@ const Home = () => {
             <TopBannerGallery />
             <div className="container">
                 <TopSellingGalery productList={products} />
-                <ProductList productList={products} />
+                <RecommendedProductList productList={products} />
             </div>
             <PurchasePopup productList={products} />
             <StoreInfo />
