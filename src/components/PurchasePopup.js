@@ -1,29 +1,34 @@
-// src/components/PurchasePopup.js
 import React, { useEffect, useState } from 'react';
 import '../styles/PurchasePopup.css';
 import { useNavigate } from "react-router-dom";
 
 const PurchasePopup = ({ productList }) => {
+
+    const SHOW_POPUP_INTERVAL = 63000 // muestra un nuevo pop-up después de x milisegundos
+    const HIDE_POPUP_INTERVAL = 6000 // Oculta el pop-up después de x milisegundos
+
     const [recentPurchase, setRecentPurchase] = useState(null);
     const [showPopup, setShowPopup] = useState(false); 
     const navigate = useNavigate();
 
-    const fetchAndSetRandomProduct = async () => {
-        //const products = await getCachedProducts();background-color: rgba(0, 0, 0, 0.8);
+    useEffect(() => {
+        const fetchAndSetRandomProduct = async () => {
             const randomProduct = productList[Math.floor(Math.random() * productList.length)]
             setRecentPurchase(randomProduct);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), 6000); // Oculta el pop-up después de 10 segundos
-    };
-
-    useEffect(() => {
+            setTimeout(() => setShowPopup(false), HIDE_POPUP_INTERVAL); 
+        };
         if (productList && productList.length > 0) {
             fetchAndSetRandomProduct(); // Ejecuta al inicio si hay productos
-            const popupInterval = setInterval(fetchAndSetRandomProduct, 63000);
+            const popupInterval = setInterval(fetchAndSetRandomProduct, SHOW_POPUP_INTERVAL); 
             return () => clearInterval(popupInterval); // Limpia el intervalo al desmontar
         }
     }, [productList]);
-    
+
+    const getRandomName = () => {
+        const names = ['John', 'Pedro', 'Carlos', 'Natalia', 'Maria', 'Estela']
+        return names[Math.floor(Math.random() * names.length)]
+    }
 
     if (!recentPurchase || !showPopup) return null;
 
@@ -31,7 +36,7 @@ const PurchasePopup = ({ productList }) => {
         <div className="purchase-popup" onClick={() =>  navigate("/details", { state: { product: recentPurchase } })}>
             <img src={recentPurchase.imageResources[0]} alt={recentPurchase.name} className="popup-image" />
             <div className="popup-text">
-                <p>{`¡Juanito acaba de comprar ${recentPurchase.name}!`}</p>
+                <p>{`${getRandomName()} acaba de comprar ${recentPurchase.name}!`}</p>
             </div>
         </div>
     );
