@@ -84,9 +84,9 @@ const RecommendedProductList = ({ productList }) => {
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product) => (
                             <div className='pr-card' key={product.sku} >
-                                <h3 onClick={() =>  navigate("/details", { state: { product: product } })}
+                                <h3 onClick={() =>  navigate(`/products/${product.sku}`, { state: { product: product } })}
                                 className='product-name'>{product.name}</h3>
-                                <img onClick={() =>  navigate("/details", { state: { product: product } })}
+                                <img onClick={() =>  navigate(`/products/${product.sku}`, { state: { product: product } })}
                                  src={product.imageResources[imageIndices[product.sku] || 0]} alt={product.name} style={{ width: '100%', height: '180px' }} />
                                 <p style={{ margin: '6px 2px', fontSize: '0.8rem' }}>Categoria: {sanitizeCategory(product.category)}</p>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -67,11 +67,11 @@ const TopSellingGallery = ({ productList }) => {
                                 src={topSellingProducts[currentIndex]?.imageResources} 
                                 alt={topSellingProducts[currentIndex]?.name} 
                                 style={{ width: '100%', height: '100%', objectFit: 'scale-down' }}
-                                onClick={() =>  navigate("/details", { state: { product: topSellingProducts[currentIndex] } })} 
+                                onClick={() =>  navigate(`/products/${topSellingProducts[currentIndex]?.sku}`, { state: { product: topSellingProducts[currentIndex] } })} 
                             />
                         </div>
                         <div className="product-info" >
-                            <h3 onClick={() =>  navigate("/details", { state: { product: topSellingProducts[currentIndex] } })} 
+                            <h3 onClick={() =>  navigate(`/products/${topSellingProducts[currentIndex]?.sku}`, { state: { product: topSellingProducts[currentIndex] } })} 
                             style={{ margin: '6px 2px', fontSize: '1.8rem' }}>{topSellingProducts[currentIndex]?.name}</h3>
                             {topSellingProducts[currentIndex]?.discountPercentage !== "" ? (
                                 <>

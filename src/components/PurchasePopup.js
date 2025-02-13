@@ -33,7 +33,7 @@ const PurchasePopup = ({ productList }) => {
     if (!recentPurchase || !showPopup) return null;
 
     return (
-        <div className="purchase-popup" onClick={() =>  navigate("/details", { state: { product: recentPurchase } })}>
+        <div className="purchase-popup" onClick={() =>  navigate(`/products/${recentPurchase.sku}`, { state: { product: recentPurchase } })}>
             <img src={recentPurchase.imageResources[0]} alt={recentPurchase.name} className="popup-image" />
             <div className="popup-text">
                 <p>{`${getRandomName()} acaba de comprar ${recentPurchase.name}!`}</p>
