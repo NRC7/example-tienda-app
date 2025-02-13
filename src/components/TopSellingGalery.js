@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
+import Rating from './ProductRating'; // Importar el componente de Rating
 import '../styles/TopSellingStyle.css'
 import { handleAddToCart } from '../handlers/CartHandler';
 import { sanitizeCategory } from '../util/SanitizeCategory';
@@ -30,19 +30,6 @@ const TopSellingGallery = ({ productList }) => {
 
     const navigate = useNavigate();
 
-    // const handleAddToCart = (product) => {
-    //     const cartItems = cartService.getCartItems();
-    //     const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
-    
-    //     if (existingProductIndex !== -1) {
-    //       // Si el producto ya está en el carrito, solo aumentamos la cantidad
-    //       cartService.incrementQuantity(product.sku);
-    //     } else {
-    //       // Si el producto no está en el carrito, lo agregamos con cantidad 1
-    //       cartService.addToCart(product);
-    //     }
-    //   };
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             setCurrentIndex((prevIndex) =>
@@ -62,14 +49,6 @@ const TopSellingGallery = ({ productList }) => {
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + topSellingProducts.length) % topSellingProducts.length);
     };
-
-    // Formato de moneda
-    // const formatCurrency = (value) => {
-    //     return new Intl.NumberFormat('es-CL', {
-    //         style: 'currency',
-    //         currency: 'CLP',
-    //     }).format(value);
-    // };
 
     return (
         <div >

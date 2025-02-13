@@ -1,31 +1,12 @@
-// src/components/ProductList.js
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
+import Rating from './ProductRating'; // Importar el componente de Rating
 import '../styles/ProductList.css'
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from '../util/FormatCurrency';
 
 const RecommendedProductList = ({ productList }) => {
-
-    // onClick={() => handleAddToCart(product)}
-    // const handleAddToCart = (product) => {
-    //     console.log(product)
-    //     const cartItems = cartService.getCartItems();
-    //     const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
-    //     console.log(existingProductIndex)
-    //     if (existingProductIndex !== -1) {
-    //       // Si el producto ya está en el carrito, solo aumentamos la cantidad
-    //       cartService.incrementQuantity(product.sku);
-    //     } else {
-    //       // Si el producto no está en el carrito, lo agregamos con cantidad 1
-    //       console.log("addToCart")
-    //       cartService.addToCart(product);
-    //     }
-    //   };
-
-    // onClick={() => handleClearCart()}
-    
 
     const productListRef = useRef(null);
     const [imageIndices, setImageIndices] = useState({});
@@ -90,15 +71,6 @@ const RecommendedProductList = ({ productList }) => {
             console.error('productListRef is not defined');
         }
     };
-
-    // Formato de moneda
-    const formatCurrency = (value) => {
-        return new Intl.NumberFormat('es-CL', {
-            style: 'currency',
-            currency: 'CLP',
-        }).format(value);
-    };
-
 
     return (
         <div>

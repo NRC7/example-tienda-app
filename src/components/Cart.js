@@ -1,47 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Cart.css';
-import cartService from '../services/CartService';
 import { useNavigate } from "react-router-dom";
+import { formatCurrency } from '../util/FormatCurrency';
+import { getCartItems, getCartItemCount,
+  incrementProductQuantity, decreaseProductQuantity
+} from '../handlers/CartHandler';
 
 const Cart = () => {
+
   const [isOpen, setIsOpen] = useState(false);
-  const [cartItems, setCartItems] = useState(cartService.getCartItems());
-  const [cartItemCount, setCartItemCount] = useState(cartService.getCartItemCount());
-  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [cartItems, setCartItems] = useState(getCartItems());
+  const [cartItemCount, setCartItemCount] = useState(getCartItemCount());
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const handleCartUpdate = () => {
-      setCartItems(cartService.getCartItems());
-      setCartItemCount(cartService.getCartItemCount());
+      setCartItems(getCartItems());
+      setCartItemCount(getCartItemCount());
     };
 
     window.addEventListener('cartUpdated', handleCartUpdate);
     return () => window.removeEventListener('cartUpdated', handleCartUpdate);
   }, []);
 
-  const toggleCart = () => {
+  const toggleCartDrawer = () => {
     setIsOpen(!isOpen);
-  };
-
-  const formatCurrency = (value) => {
-    return new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP',
-    }).format(value);
   };
 
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => total + item.totalPrice, 0);
   };
 
-  const handleTermsChange = (event) => {
-    setTermsAccepted(event.target.checked);
-  };
-
   return (
     <>
-      <div className="cart-icon cart-toggle" onClick={toggleCart}>
+      <div className="cart-icon cart-toggle" onClick={toggleCartDrawer}>
         <i className="fa fa-shopping-basket"></i>
         {cartItemCount > 0 && (
           <div className="cart-bubble">{cartItemCount}</div>
@@ -52,7 +45,7 @@ const Cart = () => {
         {/* Encabezado del carrito */}
         <div className="cart-drawer-heading">
           <span>Mi carrito</span>
-          <div className="close-cart" onClick={toggleCart}>
+          <div className="close-cart" onClick={toggleCartDrawer}>
             <i className="fa fa-times"></i>
           </div>
         </div>
@@ -77,13 +70,13 @@ const Cart = () => {
                   <p>{formatCurrency(item.totalPrice)}</p>
                   <div className="cart-item-controls">
                     <button
-                      onClick={() => cartService.decreaseQuantity(item.sku)}
+                      onClick={() => decreaseProductQuantity(item.sku)}
                       disabled={item.quantity === 0}
                     >
                       -
                     </button>
                     <button
-                      onClick={() => cartService.incrementQuantity(item.sku)}
+                      onClick={() => incrementProductQuantity(item.sku)}
                       disabled={item.quantity === 10}
                     >
                       +
@@ -102,20 +95,10 @@ const Cart = () => {
               <span>Subtotal:</span>
               <span>{formatCurrency(calculateSubtotal())}</span>
             </div>
-            <div className="terms">
-              <input
-                type="checkbox"
-                id="acceptTerms"
-                checked={termsAccepted}
-                onChange={handleTermsChange}
-              />
-              <label htmlFor="acceptTerms">Acepto términos y condiciones</label>
-            </div>
             <button
               className="checkout-button"
-              disabled={!termsAccepted}
             >
-              Finalizar compra
+            Continuar con tu compra
             </button>
           </div>
         )}

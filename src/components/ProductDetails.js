@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import '../styles/ProductDetails.css'
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { formatCurrency } from '../util/FormatCurrency';
@@ -18,18 +18,14 @@ const ProductDetails = ({ selectedProduct }) => {
     const addProductAndNavigateHome = (selectedProduct) => {
         handleAddToCart(selectedProduct)
         navigate("/")
-        alert("Producto agregado al carro!")
+        // alert("Producto agregado al carro!")
       };
 
     return (
         <div >
             <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }}>Producto seleccionado</h2>
-
             <div className="top-selling-gallery">
-
-                    {/* Contenedor para el producto */}
                     <div className="product-container">
-
                         <div className="product-image">
                             <img 
                                 src={selectedProduct?.imageResources[0]} 
@@ -55,15 +51,12 @@ const ProductDetails = ({ selectedProduct }) => {
                                 <span style={{ fontWeight: 'bold', color: 'black', fontSize: '1.3rem', margin: '20px 2px' }}>{formatCurrency(selectedProduct?.normalPrice)}</span>
                             )}
                             <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {sanitizeCategory(selectedProduct?.category)}</p>
-                            {/* Mostrar las estrellas de calificación */}
                             <Rating rating={selectedProduct?.rating}></Rating>
                             <button onClick={() =>addProductAndNavigateHome(selectedProduct)}>
                                 Añadir al carro
                             </button>
                         </div>
-                        
                     </div>
-
             </div>
         </div>
     )
