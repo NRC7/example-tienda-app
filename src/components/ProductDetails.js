@@ -10,9 +10,7 @@ import Rating from './ProductRating'; // Importar el componente de Rating
 const ProductDetails = ({ selectedProduct }) => {
 
     useEffect(() => {
-        const fetchData = async () => {
-        };
-        fetchData();
+        window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
     }, []);
 
     const navigate = useNavigate();

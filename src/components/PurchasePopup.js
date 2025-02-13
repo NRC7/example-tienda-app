@@ -1,10 +1,12 @@
 // src/components/PurchasePopup.js
 import React, { useEffect, useState } from 'react';
 import '../styles/PurchasePopup.css';
+import { useNavigate } from "react-router-dom";
 
 const PurchasePopup = ({ productList }) => {
     const [recentPurchase, setRecentPurchase] = useState(null);
     const [showPopup, setShowPopup] = useState(false); 
+    const navigate = useNavigate();
 
     const fetchAndSetRandomProduct = async () => {
         //const products = await getCachedProducts();background-color: rgba(0, 0, 0, 0.8);
@@ -26,7 +28,7 @@ const PurchasePopup = ({ productList }) => {
     if (!recentPurchase || !showPopup) return null;
 
     return (
-        <div className="purchase-popup">
+        <div className="purchase-popup" onClick={() =>  navigate("/details", { state: { product: recentPurchase } })}>
             <img src={recentPurchase.imageResources[0]} alt={recentPurchase.name} className="popup-image" />
             <div className="popup-text">
                 <p>{`¡Juanito acaba de comprar ${recentPurchase.name}!`}</p>

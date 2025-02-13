@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Cart.css';
 import cartService from '../services/CartService';
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState(cartService.getCartItems());
   const [cartItemCount, setCartItemCount] = useState(cartService.getCartItemCount());
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleCartUpdate = () => {
@@ -63,11 +65,13 @@ const Cart = () => {
             <div className="cart-items-container">
               {cartItems.map((item) => (
                 <div className="cart-item" key={item.sku}>
-                  <h3 className="product-name">{item.name}</h3>
+                  <h3 onClick={() =>  navigate("/details", { state: { product: item } })}
+                  className="product-name">{item.name}</h3>
                   <img
                     src={item.imageResources[0]}
                     alt={item.name}
                     style={{ width: '100%', height: '180px', objectFit: 'scale-down' }}
+                    onClick={() =>  navigate("/details", { state: { product: item } })}
                   />
                   <p>Cantidad: {item.quantity}</p>
                   <p>{formatCurrency(item.totalPrice)}</p>
