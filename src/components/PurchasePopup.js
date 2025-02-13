@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const PurchasePopup = ({ productList }) => {
 
     const SHOW_POPUP_INTERVAL = 63000 // muestra un nuevo pop-up después de x milisegundos
+    const INIT_POPUP_INTERVAL = 10000 // al inicio muestra el pop-up después de x milisegundos
     const HIDE_POPUP_INTERVAL = 6000 // Oculta el pop-up después de x milisegundos
 
     const [recentPurchase, setRecentPurchase] = useState(null);
@@ -19,7 +20,8 @@ const PurchasePopup = ({ productList }) => {
             setTimeout(() => setShowPopup(false), HIDE_POPUP_INTERVAL); 
         };
         if (productList && productList.length > 0) {
-            fetchAndSetRandomProduct(); // Ejecuta al inicio si hay productos
+            setTimeout(() => fetchAndSetRandomProduct(), Math.floor(Math.random() * INIT_POPUP_INTERVAL));
+            // fetchAndSetRandomProduct(); // Ejecuta al inicio si hay productos
             const popupInterval = setInterval(fetchAndSetRandomProduct, SHOW_POPUP_INTERVAL); 
             return () => clearInterval(popupInterval); // Limpia el intervalo al desmontar
         }
