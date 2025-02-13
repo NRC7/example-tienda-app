@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 const TopSellingGallery = ({ productList }) => {
 
+    const CHANGE_IMAGE_INTERVAL = 7000 // Configura el intervalo para cambiar la imagen cada x milisegundos
+
     const filteredProducts = productList.filter(product => product.rating === 5)
         .reduce((acc, product) => {
             // Si aún no hemos agregado dos productos para esta categoría
@@ -35,7 +37,7 @@ const TopSellingGallery = ({ productList }) => {
             setCurrentIndex((prevIndex) =>
                 topSellingProducts.length > 0 ? (prevIndex + 1) % topSellingProducts.length : 0
             );
-        }, 7000);
+        }, CHANGE_IMAGE_INTERVAL);
 
         // Limpiamos el intervalo cuando el componente se desmonte
         return () => clearInterval(intervalId);

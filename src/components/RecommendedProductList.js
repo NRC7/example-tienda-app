@@ -8,6 +8,8 @@ import { formatCurrency } from '../util/FormatCurrency';
 
 const RecommendedProductList = ({ productList }) => {
 
+    const CHANGE_IMAGE_INTERVAL = 5000 // Configura el intervalo para cambiar la imagen cada x milisegundos
+
     const productListRef = useRef(null);
     const [imageIndices, setImageIndices] = useState({});
 
@@ -30,7 +32,6 @@ const RecommendedProductList = ({ productList }) => {
     }, [filteredProducts]);
 
     useEffect(() => {
-        // Configura el intervalo para cambiar la imagen cada 7 segundos
         const intervalId = setInterval(() => {
             setImageIndices(prevIndices => {
                 const newIndices = { ...prevIndices };
@@ -41,7 +42,7 @@ const RecommendedProductList = ({ productList }) => {
                 });
                 return newIndices;
             });
-        }, 5000);
+        }, CHANGE_IMAGE_INTERVAL);
 
         // Limpia el intervalo cuando el componente se desmonte
         return () => clearInterval(intervalId);
