@@ -17,12 +17,12 @@ const PurchasePopup = ({ productList }) => {
             const randomProduct = productList[Math.floor(Math.random() * productList.length)]
             setRecentPurchase(randomProduct);
             setShowPopup(true);
-            setTimeout(() => setShowPopup(false), HIDE_POPUP_INTERVAL); 
+            setTimeout(() => setShowPopup(false), Math.floor(Math.random() * HIDE_POPUP_INTERVAL)); 
         };
         if (productList && productList.length > 0) {
             setTimeout(() => fetchAndSetRandomProduct(), Math.floor(Math.random() * INIT_POPUP_INTERVAL));
             // fetchAndSetRandomProduct(); // Ejecuta al inicio si hay productos
-            const popupInterval = setInterval(fetchAndSetRandomProduct, SHOW_POPUP_INTERVAL); 
+            const popupInterval = setInterval(fetchAndSetRandomProduct, Math.floor(Math.random() * SHOW_POPUP_INTERVAL)); 
             return () => clearInterval(popupInterval); // Limpia el intervalo al desmontar
         }
     }, [productList]);
