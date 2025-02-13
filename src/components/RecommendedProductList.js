@@ -2,31 +2,29 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/ProductList.css'
-import cartService from '../services/CartService';
 import { sanitizeCategory } from '../util/SanitizeCategory';
+import { handleAddToCart } from '../handlers/CartHandler';
 
 const RecommendedProductList = ({ productList }) => {
 
     // onClick={() => handleAddToCart(product)}
-    const handleAddToCart = (product) => {
-        console.log(product)
-        const cartItems = cartService.getCartItems();
-        const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
-        console.log(existingProductIndex)
-        if (existingProductIndex !== -1) {
-          // Si el producto ya está en el carrito, solo aumentamos la cantidad
-          cartService.incrementQuantity(product.sku);
-        } else {
-          // Si el producto no está en el carrito, lo agregamos con cantidad 1
-          console.log("addToCart")
-          cartService.addToCart(product);
-        }
-      };
+    // const handleAddToCart = (product) => {
+    //     console.log(product)
+    //     const cartItems = cartService.getCartItems();
+    //     const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
+    //     console.log(existingProductIndex)
+    //     if (existingProductIndex !== -1) {
+    //       // Si el producto ya está en el carrito, solo aumentamos la cantidad
+    //       cartService.incrementQuantity(product.sku);
+    //     } else {
+    //       // Si el producto no está en el carrito, lo agregamos con cantidad 1
+    //       console.log("addToCart")
+    //       cartService.addToCart(product);
+    //     }
+    //   };
 
     // onClick={() => handleClearCart()}
-    const handleClearCart = () => {
-        cartService.clearCart();
-    };
+    
 
     const productListRef = useRef(null);
     const [imageIndices, setImageIndices] = useState({});

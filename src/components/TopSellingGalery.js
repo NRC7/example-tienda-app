@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Rating from './ProductRating'; // Asegúrate de importar el componente de Rating
 import '../styles/TopSellingStyle.css'
-import cartService from '../services/CartService';
+import { handleAddToCart } from '../handlers/CartHandler';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { formatCurrency } from '../util/FormatCurrency';
 import { useNavigate } from "react-router-dom";
@@ -30,18 +30,18 @@ const TopSellingGallery = ({ productList }) => {
 
     const navigate = useNavigate();
 
-    const handleAddToCart = (product) => {
-        const cartItems = cartService.getCartItems();
-        const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
+    // const handleAddToCart = (product) => {
+    //     const cartItems = cartService.getCartItems();
+    //     const existingProductIndex = cartItems.findIndex(item => item.sku === product.sku);
     
-        if (existingProductIndex !== -1) {
-          // Si el producto ya está en el carrito, solo aumentamos la cantidad
-          cartService.incrementQuantity(product.sku);
-        } else {
-          // Si el producto no está en el carrito, lo agregamos con cantidad 1
-          cartService.addToCart(product);
-        }
-      };
+    //     if (existingProductIndex !== -1) {
+    //       // Si el producto ya está en el carrito, solo aumentamos la cantidad
+    //       cartService.incrementQuantity(product.sku);
+    //     } else {
+    //       // Si el producto no está en el carrito, lo agregamos con cantidad 1
+    //       cartService.addToCart(product);
+    //     }
+    //   };
 
     useEffect(() => {
         const intervalId = setInterval(() => {

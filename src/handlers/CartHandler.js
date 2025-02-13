@@ -12,3 +12,7 @@ export const handleAddToCart = (product) => {
       cartService.addToCart(product);
     }
   };
+
+export const handleClearCart = () => {
+    cartService.clearCart();
+    };
