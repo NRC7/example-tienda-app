@@ -3,6 +3,8 @@ import Rating from './ProductRating'; // Asegúrate de importar el componente de
 import '../styles/TopSellingStyle.css'
 import cartService from '../services/CartService';
 import { sanitizeCategory } from '../util/SanitizeCategory';
+import { formatCurrency } from '../util/FormatCurrency';
+import { useNavigate } from "react-router-dom";
 
 const TopSellingGallery = ({ productList }) => {
 
@@ -26,6 +28,7 @@ const TopSellingGallery = ({ productList }) => {
     // Estado para el índice del producto visible
     const [currentIndex, setCurrentIndex] = useState(0); 
 
+    const navigate = useNavigate();
 
     const handleAddToCart = (product) => {
         const cartItems = cartService.getCartItems();
@@ -60,13 +63,13 @@ const TopSellingGallery = ({ productList }) => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + topSellingProducts.length) % topSellingProducts.length);
     };
 
-     // Formato de moneda
-     const formatCurrency = (value) => {
-        return new Intl.NumberFormat('es-CL', {
-            style: 'currency',
-            currency: 'CLP',
-        }).format(value);
-    };
+    // Formato de moneda
+    // const formatCurrency = (value) => {
+    //     return new Intl.NumberFormat('es-CL', {
+    //         style: 'currency',
+    //         currency: 'CLP',
+    //     }).format(value);
+    // };
 
     return (
         <div >
@@ -86,7 +89,7 @@ const TopSellingGallery = ({ productList }) => {
                             />
                         </div>
                         <div className="product-info">
-                            <h3 style={{ margin: '6px 2px', fontSize: '1.8rem' }}>{topSellingProducts[currentIndex]?.name}</h3>
+                            <h3 onClick={() =>  navigate("/details", { state: { product: topSellingProducts[currentIndex] } })} style={{ margin: '6px 2px', fontSize: '1.8rem' }}>{topSellingProducts[currentIndex]?.name}</h3>
                             {topSellingProducts[currentIndex]?.discountPercentage !== "" ? (
                                 <>
                                     <span style={{ textDecoration: 'line-through', color: 'red', margin: '6px 2px', fontSize: '1rem' }}>
