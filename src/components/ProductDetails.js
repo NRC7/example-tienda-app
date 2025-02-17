@@ -1,29 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/ProductDetails.css'
+import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
+import { increaseQuantity, decreaseQuantity } from '../handlers/DetailsQuantityHandler';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { formatCurrency } from '../util/FormatCurrency';
 import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
-import Rating from './ProductRating'; // Importar el componente de Rating
+import Rating from './ProductRating'; 
+import BuyingInfo from './BuyingInfo';
+import { Link } from "react-router-dom";
 
 
 const ProductDetails = ({ selectedProduct }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0); 
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
+        console.log(selectedProduct)
     }, []);
 
     const images = selectedProduct.imageResources
 
     const navigate = useNavigate();
 
-    const addProductAndNavigateHome = (selectedProduct) => {
-        handleAddToCart(selectedProduct)
+    const addProductAndNavigateHome = (selectedProduct, selectedQuantity) => {
+        console.log('selectedQuantity: ', selectedQuantity)
+        handleAddToCart(selectedProduct, selectedQuantity)
         navigate("/")
         // alert("Producto agregado al carro!")
-      };
+    };
 
     const handlePrev = () => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
@@ -33,12 +40,28 @@ const ProductDetails = ({ selectedProduct }) => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
 
-    
-    const isFreeShipping = selectedProduct.freeShiping ? 'Si' : 'No'  
+    const handleIncrease = () => {
+        setQuantity(prevQuantity => increaseQuantity(prevQuantity));
+    };
+
+    const handleDecrease = () => {
+        setQuantity(prevQuantity => decreaseQuantity(prevQuantity));
+    };
+
+    const sanitizedDescription = selectedProduct.description
+
+    let descriptionList = sanitizedDescription.split(",");
+    console.log('descriptionList', descriptionList)
 
     return (
-            <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '100px'}}>
-
+        <>
+            <div className='detailsNavegation'>
+                <Link to={`/`}>Home -</Link>
+                <Link to={`/products/${selectedProduct.category}`}> {sanitizeCategory(selectedProduct.category)} - </Link>
+                <Link className="highlight" to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}`}> {sanitizeCategory(selectedProduct.subCategory)}</Link>
+            </div>
+            
+            <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '12px'}}>
                 <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', height: '100%'}}>
                     <div style={{display:'flex', flexDirection: 'row', alignItems: 'center', gap: '50px'}}>
                         <button className="arrow-details" onClick={handlePrev}>
@@ -60,7 +83,7 @@ const ProductDetails = ({ selectedProduct }) => {
                             ))}
                     </div>  
                 </div>
-                
+
 
                 <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', minHeight:'100%', fontSize: '0.9rem'}}>
 
@@ -81,9 +104,9 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     {selectedProduct?.discountPercentage !== "" ? (
                         <>
-                            <div style={{display: 'flex', flexDirection: 'column', margin: '10px 0px', width: '60%'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', margin: '2px 0px', width: '60%'}}>
 
-                                <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '4px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
                                         <p style={{fontSize: '0.8rem'}}>Normal:</p>
                                         <p style={{textDecoration: 'line-through', fontSize: '0.8rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</p>
                                 </span>
@@ -92,7 +115,7 @@ const ProductDetails = ({ selectedProduct }) => {
                                         <p style={{fontSize: '0.9rem'}}>Desc:</p> <p style={{fontSize: '0.9rem'}}>-{selectedProduct?.discountPercentage}</p>
                                 </span>
 
-                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '4px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
                                         <p style={{fontSize: '1.1rem'}}>Ahora:</p> <p style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.dealPrice)}</p>
                                 </span>
 
@@ -101,7 +124,7 @@ const ProductDetails = ({ selectedProduct }) => {
                         </>
                     ) : (
 
-                        <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '4px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
                             <p style={{fontSize: '1.1rem'}}>Normal:</p>
 
@@ -112,20 +135,48 @@ const ProductDetails = ({ selectedProduct }) => {
                         )
                     }
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '20px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
-                    <p style={{fontSize: '0.9rem'}}>Envio gratis:</p>
-                    
-                    <p style={{fontSize: '0.9rem'}}>{isFreeShipping}</p>
+                        <p style={{fontSize: '0.9rem'}}>Envio gratis:</p>
+                        
+                        <p style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping ? 'Si' : 'No'}</p>
 
                     </span>
 
-                    <button className='details-btn' onClick={() =>addProductAndNavigateHome(selectedProduct)}>
-                        Añadir al carro
-                    </button>
-                            
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
+
+                        <p style={{fontSize: '0.9rem'}}>Fecha estimada de entrega aprox 48 hrs. hábiles:</p>
+                        
+                        <p style={{fontSize: '0.9rem'}}>{getEstimatedDeliveryDate().replaceAll('/', ' ')}</p>
+
+                    </span>
+
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '8px 0px', display: 'flex', justifyContent: 'space-between' }}>
+
+                        <button className='qt-btn' onClick={() => handleDecrease()} disabled={quantity === 1}>-</button>
+
+                        <span style={{fontSize: '0.8rem', alignSelf: 'center'}}>{quantity}</span>
+
+                        <button className='qt-btn' onClick={() => handleIncrease()} disabled={quantity === 10}>+</button>
+                        
+                        <button className='details-btn' onClick={() =>addProductAndNavigateHome(selectedProduct,quantity )}>
+                            Añadir al carro
+                        </button>
+
+                    </span>
+
                 </div>
             </div>
+            <h2 style={{ fontSize: '1.4rem', width: '91%', textAlign: 'center'}}>Descripcion</h2>
+            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <ul style={{ width: '27%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 auto', display: 'block' }}>
+                    {descriptionList.map((item, index) => (
+                        <li style={{ fontSize: '0.9rem', width: '100%', textAlign: 'justify', margin: '8px 0px'}} key={index}>{item}</li>
+                    ))}
+                </ul>
+            </div>
+            <BuyingInfo/>
+        </>  
     )
 };
 

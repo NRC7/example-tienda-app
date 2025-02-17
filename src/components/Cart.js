@@ -58,13 +58,13 @@ const Cart = () => {
             <div className="cart-items-container">
               {cartItems.map((item) => (
                 <div className="cart-item" key={item.sku}>
-                  <h3 onClick={() =>  navigate(`/products/${item.sku}`, { state: { product: item } })}
+                  <h3 onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
                   className="product-name">{item.name}</h3>
                   <img
                     src={item.imageResources[0]}
                     alt={item.name}
                     style={{ width: '100%', height: '180px', objectFit: 'scale-down' }}
-                    onClick={() =>  navigate(`/products/${item.sku}`, { state: { product: item } })}
+                    onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
                   />
                   <p>Cantidad: {item.quantity}</p>
                   <p>{formatCurrency(item.totalPrice)}</p>
@@ -76,7 +76,7 @@ const Cart = () => {
                       -
                     </button>
                     <button
-                      onClick={() => incrementProductQuantity(item.sku)}
+                      onClick={() => incrementProductQuantity(item.sku, 1)}
                       disabled={item.quantity === 10}
                     >
                       +

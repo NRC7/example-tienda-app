@@ -6,10 +6,14 @@ const cartService = {
   
     getCartItemCount: () => {
       const cart = cartService.getCartItems();
-      return cart.length;
+      let cartLen = 0;
+      cart.forEach(cartProduct => {
+        cartLen += cartProduct.quantity
+      });
+      return cartLen;
     },
   
-    addToCart: (product) => {
+    addToCart: (product, selectedQuantity) => {
       const cart = cartService.getCartItems();
 
       // Buscar si el producto ya existe en el carrito
@@ -17,7 +21,7 @@ const cartService = {
 
       if (existingProductIndex !== -1) {
         // Incrementar cantidad y recalcular precio total
-        cart[existingProductIndex].quantity += 1;
+        cart[existingProductIndex].quantity += selectedQuantity;
         cart[existingProductIndex].totalPrice =
           cart[existingProductIndex].quantity *
           (product.dealPrice || product.normalPrice);
@@ -25,7 +29,7 @@ const cartService = {
         // Agregar un nuevo producto con cantidad 1
         cart.push({
           ...product,
-          quantity: 1,
+          quantity: selectedQuantity,
           totalPrice: product.dealPrice || product.normalPrice,
         });
       }
@@ -47,11 +51,11 @@ const cartService = {
       window.dispatchEvent(new Event('cartUpdated')); // Emitir evento
     },
 
-    incrementQuantity: (productSku) => {
+    incrementQuantity: (productSku, selectedQuantity) => {
       const cart = cartService.getCartItems();
       const product = cart.find(item => item.sku === productSku);
       if (product && product.quantity < 10) {
-        product.quantity += 1;
+        product.quantity += selectedQuantity;
         product.totalPrice = product.quantity * (product.dealPrice || product.normalPrice);
         localStorage.setItem('cart', JSON.stringify(cart));
         window.dispatchEvent(new Event('cartUpdated'));

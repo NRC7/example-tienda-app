@@ -1,19 +1,63 @@
+.detailsNavegation {
+    padding: 10px 5px;
+    font-size: 0.9rem;
+    width: 71%;
+    margin-top: 90px;
+    margin-left: 90px;
+}
+
+.detailsNavegation a {
+    text-decoration: none;
+    color: #000;
+}
+
+.detailsNavegation a:hover {
+    color: #25d366;
+    text-decoration: underline;
+}
+
+.detailsNavegation .highlight {
+    color: #1e9e4a; /* Color morado similar */
+    font-weight: bold;
+  }
+
+
+.qt-btn {
+    padding: 8px;
+    background-color: #25d366; /* Color verde */
+    color: black;
+    border: none;
+    justify-content: center;
+    width: 8%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.qt-btn:disabled {
+    background-color: rgba(0, 0, 0, 0.5); /* Color verde más oscuro */
+    opacity: 0.4;
+}
+  
+.qt-btn:hover {
+    background-color: #1e9e4a; /* Color verde más oscuro */
+}
+
 .details-btn {
-    margin-top: 20px;
     padding: 10px;
     background-color: #25d366; /* Color verde */
-    color: white;
+    color: black;
     border: none;
     justify-content: center;
     width: 50%;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
+}
   
 .details-btn:hover {
     background-color: #1e9e4a; /* Color verde más oscuro */
-  }
+}
 
 .arrow-details {
     height: 20%;

@@ -32,13 +32,18 @@ const PurchasePopup = ({ productList }) => {
         return names[Math.floor(Math.random() * names.length)]
     }
 
+    const getRandomAction = () => {
+        const actions = ['comprar','mirar', 'comprar']
+        return actions[Math.floor(Math.random() * actions.length)]
+    }
+
     if (!recentPurchase || !showPopup) return null;
 
     return (
-        <div className="purchase-popup" onClick={() =>  navigate(`/products/${recentPurchase.sku}`, { state: { product: recentPurchase } })}>
+        <div className="purchase-popup" onClick={() =>  navigate(`/products/${recentPurchase.category}/${recentPurchase.subCategory}/${recentPurchase.sku}`, { state: { product: recentPurchase } })}>
             <img src={recentPurchase.imageResources[0]} alt={recentPurchase.name} className="popup-image" />
             <div className="popup-text">
-                <p>{`${getRandomName()} acaba de comprar ${recentPurchase.name}!`}</p>
+                <span style={{fontWeight: 'bold'}}>{getRandomName()}</span> acaba de {getRandomAction()} <span></span><span style={{fontWeight: 'bold'}}>{recentPurchase.name}</span>
             </div>
         </div>
     );
