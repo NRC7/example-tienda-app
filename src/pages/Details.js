@@ -1,5 +1,4 @@
 import ProductDetails from '../components/ProductDetails';
-import Footer from '../components/Footer';
 import ChatButton from '../components/ChatButton';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
@@ -16,9 +15,11 @@ const Details = () => {
 
     useEffect(() => {
 
-        if ( selectedProduct == null || typeof selectedProduct === 'undefined') {
-            setError(true)
-        }
+        // if ( selectedProduct == null || typeof selectedProduct === 'undefined') {
+        //     setError(true)
+        // }
+
+        setError(false)
 
         // Deja de cargar
         setLoading(false);
@@ -38,11 +39,10 @@ const Details = () => {
     // Layout
     return (
         <main>
-            <div className="container">
+            <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
                 <ProductDetails selectedProduct={selectedProduct} />
             </div>
             <ChatButton />
-            <Footer />
         </main>
     );
 

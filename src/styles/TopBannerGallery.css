@@ -1,10 +1,11 @@
 /* Contenedor principal de la galería */
 .top-banner-gallery {
-    margin-top: 20px;
+    margin: 0px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    max-width: 100%;
     height: 50vh; /* Ocupa toda la altura de la ventana */
     display: flex;
+    text-align: center;
     justify-content: center; /* Centra horizontalmente */
     align-items: center; /* Centra verticalmente */
     overflow: hidden; /* Evita desbordamientos si hay un cambio de tamaño */

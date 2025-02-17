@@ -39,7 +39,6 @@ const TopBannerGallery = () => {
     };
 
     return (
-        <div >
             <div className="top-banner-gallery">
                 <button className="arrow left" onClick={handlePrev}>
                     <i className="fas fa-chevron-left"></i>
@@ -60,7 +59,6 @@ const TopBannerGallery = () => {
                     ))}
                 </div>  
             </div>
-        </div>
     );
 };
 
