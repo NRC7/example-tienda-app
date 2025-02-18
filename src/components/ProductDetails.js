@@ -65,7 +65,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     <h2 style={{ fontSize: '1.8rem', width: '70%', textAlign: 'center'}}>{selectedProduct?.name}</h2>
 
-                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
+                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%', alignItems: 'center', margin: '8px 0px',}}>
                         <span>SKU: {selectedProduct?.sku}</span>
                         <span style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                             Reseñas:
@@ -74,25 +74,25 @@ const ProductDetails = ({ selectedProduct }) => {
                         </span>
                     </div>
 
-                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
+                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%', margin: '10px 0px'}}>
                         <span>Categoria: </span>
                         <span className='review'>{sanitizeCategory(selectedProduct?.category)} / {sanitizeCategory(selectedProduct?.subCategory)}</span>
                     </div>
 
                     {selectedProduct?.discountPercentage !== "" ? (
                         <>
-                            <div style={{display: 'flex', flexDirection: 'column', margin: '2px 0px', width: '60%'}}>
+                            <div style={{display: 'flex', flexDirection: 'column', margin: '10px 0px', width: '60%'}}>
 
-                                <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
                                         <span style={{fontSize: '0.8rem'}}>Normal:</span>
                                         <span style={{textDecoration: 'line-through', fontSize: '0.8rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
                                 </span>
 
-                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '0px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
                                         <span style={{fontSize: '0.9rem'}}>Desc:</span> <span style={{fontSize: '0.9rem'}}>-{selectedProduct?.discountPercentage}</span>
                                 </span>
 
-                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '12px 0px', display: 'flex', justifyContent: 'space-between' }}>
                                         <span style={{fontSize: '1.1rem'}}>Ahora:</span> <span style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.dealPrice)}</span>
                                 </span>
 
@@ -101,7 +101,7 @@ const ProductDetails = ({ selectedProduct }) => {
                         </>
                     ) : (
 
-                        <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                        <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '20px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
                             <span style={{fontSize: '1.1rem'}}>Normal:</span>
 
@@ -112,7 +112,7 @@ const ProductDetails = ({ selectedProduct }) => {
                         )
                     }
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
                         <span style={{fontSize: '0.9rem'}}>Envio gratis:</span>
                         
@@ -120,7 +120,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     </span>
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '16px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
                         <span style={{fontSize: '0.9rem'}}>Fecha estimada de entrega aprox 48 hrs. hábiles:</span>
                         
@@ -128,7 +128,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     </span>
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '8px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', display: 'flex', justifyContent: 'space-between', margin: '25px 0px'  }}>
 
                         <button className='qt-btn' onClick={() => handleDecrease()} disabled={quantity === 1}>-</button>
 
