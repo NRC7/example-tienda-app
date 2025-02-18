@@ -1,25 +1,34 @@
 export const getEstimatedDeliveryDate = () => {
-    let fecha = new Date();
-    let diasSumados = 0;
+
+    const CLOSING_TIME = 15
+
+    let estimatedDate = new Date();
+
+    // Si es después de las XX:00, sumamos un día
+    if (estimatedDate.getHours() >= CLOSING_TIME) {
+        estimatedDate.setDate(estimatedDate.getDate() + 1);
+    }
+
+    let sumDays = 0;
     
-    while (diasSumados < 2) {
-        fecha.setDate(fecha.getDate() + 1);
-        if (fecha.getDay() !== 0 && fecha.getDay() !== 6) { // 0 = Domingo, 6 = Sábado
-            diasSumados++;
+    while (sumDays < 2) {
+        estimatedDate.setDate(estimatedDate.getDate() + 1);
+        if (estimatedDate.getDay() !== 0 && estimatedDate.getDay() !== 6) { // 0 = Domingo, 6 = Sábado
+            sumDays++;
         }
     }
 
-    return formatearFecha(fecha);
+    return formatDate(estimatedDate);
 };
 
-function formatearFecha(fecha) {
-    const diasSemana = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
-    const meses = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
+function formatDate(date) {
+    const weekDays = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
+    const months = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"];
     
-    const diaSemana = diasSemana[fecha.getDay()];
-    const dia = fecha.getDate();
-    const mes = meses[fecha.getMonth()];
-    const anio = fecha.getFullYear();
+    const weekDay = weekDays[date.getDay()];
+    const day = date.getDate();
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
 
-    return `${diaSemana} ${dia}/${mes}./${anio}`;
+    return `${weekDay} ${day}/${month}./${year}`;
 }

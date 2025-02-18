@@ -1,7 +1,9 @@
 import ProductDetails from '../components/ProductDetails';
 import ChatButton from '../components/ChatButton';
+import Footer from '../components/Footer';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
+import BuyingInfo from '../components/BuyingInfo';
 
 const Details = () => {
 
@@ -43,6 +45,8 @@ const Details = () => {
                 <ProductDetails selectedProduct={selectedProduct} />
             </div>
             <ChatButton />
+            <BuyingInfo/>
+            <Footer />
         </main>
     );
 

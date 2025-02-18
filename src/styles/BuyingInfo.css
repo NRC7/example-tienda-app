@@ -1,12 +1,9 @@
 .col-full-dit {
     background-color: #25d366;
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-around;
-    padding: 2px 2px;
-    width: 99%;
-    margin: 50px 2px;
-    border-radius: 5px;
+    width: 100%;
+    margin-top: 50px;
   }
   
   .widget_text-dit {

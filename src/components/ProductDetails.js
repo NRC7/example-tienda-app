@@ -8,7 +8,6 @@ import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
 import Rating from './ProductRating'; 
 import ImageCarousel from './ImageCarousel';
-import BuyingInfo from './BuyingInfo';
 import { Link } from "react-router-dom";
 
 
@@ -156,7 +155,7 @@ const ProductDetails = ({ selectedProduct }) => {
                 </ul>
             </div>
 
-            <BuyingInfo/>
+            
 
         </>  
     )
