@@ -18,7 +18,6 @@ const ProductDetails = ({ selectedProduct }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
-        console.log(selectedProduct)
     }, []);
 
     const images = selectedProduct.imageResources
@@ -26,7 +25,6 @@ const ProductDetails = ({ selectedProduct }) => {
     const navigate = useNavigate();
 
     const addProductAndNavigateHome = (selectedProduct, selectedQuantity) => {
-        console.log('selectedQuantity: ', selectedQuantity)
         handleAddToCart(selectedProduct, selectedQuantity)
         navigate("/")
         // alert("Producto agregado al carro!")
@@ -51,7 +49,6 @@ const ProductDetails = ({ selectedProduct }) => {
     const sanitizedDescription = selectedProduct.description
 
     let descriptionList = sanitizedDescription.split(",");
-    console.log('descriptionList', descriptionList)
 
     return (
         <>
@@ -93,8 +90,9 @@ const ProductDetails = ({ selectedProduct }) => {
                         <p>SKU: {selectedProduct?.sku}</p>
                         <p style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                             Reseñas:
-                            <div style={{padding:'0px 4px'}}/> 
-                            <Rating rating={selectedProduct?.rating}/></p>
+                            <span style={{padding:'0px 4px'}}/> 
+                            <Rating rating={selectedProduct?.rating}/>
+                        </p>
                     </div>
 
                     <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
