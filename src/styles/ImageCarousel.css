@@ -1,12 +1,11 @@
 /* Estilizar los dots de Swiper */
 .swiper-pagination-bullet {
-    background-color: gray;
+    background-color: grey;
     opacity: 0.6;
 }
 
 .swiper-pagination-bullet-active {
-    background-color: white;
-    opacity: 1;
+    background-color: black;
 }
 
 /* Estilizar las flechas de Swiper */

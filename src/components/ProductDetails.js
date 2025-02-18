@@ -14,14 +14,11 @@ import { Link } from "react-router-dom";
 
 const ProductDetails = ({ selectedProduct }) => {
 
-    const [currentIndex, setCurrentIndex] = useState(0); 
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
     }, []);
-
-    const images = selectedProduct.imageResources
 
     const navigate = useNavigate();
 
@@ -29,14 +26,6 @@ const ProductDetails = ({ selectedProduct }) => {
         handleAddToCart(selectedProduct, selectedQuantity)
         navigate("/")
         // alert("Producto agregado al carro!")
-    };
-
-    const handlePrev = () => {
-        setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-    };
-
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
 
     const handleIncrease = () => {
@@ -53,6 +42,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
     return (
         <>
+
             <div className='detailsNavegation'>
                 <Link to={`/`}>Home -</Link>
                 <Link to={`/products/${selectedProduct.category}`}> {sanitizeCategory(selectedProduct.category)} - </Link>
@@ -60,27 +50,33 @@ const ProductDetails = ({ selectedProduct }) => {
             </div>
             
             <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '12px'}}>
+                
                 <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', height: '100%'}}>
-                        <ImageCarousel images={selectedProduct?.imageResources}/>
+                        <ImageCarousel
+                            images={selectedProduct?.imageResources}
+                            mHeight={'600px'}
+                            contWidth={'700px'}
+                            imgWidth={'500px'}
+                            autoplayEnabled={false}
+                        />
                 </div>
-
 
                 <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', minHeight:'100%', fontSize: '0.9rem'}}>
 
                     <h2 style={{ fontSize: '1.8rem', width: '70%', textAlign: 'center'}}>{selectedProduct?.name}</h2>
 
                     <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
-                        <p>SKU: {selectedProduct?.sku}</p>
-                        <p style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <span>SKU: {selectedProduct?.sku}</span>
+                        <span style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                             Reseñas:
                             <span style={{padding:'0px 4px'}}/> 
                             <Rating rating={selectedProduct?.rating}/>
-                        </p>
+                        </span>
                     </div>
 
                     <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%'}}>
-                        <p>Categoria: </p>
-                        <p className='review'>{sanitizeCategory(selectedProduct?.category)} / {sanitizeCategory(selectedProduct?.subCategory)}</p>
+                        <span>Categoria: </span>
+                        <span className='review'>{sanitizeCategory(selectedProduct?.category)} / {sanitizeCategory(selectedProduct?.subCategory)}</span>
                     </div>
 
                     {selectedProduct?.discountPercentage !== "" ? (
@@ -88,16 +84,16 @@ const ProductDetails = ({ selectedProduct }) => {
                             <div style={{display: 'flex', flexDirection: 'column', margin: '2px 0px', width: '60%'}}>
 
                                 <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <p style={{fontSize: '0.8rem'}}>Normal:</p>
-                                        <p style={{textDecoration: 'line-through', fontSize: '0.8rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</p>
+                                        <span style={{fontSize: '0.8rem'}}>Normal:</span>
+                                        <span style={{textDecoration: 'line-through', fontSize: '0.8rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
                                 </span>
 
                                 <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '0px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <p style={{fontSize: '0.9rem'}}>Desc:</p> <p style={{fontSize: '0.9rem'}}>-{selectedProduct?.discountPercentage}</p>
+                                        <span style={{fontSize: '0.9rem'}}>Desc:</span> <span style={{fontSize: '0.9rem'}}>-{selectedProduct?.discountPercentage}</span>
                                 </span>
 
                                 <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <p style={{fontSize: '1.1rem'}}>Ahora:</p> <p style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.dealPrice)}</p>
+                                        <span style={{fontSize: '1.1rem'}}>Ahora:</span> <span style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.dealPrice)}</span>
                                 </span>
 
                             </div>
@@ -107,9 +103,9 @@ const ProductDetails = ({ selectedProduct }) => {
 
                         <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
-                            <p style={{fontSize: '1.1rem'}}>Normal:</p>
+                            <span style={{fontSize: '1.1rem'}}>Normal:</span>
 
-                            <p style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</p>
+                            <span style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
 
                         </span>
 
@@ -118,17 +114,17 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '2px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
-                        <p style={{fontSize: '0.9rem'}}>Envio gratis:</p>
+                        <span style={{fontSize: '0.9rem'}}>Envio gratis:</span>
                         
-                        <p style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping ? 'Si' : 'No'}</p>
+                        <span style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping ? 'Si' : 'No'}</span>
 
                     </span>
 
                     <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
 
-                        <p style={{fontSize: '0.9rem'}}>Fecha estimada de entrega aprox 48 hrs. hábiles:</p>
+                        <span style={{fontSize: '0.9rem'}}>Fecha estimada de entrega aprox 48 hrs. hábiles:</span>
                         
-                        <p style={{fontSize: '0.9rem'}}>{getEstimatedDeliveryDate().replaceAll('/', ' ')}</p>
+                        <span style={{fontSize: '0.9rem'}}>{getEstimatedDeliveryDate().replaceAll('/', ' ')}</span>
 
                     </span>
 
@@ -147,8 +143,11 @@ const ProductDetails = ({ selectedProduct }) => {
                     </span>
 
                 </div>
+
             </div>
+
             <h2 style={{ fontSize: '1.4rem', width: '91%', textAlign: 'center'}}>Descripcion</h2>
+
             <div style={{ display: 'flex', justifyContent: 'center' }}>
                 <ul style={{ width: '27%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 auto', display: 'block' }}>
                     {descriptionList.map((item, index) => (
@@ -156,7 +155,9 @@ const ProductDetails = ({ selectedProduct }) => {
                     ))}
                 </ul>
             </div>
+
             <BuyingInfo/>
+
         </>  
     )
 };
