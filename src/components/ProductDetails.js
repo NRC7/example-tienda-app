@@ -7,6 +7,7 @@ import { formatCurrency } from '../util/FormatCurrency';
 import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
 import Rating from './ProductRating'; 
+import ImageCarousel from './ImageCarousel';
 import BuyingInfo from './BuyingInfo';
 import { Link } from "react-router-dom";
 
@@ -60,25 +61,7 @@ const ProductDetails = ({ selectedProduct }) => {
             
             <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '12px'}}>
                 <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', height: '100%'}}>
-                    <div style={{display:'flex', flexDirection: 'row', alignItems: 'center', gap: '50px'}}>
-                        <button className="arrow-details" onClick={handlePrev}>
-                            <i className="fas fa-chevron-left"></i>
-                        </button>
-                        <img 
-                            src={selectedProduct?.imageResources[currentIndex]} 
-                            alt={selectedProduct?.name}
-                            style={{objectFit: 'scale-down', height:'600px', width: '500px'}}  
-                        />
-                        <button className="arrow-details" onClick={handleNext}>
-                            <i className="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-
-                    <div className="dots-details">
-                            {images.map((_, index) => (
-                                <span key={index} className={`dot-details ${index === currentIndex ? 'active' : ''}`} />
-                            ))}
-                    </div>  
+                        <ImageCarousel images={selectedProduct?.imageResources}/>
                 </div>
 
 
