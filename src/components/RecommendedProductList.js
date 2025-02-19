@@ -16,8 +16,7 @@ const RecommendedProductList = ({ productList }) => {
     const navigate = useNavigate();
 
     const filteredProducts = useMemo(() => {
-        return productList
-            .filter(product => product.discountPercentage !== "")
+        return productList?.filter(product => product.discountPercentage !== "")
             .sort((b, a) => b.name.localeCompare(a.name));
     }, [productList]);
 

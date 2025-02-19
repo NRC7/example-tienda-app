@@ -1,6 +1,7 @@
 // src/components/Header.js
 import React, { useState } from 'react';
 import Cart from './Cart';
+import SearchBar from './SearchBar';
 import '../styles/NavBar.css'
 
 function Header() {
@@ -33,13 +34,7 @@ function Header() {
                 </div>
             )}
 
-            {/* Barra de búsqueda */}
-            <div className="search-bar">
-                <input type="text" placeholder="Buscar productos..." />
-                <button className="search-button">
-                    <i className="fa fa-search"></i> {/* Ícono decorativo */}
-                </button>
-            </div>
+            <SearchBar />
 
             {/* Enlace de sesión */}
             <div className="session-links">

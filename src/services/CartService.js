@@ -41,7 +41,7 @@ const cartService = {
   
     removeFromCart: (productSku) => {
       const cart = cartService.getCartItems();
-      const updatedCart = cart.filter(item => item.sku !== productSku);
+      const updatedCart = cart?.filter(item => item.sku !== productSku);
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       window.dispatchEvent(new Event('cartUpdated')); // Emitir evento
     },
