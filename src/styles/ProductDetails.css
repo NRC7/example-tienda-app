@@ -23,12 +23,13 @@
 
 
 .qt-btn {
-    padding: 8px;
+    text-align: center;
+    padding: 2px;
     background-color: #25d366; /* Color verde */
-    color: black;
+    color: #f0f0f0;
     border: none;
     justify-content: center;
-    width: 8%;
+    width: 9%;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
@@ -46,7 +47,7 @@
 .details-btn {
     padding: 10px;
     background-color: #25d366; /* Color verde */
-    color: black;
+    color: #f0f0f0;
     border: none;
     justify-content: center;
     width: 50%;

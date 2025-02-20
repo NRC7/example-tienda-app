@@ -1,19 +1,37 @@
-import ProductDetails from '../components/ProductDetails';
+import ProductGrid from '../components/ProductGrid';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useLocation } from "react-router-dom";
 import BuyingInfo from '../components/BuyingInfo';
+import '../styles/SearchResult.css'
+import { Link } from "react-router-dom";
 
 const Search = () => {
 
     const location = useLocation();
-    const foundProducts = location.state?.products;
+    const products = location.state?.products;
+    const terms = location.state?.terms;
+
+    // Formato navegacion
+    function formatTerms(userTerms) {
+        let formatedTerms = '';
+        userTerms.forEach(term => {
+            formatedTerms += (term + ' ')
+        });
+        return formatedTerms;
+    }
+
+    let formatted = formatTerms(terms);
 
     return (
         <main>
             <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
-                <ProductDetails selectedProduct={foundProducts[1]} />
+                <div className='detailsNavegation'>
+                    <Link to={`/`}>Home -</Link>
+                    <Link className="highlight" to={`/search/${terms}`}>{` Busqueda: '${formatted}' : ${products.length} resultados`}</Link>
+                </div>
+                <ProductGrid foundProducts={products}></ProductGrid>
             </div>
             <ChatButton />
             <BuyingInfo/>

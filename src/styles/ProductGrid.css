@@ -1,0 +1,114 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 10px;
+    height: fit-content;
+    width: 80%;
+  }
+  
+  .grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #f9f9f9;
+    padding: 6px 10px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  }
+
+  .grid-item:hover {
+    transform: scale(1.07);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .grid-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  
+  .grid-item span {
+    margin: 5px 2px;
+    font-size: 0.9rem;
+    justify-content: center;
+  }
+
+  .detailsNavegation {
+    padding: 10px 5px;
+    font-size: 0.9rem;
+    width: 71%;
+    margin-top: 90px;
+    margin-left: 90px;
+}
+
+.detailsNavegation a {
+    text-decoration: none;
+    color: #000;
+}
+
+.detailsNavegation a:hover {
+    color: #25d366;
+    text-decoration: underline;
+}
+
+.detailsNavegation .highlight {
+    color: #1e9e4a;
+    font-weight: bold;
+}
+
+.pg-qt-btn {
+    padding: 6px;
+    background-color: #1e9e4a;
+    color: #f0f0f0;
+    border: none;
+    justify-content: center;
+    width: 10%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pg-qt-btn:disabled {
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0.4;
+}
+  
+.pg-qt-btn:hover {
+    background-color: #25d366;
+}
+
+.pg-details-btn {
+    font-weight: bold;
+    padding: 10px;
+    background-color: #25d366;
+    color: #f0f0f0;
+    border: none;
+    justify-content: center;
+    width: 50%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.pg-details-btn:hover {
+    background-color: #1e9e4a;
+}
+  
+.result-bubble {
+    position: relative;
+    top: -78%;
+    right: -30%;
+    background-color: #1e9e4a;
+    color: #f0f0f0;
+    border-radius: 50%;
+    padding: 8px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}  
+  

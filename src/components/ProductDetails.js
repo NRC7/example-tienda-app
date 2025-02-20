@@ -45,7 +45,12 @@ const ProductDetails = ({ selectedProduct }) => {
             <div className='detailsNavegation'>
                 <Link to={`/`}>Home -</Link>
                 <Link to={`/products/${selectedProduct.category}`}> {sanitizeCategory(selectedProduct.category)} - </Link>
-                <Link className="highlight" to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}`}> {sanitizeCategory(selectedProduct.subCategory)}</Link>
+                <Link to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}`}> {sanitizeCategory(selectedProduct.subCategory)} - </Link>
+                <Link className="highlight" 
+                    to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}/${selectedProduct.sku}`}
+                    state={{product: selectedProduct}}
+                    > Sku: {selectedProduct.sku}
+                </Link>
             </div>
             
             <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '12px'}}>
