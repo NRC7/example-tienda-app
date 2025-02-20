@@ -36,18 +36,7 @@ function Header() {
 
             <SearchBar />
 
-            {/* Enlace de sesión */}
-            <div className="session-links">
-                {isAuthenticated ? (
-                    <a href="#logout" className="session-link" onClick={handleAuthClick}>
-                        Cerrar sesión
-                    </a>
-                ) : (
-                    <a href="#login" className="session-link" onClick={handleAuthClick}>
-                        Iniciar sesión
-                    </a>
-                )}
-            </div>
+            
 
             {/* Icono de carrito */}
             <Cart/>

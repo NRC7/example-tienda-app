@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { getCachedProducts } from '../util/CachedProducs';
-import { Link } from "react-router-dom";
+import { formatCurrency } from '../util/FormatCurrency';
+import { sanitizeCategory } from '../util/SanitizeCategory';
+import { useNavigate } from "react-router-dom";
 import '../styles/SearchBar.css'
 
 const SearchBar = () => {
@@ -10,6 +12,8 @@ const SearchBar = () => {
     const [userSearchTerms, setSearchTerms] = useState([]);
 
     const [userSearchResults, setSearchResults] = useState([]);
+
+    const navigate = useNavigate();
 
     const fetchCachedProducts = async () => {
         const data = await getCachedProducts();
@@ -34,27 +38,76 @@ const SearchBar = () => {
             ).sort((a, b) => b.rating - a.rating);
             setSearchResults(searchResults)
 
+            
+
+            searchResults?.map((productFound) => {
+                <div class="result-item">{productFound.name}</div>
+            })
+
             // `/search/${userSearchTerms[0]}/${userSearchTerms[1]}?sort=rating`
             // 
         }
+        else {
+            setSearchTerms([])
+        }
+    }
+
+    function clearUI() {
+        document.getElementById("searchInput").value = '';
+        setSearchTerms([])
     }
     
     return (
-        <div className="search-bar">
-            <input type="text" 
-                placeholder="Buscar productos..." 
-                onChange={(event) => handleSearch(event)} 
-            />
-            <button className="search-button">
-                <Link
-                    to={{
-                        pathname: `/search/${userSearchTerms}`
-                    }}
-                    state={{ products: userSearchResults }}
+        <div style={{display: 'flex', alignItems:'flex-start', justifyContent:'center'}}>
+
+            <div className="search-bar">
+                <input id='searchInput' type="text" 
+                    placeholder="Buscar productos..." 
+                    onChange={(event) => handleSearch(event)} 
+                />
+                <button className="search-button" disabled={userSearchTerms.length < 1}
+                    onClick={ () => {
+                        navigate(`/search/${userSearchTerms}`, {state: {products: userSearchResults}})
+                        clearUI()
+                    } }
                 >
-                    <i className="fa fa-search"></i>
-                </Link>
-            </button>
+                    <i className="fa fa-search ic"></i>
+                </button>
+            </div>
+
+            {userSearchTerms[0]?.length > 2 ? (
+
+                <div className="results">
+                    {userSearchResults.map((item, index) => (
+                        <div style={{ display:'flex', width: '95%', backgroundColor:'#f0f0f0', padding:'5px', margin:'8px 10px', borderRadius:'10px', justifyContent:'flex-start' }} 
+                            key={index} 
+                            onClick={() =>  {
+                                navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, {state: {product: item}})
+                                clearUI()
+                            } }
+                        >
+
+                            <img src={item.imageResources[0]} alt={`img-${index}`} style={{ objectFit: 'scale-down', height: '120px', width: '120px', borderRadius:'10px', marginLeft:'20px' }} />
+
+                            <div style={{display:'flex', flexDirection: 'column', color:'rgba(0, 0, 0, 0.7)', justifyContent:'center', marginLeft:'10px'}}>
+                                <span>{item.name}</span>
+                                {item.discountPercentage !== "" ? (
+                                        <span>{formatCurrency(item.dealPrice)}</span>             
+                                    ) : (
+                                        <span>{formatCurrency(item.normalPrice)}</span>
+                                    )
+                                }
+                                <span>{`Categoria: ${sanitizeCategory(item.category)}`}</span>
+                            </div>  
+
+                        </div>                    
+                    ))}
+                </div>    
+                ) : (
+                    <span></span>
+                )
+
+            }
         </div>
     );
 }

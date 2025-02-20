@@ -1,9 +1,10 @@
+/* .input-container */
 .search-bar {
-    flex: 1;
     display: flex;
     justify-content: center;
     padding: 0 20px;
     position: relative;
+    width: 1000px;
 }
 
 .search-bar input {
@@ -20,16 +21,29 @@
     border: 1.8px solid rgba(0, 0, 0, 0.4);
 }
 
-.search-button {
+.search-button {    
     position: relative;
-    right: 30px; /* Posicion del icono a la derecha y dentro, fuera es -px */
+    left: -30px; /* Posicion del icono a la derecha y dentro, fuera es -px */
     background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
 }
 
-.search-button i {
+.search-button .ic {
     font-size: 1.2rem;
     color: rgba(0, 0, 0, 0.4);
+}
+
+.results {
+    position: absolute;
+    margin-top: 50px;
+    width: 600px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
