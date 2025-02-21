@@ -8,9 +8,10 @@ import { sanitizeCategory } from '../util/SanitizeCategory';
 import { getCachedProducts } from '../util/CachedProducs';
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
-const Categories = () => {
+const SubCategories = () => {
 
     const location = useLocation();
+    const selectedSubCategory = location.state?.subCategory;
     const selectedCategory = location.state?.category;
     const selectedLabel = location.state?.label;
 
@@ -19,7 +20,7 @@ const Categories = () => {
     useEffect(() => {
         const fetchCachedProducts = async () => {
             let data = await getCachedProducts();
-            const filtered = data.filter((item) => item.category === selectedCategory)
+            const filtered = data.filter((item) => item.subCategory === selectedSubCategory)
             setFilteredProducts(filtered);
         };
         fetchCachedProducts()
@@ -31,7 +32,10 @@ const Categories = () => {
             <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
                 <div style={{fontSize:'1.1rem', marginBottom:'10px'}} className='detailsNavegation'>
                     <Link className='' to={`/`}>Home - </Link>
-                    <span className='highlight'>{sanitizeCategory(selectedCategory)}</span>
+                    <Link to={`/products/${selectedCategory}`} 
+                        state={{category: selectedCategory, label: `Todos los productos en ${sanitizeCategory(selectedCategory)}`}}
+                        > {sanitizeCategory(selectedCategory)} - </Link>
+                    <span className='highlight'>{sanitizeCategory(selectedSubCategory)}</span>
                 </div>
                 {filteredProducts.length > 0 ? (
                     <ProductGrid selectedProducts={filteredProducts} label={selectedLabel}></ProductGrid>
@@ -47,4 +51,4 @@ const Categories = () => {
 
 }
 
-export default Categories;
+export default SubCategories;
