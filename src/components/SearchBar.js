@@ -32,6 +32,7 @@ const SearchBar = () => {
             const searchResults = products?.filter(product => 
                 (normalizeText(product.name.toLowerCase()).includes(searchTerms[0].toLowerCase())) ||
                 (product.category.toLowerCase().includes(searchTerms[0].toLowerCase())) ||
+                (product.subCategory.toLowerCase().includes(searchTerms[0].toLowerCase())) ||
                 (product.name.toLowerCase().includes(searchTerms[0].toLowerCase()) &&
                 product.category.toLowerCase().includes(searchTerms[1]?.toLowerCase()))
             ).sort((a, b) => b.rating - a.rating);
