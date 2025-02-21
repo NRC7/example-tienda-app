@@ -125,7 +125,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
                         <span style={{fontSize: '0.9rem'}}>Envio gratis:</span>
                         
-                        <span style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping ? 'Si' : 'No'}</span>
+                        <span style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping === 'true' ? 'Si' : 'No'}</span>
 
                     </span>
 

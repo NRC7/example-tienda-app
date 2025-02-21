@@ -37,6 +37,13 @@ const ProductGrid = ({ selectedProducts, label }) => {
                     b.discountPercentage.replace('%', '') - a.discountPercentage.replace('%', ''));
                 setSelectedFilterOption(filtered3)
                 break;      
+            case "4":
+                const filtered4 = selectedProducts.sort((a, b) => {
+                    if (a.freeShiping === b.freeShiping) return 0;
+                    return a.freeShiping === 'true' ? -1 : 1; // Los true van primero
+                });
+                setSelectedFilterOption(filtered4)
+                break;     
             default:
                 setSelectedFilterOption(selectedProducts)
                 break;
@@ -55,6 +62,7 @@ const ProductGrid = ({ selectedProducts, label }) => {
                     <option value="1">Mayor precio</option>
                     <option value="2">Menor precio</option>
                     <option value="3">Mayor descuento</option>
+                    <option value="4">Envío gratis</option>
                 </select>
             </div>
         
@@ -66,15 +74,25 @@ const ProductGrid = ({ selectedProducts, label }) => {
                         <div key={item.sku} className="grid-item">
                         
                             <img 
-                                src={item.imageResources[1]} 
+                                src={item.imageResources[0]} 
                                 alt={`img-${index}`} 
                                 style={{ objectFit: 'scale-down', height: '120px', width: '120px', borderRadius:'10px', marginLeft:'20px' }}
                                 onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
                                 />
                             
-                            <span style={{fontWeight: 'bold'}} >{item.name}</span>
-                            
-                            <span >{`Categoria: ${sanitizeCategory(item.category)} - ${sanitizeCategory(item.subCategory)}`}</span>
+                            <span className='product-navegation' style={{fontWeight: 'bold'}}
+                                onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
+                            >{item.name}</span>
+
+                            <div style={{display: 'flex', flexDirection:'row'}}>
+                                <span >Categoria: </span>
+                                <span className='product-navegation'
+                                    onClick={() =>  navigate(`/products/${item.category}`, { state: { category: item.category, label:`Todos los productos en ${sanitizeCategory(item.category)}`}})}
+                                >{`${sanitizeCategory(item.category)} - `}</span>
+                                <span className='product-navegation'
+                                    onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}`, { state: { category: item.category, subCategory: item.subCategory, label: `Todos los productos en ${sanitizeCategory(item.subCategory)}` } })}
+                                >{sanitizeCategory(item.subCategory)}</span>
+                            </div>
 
                             {item.discountPercentage !== "" ? (
                                     <div style={{display: 'flex', flexDirection: 'column'}}> 
@@ -96,7 +114,7 @@ const ProductGrid = ({ selectedProducts, label }) => {
 
                             <Rating rating={item.rating}/>
 
-                            {item.freeShiping ? (
+                            {item.freeShiping === 'true' ? (
                                     <span style={{ fontSize: '0.8rem'}}>Envio gratis: Si</span>
                                 ) : (
                                     <div></div>

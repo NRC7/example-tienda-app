@@ -31,7 +31,11 @@ const Search = () => {
                     <Link to={`/`}>Home -</Link>
                     <Link className="highlight" to={`/search/${terms}`}>{` Busqueda: '${formatted}' : ${products.length} resultados`}</Link>
                 </div>
-                <ProductGrid selectedProducts={products} label={`Todos los productos con '${formatted}'`}></ProductGrid>
+                {products.length > 0 ? (
+                    <ProductGrid selectedProducts={products} label={`Todos los productos con '${formatted}'`}></ProductGrid>
+                ) : (
+                    <div style={{fontSize: '1.1rem', textAlign: 'center', height:'80vh'}}>Cargando productos...</div>
+                ) }
             </div>
             <ChatButton />
             <BuyingInfo/>

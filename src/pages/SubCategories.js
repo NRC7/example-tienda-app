@@ -40,7 +40,7 @@ const SubCategories = () => {
                 {filteredProducts.length > 0 ? (
                     <ProductGrid selectedProducts={filteredProducts} label={selectedLabel}></ProductGrid>
                 ) : (
-                    <span style={{fontSize: '1.1rem', textAlign: 'center'}}>Normal:</span>
+                    <div style={{fontSize: '1.1rem', textAlign: 'center', height:'80vh'}}>Cargando productos...</div>
                 ) }
             </div>
             <ChatButton />
