@@ -39,12 +39,14 @@ const ProductDetails = ({ selectedProduct }) => {
 
     let descriptionList = sanitizedDescription.split(",");
 
+    const selectedCategory = selectedProduct.category
+
     return (
         <>
-
             <div className='detailsNavegation'>
                 <Link to={`/`}>Home -</Link>
-                <Link to={`/products/${selectedProduct.category}`}> {sanitizeCategory(selectedProduct.category)} - </Link>
+                <Link to={`/products/${selectedProduct.category}`} state={{category: selectedCategory, label: `Todos los productos ${sanitizeCategory(selectedCategory)}`}}
+                > {sanitizeCategory(selectedProduct.category)} - </Link>
                 <Link to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}`}> {sanitizeCategory(selectedProduct.subCategory)} - </Link>
                 <Link className="highlight" 
                     to={`/products/${selectedProduct.category}/${selectedProduct.subCategory}/${selectedProduct.sku}`}

@@ -50,7 +50,8 @@
     color: #000;
 }
 
-.detailsNavegation a:hover {
+.detailsNavegation a:hover,
+.detailsNavegation .highlight:hover {
     color: #25d366;
     text-decoration: underline;
 }
@@ -58,6 +59,11 @@
 .detailsNavegation .highlight {
     color: #1e9e4a;
     font-weight: bold;
+}
+
+.detailsNavegation .highlight:hover {
+  color: #1e9e4a;
+  font-weight: bold;
 }
 
 .pg-qt-btn {

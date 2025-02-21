@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import Details from './pages/Details';
 import Search from './pages/Search';
+import Categories from './pages/Categories';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -17,6 +18,7 @@ const App = () => (
             <Route path="/" element={<Home />} />
             <Route path="/products/:category/:subCategory/:sku" element={<Details />} />
             <Route path="/search/:userSearchTerms" element={<Search />}/>
+            <Route path="/products/:category" element={<Categories />}/>
         </Routes>
     </Router>
 );

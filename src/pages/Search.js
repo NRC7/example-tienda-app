@@ -31,7 +31,7 @@ const Search = () => {
                     <Link to={`/`}>Home -</Link>
                     <Link className="highlight" to={`/search/${terms}`}>{` Busqueda: '${formatted}' : ${products.length} resultados`}</Link>
                 </div>
-                <ProductGrid foundProducts={products}></ProductGrid>
+                <ProductGrid selectedProducts={products} label={`Todos los productos '${formatted}'.`}></ProductGrid>
             </div>
             <ChatButton />
             <BuyingInfo/>
