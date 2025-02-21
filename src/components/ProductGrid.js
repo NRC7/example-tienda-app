@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import '../styles/ProductGrid.css'
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { formatCurrency } from '../util/FormatCurrency';
 import { handleAddToCart } from '../handlers/CartHandler';
 import Rating from './ProductRating'; 
 import { useNavigate } from "react-router-dom";
-
+import '../styles/ProductGrid.css'
 
 const ProductGrid = ({ foundProducts }) => {
 
@@ -15,12 +14,6 @@ const ProductGrid = ({ foundProducts }) => {
         // Mueve el scroll al inicio cuando se monta el componente
         window.scrollTo(0, 0);
     }, []);
-
-    const addProductAndNavigateHome = (selectedProduct, selectedQuantity) => {
-            handleAddToCart(selectedProduct, selectedQuantity)
-            //navigate("/")
-            // alert("Producto agregado al carro!")
-        };
 
     return (
             <div style={{display:'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', width: '100%', backgroundColor: '#f0f0f0', minHeight:'80vh'}}>
@@ -59,6 +52,8 @@ const ProductGrid = ({ foundProducts }) => {
                                 )
                             }
 
+                            <Rating rating={item.rating}/>
+
                             {item.freeShiping ? (
                                     <span style={{ fontSize: '0.8rem'}}>Envio gratis: Si</span>
                                 ) : (
@@ -66,9 +61,9 @@ const ProductGrid = ({ foundProducts }) => {
                                 )
                             }
 
-                            <Rating rating={item.rating}/>
-
-                            <button style={{marginTop: '10px'}} className='pg-details-btn' onClick={() =>addProductAndNavigateHome(item, 1)}>
+                            <button style={{marginTop: '10px'}} className='pg-details-btn' onClick={() => {
+                                console.log(`Item ${index}: `, item)
+                                handleAddToCart(item, 1)}}>
                                     Añadir al carro
                             </button>
 

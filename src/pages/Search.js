@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import React from 'react';
 import { useLocation } from "react-router-dom";
 import BuyingInfo from '../components/BuyingInfo';
-import '../styles/SearchResult.css'
+import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 import { Link } from "react-router-dom";
 
 const Search = () => {
