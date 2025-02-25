@@ -98,7 +98,11 @@ const Cart = () => {
             </div>
             <button
               className="checkout-button"
-              onClick={() =>  navigate('/checkout', { state: { cart: cartItems } })}
+              onClick={() => 
+              {
+                toggleCartDrawer()
+                navigate('/checkout', { state: { cart: cartItems } })}
+              }
             >
             Continuar con tu compra
             </button>

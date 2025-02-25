@@ -2,9 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { formatCurrency } from '../util/FormatCurrency';
 import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
 import { getCartItems, calculateSubtotal, calculateShippingCost, 
-  calculateTotalWithCupon, getCuponAppliedValue, calculateTotal
+  calculateTotalWithCupon, calculateTotal
 } from '../handlers/CartHandler';
-import { getCuponAppliedValue } from '../handlers/CuponHandler';
+import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
 
 const Checkout = () => {
@@ -33,7 +33,8 @@ const Checkout = () => {
   function handleApplyCoupon() {
     const couponQuery = inputRef.current?.value.toUpperCase();
     if (couponQuery.length > 4) {
-        const applied = getCuponAppliedValue(couponQuery);
+        const applied = getCuponValue(couponQuery);
+        console.log('applied: ', applied)
         if (applied > 0) {
             setCouponValue(applied);
             alert('Cupón aplicado');
@@ -199,11 +200,11 @@ const Checkout = () => {
                         <hr style={{border: 'none', height: '1px', backgroundColor: '#ccc', margin: '12px 0', width:'60%'}} />
                         <div style={{display:"flex", justifyContent: 'space-between', width: '50%'}}>
                             <span>Cupones: </span>
-                            <span>-{formatCurrency(couponValue)}</span>
+                            <span>-{formatCurrency(couponValue * calculateTotal())}</span>
                         </div>
                         <div style={{display:"flex", justifyContent: 'space-between', width: '50%', fontWeight:'bold'}}>
-                            <span>Total con cupones: </span>
-                            <span>{formatCurrency(calculateTotalWithCupon(couponValue))}</span>
+                            <span>Total con descuento: </span>
+                            <span>{formatCurrency(calculateTotalWithCupon(couponValue * calculateTotal()))}</span>
                         </div>
                                                 
                     </>

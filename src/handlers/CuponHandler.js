@@ -14,7 +14,8 @@ const calculateCupon = (cuponQuery) => {
     return cuponValue;
 };
 
-export const getCuponAppliedValue = (cuponQuery) => {
+export const getCuponValue = (cuponQuery) => {
     const cuponValue = calculateCupon(cuponQuery) 
-    return calculateTotal() * (cuponValue/100);
+    return (cuponValue/100);
+    //return calculateTotal() * (cuponValue/100);
 };
