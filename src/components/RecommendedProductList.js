@@ -52,7 +52,7 @@ const RecommendedProductList = ({ productList }) => {
     const scrollRight = () => {
         if (productListRef.current) {
             productListRef.current.scrollBy({
-                left: 300, 
+                left: 850, 
                 behavior: 'smooth'
             });
         } else {

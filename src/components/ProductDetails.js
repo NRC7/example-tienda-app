@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/ProductDetails.css'
 import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
 import { increaseQuantity, decreaseQuantity } from '../handlers/DetailsQuantityHandler';
 import { sanitizeCategory } from '../util/SanitizeCategory';
@@ -9,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Rating from './ProductRating'; 
 import ImageCarousel from './ImageCarousel';
 import { Link } from "react-router-dom";
+import '../styles/ProductDetails.css'
 
 
 const ProductDetails = ({ selectedProduct }) => {

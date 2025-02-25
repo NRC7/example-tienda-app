@@ -67,7 +67,7 @@ const SearchBar = () => {
             {userSearchTerms[0]?.length > 2 ? (
                 <div className="results">
                     {userSearchResults.map((item, index) => (
-                        <div style={{ display:'flex', width: '95%', backgroundColor:'#f0f0f0', padding:'5px', margin:'8px 10px', borderRadius:'10px', justifyContent:'flex-start' }} 
+                        <div style={{ display:'flex', width: '95%', backgroundColor:'#fff', padding:'5px', margin:'8px 10px', borderRadius:'10px', justifyContent:'flex-start' }} 
                             key={index} 
                             onClick={() =>  {
                                 navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, {state: {product: item}})
@@ -75,10 +75,13 @@ const SearchBar = () => {
                             } }
                         >
                             <img src={item.imageResources[0]} alt={`img-${index}`} style={{ objectFit: 'scale-down', height: '120px', width: '120px', borderRadius:'10px', marginLeft:'20px' }} />
-                            <div style={{display:'flex', flexDirection: 'column', color:'rgba(0, 0, 0, 0.7)', justifyContent:'center', marginLeft:'10px'}}>
+                            <div style={{display:'flex', flexDirection: 'column', color:'rgba(0, 0, 0, 0.7)', justifyContent:'center', marginLeft:'10px', fontSize:'1rem'}}>
                                 <span>{item.name}</span>
                                 {item.discountPercentage !== "" ? (
-                                        <span style={{fontWeight: 'bold'}}>{formatCurrency(item.dealPrice)}</span>             
+                                        <div>
+                                            <span style={{textDecoration: 'line-through', fontSize:'0.9rem'}}>{formatCurrency(item.normalPrice)} </span>
+                                            <span style={{fontWeight: 'bold'}}>{formatCurrency(item.dealPrice)}</span>             
+                                        </div>
                                     ) : (
                                         <span style={{fontWeight: 'bold'}}>{formatCurrency(item.normalPrice)}</span>
                                     )

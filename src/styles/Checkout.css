@@ -1,0 +1,143 @@
+.checkout-container {
+    max-width: 600px;
+    margin: 0px auto;
+    margin-top: 100px;
+    margin-bottom: 30px;
+    padding: 16px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .checkout-section {
+    border: 1px solid #ddd;
+    padding: 4px 40px 8px 8px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    background-color: white;
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .link-button {
+    background: none;
+    border: none;
+    color: blue;
+    cursor: pointer;
+  }
+  
+  .free-shipping {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .coupon-container {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .cartItem-item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    background-color: red;
+    gap: 4px;
+  }
+  
+  .cartItem-image {
+    margin: 6px 24px 0px;
+    max-width: 120px;
+    max-height: 120px;
+    object-fit: scale-down;
+  }
+
+  .cartItem-content {
+    background-color: green;
+    width: 100%;
+    height: 200px;
+    margin: 6px 0px;
+  }
+  
+  .cartItem-name {
+    font-weight: bold;
+  }
+
+  .cartItem-btn {
+    padding: 3px 8px;
+    font-size: 0.9rem;
+    background-color: #25d366; /* Verde WhatsApp */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .totals span {
+    margin: 4px 0;
+  }
+  
+  .total-amount {
+    font-weight: bold;
+  }
+  
+  .discount {
+    color: green;
+  }
+  
+  .terms {
+    display: flex;
+    align-items: center;
+    margin-top: 12px;
+  }
+
+
+.pay-button {
+    font-size: 1.1rem;
+    margin: 10px 0px;
+    padding: 10px;
+    background-color: #25d366; /* Color verde */
+    color: #f0f0f0;
+    border: none;
+    justify-content: center;
+    width: 80%;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}  
+
+.pay-button:hover, .cartItem-btn:hover {
+    background-color: #1e9e4a; /* Color verde más oscuro */
+}
+
+.pay-button:disabled {
+    background-color: rgba(0, 0, 0, 0.5); /* Color verde más oscuro */
+    opacity: 0.4;
+}
+
+.coupon-input {
+  background-color: #fff;
+  width: 70%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+input:focus {
+  border: 1px solid #25d366;
+  outline: 1px solid #25d366;
+  background-color: #fff;
+}
+
+.modify-button {
+  font-size: 0.9rem;
+}
+
+.modify-button:hover {
+  color: #1e9e4a;
+  text-decoration: underline;
+}

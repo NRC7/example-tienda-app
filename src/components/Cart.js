@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/Cart.css';
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from '../util/FormatCurrency';
 import { getCartItems, getCartItemCount,
   incrementProductQuantity, decreaseProductQuantity
 } from '../handlers/CartHandler';
+import '../styles/Cart.css';
+
 
 const Cart = () => {
 
@@ -97,6 +98,7 @@ const Cart = () => {
             </div>
             <button
               className="checkout-button"
+              onClick={() =>  navigate('/checkout', { state: { cart: cartItems } })}
             >
             Continuar con tu compra
             </button>

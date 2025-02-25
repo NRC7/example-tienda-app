@@ -8,6 +8,7 @@ import Search from './pages/Search';
 import Categories from './pages/Categories';
 import SubCategories from './pages/SubCategories';
 import AllProducts from './pages/AllProducts';
+import Checkout from './pages/Checkout';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -23,6 +24,7 @@ const App = () => (
             <Route path="/products/:category" element={<Categories />}/>
             <Route path="/products/:category/:subCategory" element={<SubCategories />}/>
             <Route path="/products" element={<AllProducts />}/>
+            <Route path="/checkout" element={<Checkout />}/>
         </Routes>
     </Router>
 );
