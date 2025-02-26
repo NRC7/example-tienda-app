@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import ModifyEmailDialog from '../components/ModifyEmailDialog';
 import { formatCurrency } from '../util/FormatCurrency';
 import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
 import { getCartItems, calculateSubtotal, calculateShippingCost, 
@@ -13,6 +14,8 @@ const Checkout = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const inputRef = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [email, setEmail] = useState("johnkennedy@ejemplo.com");
 
   const [cartItems, setCartItems] = useState(getCartItems());
 
@@ -28,7 +31,7 @@ const Checkout = () => {
   const cuponAplicadoDummy = 'SAVE10';
 
   const deliveryAddress = 'Calle principal #123, Santiago.'
-  const email = 'johnkennedy@ejemplo.com'
+  //const email = 'johnkennedy@ejemplo.com'
 
   function handleApplyCoupon() {
     const couponQuery = inputRef.current?.value.toUpperCase();
@@ -59,11 +62,20 @@ const Checkout = () => {
       <div style={{display:"flex", flexDirection:'column', height:'105px', alignItems:'flex-start', backgroundColor:'white', borderRadius:'5px', border: '1px solid #ddd', margin:'10px 0px', padding:'0px 14px', fontSize:'1rem', color:'gris', gap:'4px'}}>
         <div style={{display:"flex", justifyContent: 'space-between', width: '100%', alignItems:'center'}}>
           <h2>Boleta</h2>
-          <span className="modify-button" >Modificar <i className="fa fa-edit ic"></i></span>
+          <span
+            onClick={() => setIsModalOpen(true)}
+            className="modify-button" >Modificar <i className="fa fa-edit ic"></i>
+          </span>
+          <ModifyEmailDialog
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            email={email}
+            setEmail={setEmail}
+          />
         </div>
         <div style={{display:"flex", justifyContent: 'start', width: '100%', alignItems:'center', gap:'8px'}}>
           <span>Recibe tu boleta en:</span>
-          <span style={{fontWeight:'bold'}}>{email}</span>
+          <span style={{fontWeight:'bold', overflow: 'hidden',textOverflow: 'ellipsis'}}>{email}</span>
         </div>
       </div>
 
@@ -105,27 +117,27 @@ const Checkout = () => {
         {cartItems?.map((cartItem) => (
             <div key={cartItem.sku} style={{ width:'95%', display:"flex", alignItems:'center', borderRadius:'5px', margin:'10px 0px', gap:'6px'}}>
 
-                {/* IMAGE */}
+                {/* Image */}
                 <div style={{display:"flex", width:'35%', height:'95%', justifyContent:'center'}}>
                     <img src={cartItem.imageResources[0]} alt={cartItem.name} style={{width:'160px', height:'160px', objectFit:'scale-down'}} />
                 </div>
                 
-                {/* CONTENT */}
+                {/* Content */}
                 <div style={{height:'200px', width:'65%', display:'flex', justifyContent:'center', alignItems:'center'}}>
 
-                    {/* CONTAINER */}
+                    {/* Container */}
                     <div style={{maxHeight:'99%', width:'98%', fontSize:'0.9rem', color:'gris'}}>
 
-                        {/* NAME */}
+                        {/* Name */}
                         <div style={{width:'100%', fontWeight:'bold', margin:'2px 0px'}}>{cartItem.name}</div>
 
-                        {/* QUANTITY */}
+                        {/* Quantity */}
                         <div style={{ textAlign: 'center', width: '78%', margin: '3px 0px', display: 'flex', justifyContent: 'space-between', alignItems:'center' }}>
                           <span>Cantidad: </span>
                           <span>{cartItem.quantity}</span>
                         </div>
                         
-                        {/* PRICING */}
+                        {/* Pricing */}
                         {cartItem?.discountPercentage !== "" ? (
                             <div style={{ textAlign: 'center', width: '80%', margin: '2px 0px', display: 'flex', flexDirection:'column', justifyContent: 'space-between', alignItems:'center' }}>
                         
