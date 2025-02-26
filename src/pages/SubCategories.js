@@ -25,7 +25,7 @@ const SubCategories = () => {
         };
         fetchCachedProducts()
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
-    }, []);
+    }, [selectedSubCategory]);
   
     return (
         <main>

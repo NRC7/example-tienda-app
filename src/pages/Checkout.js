@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import ModifyEmailDialog from '../components/ModifyEmailDialog';
+import ModifyAddressDialog from '../components/ModifyAddressDialog';
 import { formatCurrency } from '../util/FormatCurrency';
 import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
 import { getCartItems, calculateSubtotal, calculateShippingCost, 
@@ -9,13 +10,15 @@ import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
 
 const Checkout = () => {
-  const [selectedDate, setSelectedDate] = useState("2025-02-25");
+  const [selectedDate, setSelectedDate] = useState(getEstimatedDeliveryDate());
   const [couponValue, setCouponValue] = useState(0);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [termsAccepted, setTermsAccepted] = useState(false);
   const inputRef = useRef();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModifyEmailDialogOpen, setIsModifyEmailDialogOpen] = useState(false);
+  const [isModifyAddressDialogOpen, setIsModifyAddressDialogOpen] = useState(false);
   const [email, setEmail] = useState("johnkennedy@ejemplo.com");
+  const [address, setAddress] = useState("Calle principal #123, Santiago.");
 
   const [cartItems, setCartItems] = useState(getCartItems());
 
@@ -28,10 +31,7 @@ const Checkout = () => {
       return () => window.removeEventListener('cartUpdated', handleCartUpdate);
     }, []);
 
-  const cuponAplicadoDummy = 'SAVE10';
-
-  const deliveryAddress = 'Calle principal #123, Santiago.'
-  //const email = 'johnkennedy@ejemplo.com'
+  //const cuponAplicadoDummy = 'SAVE10';
 
   function handleApplyCoupon() {
     const couponQuery = inputRef.current?.value.toUpperCase();
@@ -51,10 +51,21 @@ const Checkout = () => {
       <div style={{display:"flex", flexDirection:'column', height:'150px', alignItems:'flex-start', backgroundColor:'white', borderRadius:'5px', border: '1px solid #ddd', margin:'10px 0px', padding:'0px 14px', fontSize:'1rem', color:'gris', gap:'4px'}}>
         <div style={{display:"flex", justifyContent: 'space-between', width: '100%',fontSize:'1.2rem', alignItems:'center'}}>
           <h2>Entrega</h2>
-          <span className="modify-button" >Modificar <i className="fa fa-edit ic"></i></span>
+          <span
+            onClick={() => setIsModifyAddressDialogOpen(true)}
+            className="modify-button" >Modificar <i className="fa fa-edit ic"></i>
+          </span>
+          <ModifyAddressDialog
+            isOpen={isModifyAddressDialogOpen}
+            onClose={() => setIsModifyAddressDialogOpen(false)}
+            address={address}
+            setAddress={setAddress}
+            date={selectedDate}
+            setDate={setSelectedDate}
+          />
         </div>
-        <span>{deliveryAddress}</span>
-        <span>A partir de: <span style={{fontWeight:'bold'}}>{getEstimatedDeliveryDate()}.</span></span>
+        <span>{address}</span>
+        <span>A partir de: <span style={{fontWeight:'bold'}}>{selectedDate}.</span></span>
         <span>Horario: desde las 9:00 hasta las 18:00 hrs.</span>
       </div>
       
@@ -63,12 +74,12 @@ const Checkout = () => {
         <div style={{display:"flex", justifyContent: 'space-between', width: '100%', alignItems:'center'}}>
           <h2>Boleta</h2>
           <span
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsModifyEmailDialogOpen(true)}
             className="modify-button" >Modificar <i className="fa fa-edit ic"></i>
           </span>
           <ModifyEmailDialog
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            isOpen={isModifyEmailDialogOpen}
+            onClose={() => setIsModifyEmailDialogOpen(false)}
             email={email}
             setEmail={setEmail}
           />

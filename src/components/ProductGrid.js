@@ -16,7 +16,7 @@ const ProductGrid = ({ selectedProducts, label }) => {
     useEffect(() => {
         setSelectedProducts(selectedProducts)
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
-    }, []);
+    }, [selectedProducts]);
 
     useEffect(() => {
         switch (selectedFilterOption) {
@@ -49,7 +49,7 @@ const ProductGrid = ({ selectedProducts, label }) => {
                 break;
         }
           
-    }, [selectedFilterOption]);
+    }, [selectedFilterOption, selectedProducts]);
 
     return (
         <>

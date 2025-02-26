@@ -1,0 +1,10 @@
+          <DatePicker
+                selected={date}
+                onChange={(e) => setDate(formatDate(e))}    
+                minDate={oldDate} // No permite fechas pasadas
+                maxDate={new Date(new Date().setMonth(new Date().getMonth() + 2))} // Máximo 2 meses adelante
+                dateFormat="dd/MM/yyyy"
+          />
+
+          import DatePicker from "react-datepicker";
+          import "react-datepicker/dist/react-datepicker.css";

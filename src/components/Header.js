@@ -6,16 +6,16 @@ import '../styles/NavBar.css'
 
 function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
+    // const [isAuthenticated, setIsAuthenticated] = useState(false); // Estado de autenticación
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const handleAuthClick = () => {
-        // Cambiar el estado de autenticación al hacer clic
-        setIsAuthenticated(!isAuthenticated);
-    };
+    // const handleAuthClick = () => {
+    //     // Cambiar el estado de autenticación al hacer clic
+    //     setIsAuthenticated(!isAuthenticated);
+    // };
 
     return (
         <nav className="navbar">

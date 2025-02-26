@@ -21,7 +21,7 @@ export const getEstimatedDeliveryDate = () => {
     return formatDate(estimatedDate);
 };
 
-function formatDate(date) {
+export function formatDate(date) {
     const weekDays = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
     const months = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     

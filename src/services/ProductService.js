@@ -10,6 +10,4 @@ const getProducts = async () => {
     }
 };
   
-export default {
-    getProducts,
-};
+export default getProducts;
