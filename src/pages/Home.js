@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../components/Header';
 import TopBannerGallery from '../components/TopBannerGallery';
 import TopSellingGalery from '../components/TopSellingGalery';
 import RecommendedProductList from '../components/RecommendedProductList';
@@ -6,8 +7,8 @@ import StoreInfo from '../components/StoreInfo';
 import PurchasePopup from '../components/PurchasePopup';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
-import '../styles/HomeStyle.css'
 import { getCachedProducts } from '../util/CachedProducs';
+import '../styles/HomeStyle.css'
 
 const Home = () => {
     const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ const Home = () => {
     const [error, setError] = useState(false); // Indicador de error
 
     useEffect(() => {
+        document.body.style.marginTop = "80px";
         const fetchData = async () => {
             try {
                 const data = await getCachedProducts();
@@ -48,6 +50,7 @@ const Home = () => {
 
     return (
         <main>
+            <Header />
             <TopBannerGallery />
             <div className="container">
                 <TopSellingGalery productList={products} />

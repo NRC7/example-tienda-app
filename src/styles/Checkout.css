@@ -1,8 +1,6 @@
 .checkout-container {
     max-width: 600px;
-    margin: 0px auto;
-    margin-top: 100px;
-    margin-bottom: 30px;
+    margin: 10px auto;
     padding: 16px;
     background-color: white;
     border-radius: 5px;
@@ -140,4 +138,28 @@ input:focus {
 .modify-button:hover {
   color: #1e9e4a;
   text-decoration: underline;
+}
+
+.checkout-navegation {
+  padding: 10px 5px;
+  font-size: 0.9rem;
+  width: 65%;
+  margin-top: 10px;
+  justify-content: center;
+  text-align: center;
+}
+
+.checkout-navegation a {
+  text-decoration: none;
+  color: #000;
+}
+
+.checkout-navegation a:hover {
+  color: #25d366;
+  text-decoration: underline;
+}
+
+.checkout-navegation .highlight {
+  color: #1e9e4a; /* Color morado similar */
+  font-weight: bold;
 }

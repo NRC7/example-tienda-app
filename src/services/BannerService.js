@@ -10,4 +10,6 @@ const getImages = async () => {
   }
 };
   
-export default getImages;
+export default {
+  getImages,
+};

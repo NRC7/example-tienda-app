@@ -1,9 +1,10 @@
-import ProductDetails from '../components/ProductDetails';
-import ChatButton from '../components/ChatButton';
-import Footer from '../components/Footer';
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
+import Header from '../components/Header';
+import ProductDetails from '../components/ProductDetails';
+import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
+import Footer from '../components/Footer';
 
 const Details = () => {
 
@@ -41,6 +42,7 @@ const Details = () => {
     // Layout
     return (
         <main>
+            <Header />
             <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
                 <ProductDetails selectedProduct={selectedProduct} />
             </div>

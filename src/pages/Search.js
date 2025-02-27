@@ -1,11 +1,11 @@
+import React from 'react';
+import { useLocation, Link } from "react-router-dom";
+import Header from '../components/Header';
 import ProductGrid from '../components/ProductGrid';
 import ChatButton from '../components/ChatButton';
-import Footer from '../components/Footer';
-import React from 'react';
-import { useLocation } from "react-router-dom";
 import BuyingInfo from '../components/BuyingInfo';
-import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
-import { Link } from "react-router-dom";
+import Footer from '../components/Footer';
+import '../styles/ProductGrid.css'
 
 const Search = () => {
 
@@ -26,6 +26,7 @@ const Search = () => {
 
     return (
         <main>
+            <Header />
             <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
                 <div className='detailsNavegation'>
                     <Link to={`/`}>Home -</Link>

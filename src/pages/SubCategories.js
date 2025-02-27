@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation, Link } from "react-router-dom";
+import Header from '../components/Header';
 import ProductGrid from '../components/ProductGrid';
 import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
@@ -29,8 +30,9 @@ const SubCategories = () => {
   
     return (
         <main>
+            <Header />
             <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
-                <div style={{fontSize:'1.1rem', marginBottom:'10px'}} className='detailsNavegation'>
+                <div className='detailsNavegation'>
                     <Link className='' to={`/`}>Home - </Link>
                     <Link to={`/products/${selectedCategory}`} 
                         state={{category: selectedCategory, label: `Todos los productos en ${sanitizeCategory(selectedCategory)}`}}

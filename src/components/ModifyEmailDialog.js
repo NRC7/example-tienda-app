@@ -40,6 +40,7 @@ const ModifyEmailDialog = ({ isOpen, onClose, email, setEmail }) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
             .modal-content {
                 align-items: center;
@@ -65,7 +66,7 @@ const ModifyEmailDialog = ({ isOpen, onClose, email, setEmail }) => {
                 width: 40%;
                 padding: 8px 8px;
                 font-size: 0.9rem;
-                background-color: green;
+                background-color: #25d366;
                 color: white;
                 border: none;
                 border-radius: 5px;

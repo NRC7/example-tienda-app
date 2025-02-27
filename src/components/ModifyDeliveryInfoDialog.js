@@ -1,7 +1,7 @@
 import { useState } from "react";
-
-import {formatDate} from "../util/EstimatedDeliveryDate"
-
+import {formatDate, isWeekday} from "../util/EstimatedDeliveryDate"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const ModifyDeliveryInfoDialog = ({ isOpen, onClose, address, setAddress, date, setDate }) => {
 
@@ -13,6 +13,7 @@ const ModifyDeliveryInfoDialog = ({ isOpen, onClose, address, setAddress, date, 
     return (
       <div className="modal">
         <div className="modal-content">
+
           <h2>Modificar Dirección</h2>
           <input
             type="text"
@@ -20,10 +21,21 @@ const ModifyDeliveryInfoDialog = ({ isOpen, onClose, address, setAddress, date, 
             value={address}
             onChange={(e) =>  setAddress(e.target.value)}
           />
-          <h2>Modificar Fecha</h2>
 
+          <h2>Modificar Fecha</h2>
+          <div style={{display:'flex', justifyContent:'center', marginRight:'30px'}}>
+            <DatePicker
+                  selected={date}
+                  filterDate={isWeekday}
+                  onChange={(e) => setDate(formatDate(e))}    
+                  minDate={oldDate} // No permite fechas pasadas
+                  maxDate={new Date(new Date().setMonth(new Date().getMonth() + 2))} // Máximo 2 meses adelante
+                  dateFormat="dd/MM/yyyy"
+            />
+          </div>
           
-          <div style={{display: 'flex', width:'100%', justifyContent:'space-between'}}>
+          
+          <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px'}}>
             <button className="cancel-btn" onClick={() => 
               {setAddress(oldAddress)
                 onClose()}
@@ -46,6 +58,7 @@ const ModifyDeliveryInfoDialog = ({ isOpen, onClose, address, setAddress, date, 
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
             .modal-content {
                 align-items: center;

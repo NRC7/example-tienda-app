@@ -1,6 +1,6 @@
 export const getEstimatedDeliveryDate = () => {
 
-    const CLOSING_TIME = 15
+    const CLOSING_TIME = 18
 
     let estimatedDate = new Date();
 
@@ -31,4 +31,9 @@ export function formatDate(date) {
     const year = date.getFullYear();
 
     return `${weekDay} ${day}/${month}./${year}`;
+}
+
+export function isWeekday(date) {
+    const day = date.getDay();
+    return day !== 0 && day !== 6; // Excluye domingos (0) y sábados (6)
 }
