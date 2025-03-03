@@ -49,7 +49,7 @@ const SearchBar = () => {
     }
     
     return (
-        <div style={{display: 'flex', alignItems:'flex-start', justifyContent:'center'}}>
+        <div style={{display: 'flex', alignItems:'flex-start', width: '500px', justifyContent:'center'}}>
             <div className="search-bar">
                 <input id='searchInput' type="text" 
                     placeholder="Buscar productos..." 

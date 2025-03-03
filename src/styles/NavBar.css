@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 0px; /* Ajusta el padding lateral para que no quede pegado a los bordes */
+    padding: 16px 65px; /* Ajusta el padding lateral para que no quede pegado a los bordes */
     background-color: #f9e35c;
     color: black;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -24,126 +24,6 @@ body {
 
 .sidebar {
     display: none; /* Esto oculta completamente la barra lateral */
-}
-
-/* Estilos para los elementos dentro del navbar */
-.navbar .hamburger,
-.navbar .search-bar,
-.navbar .session-links,
-.navbar .cart-icon {
-    flex-shrink: 0; /* Evita que los elementos se reduzcan en tamaño */
-}
-
-/* Asegurarse de que el contenedor del navbar no se desborde */
-.navbar-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-}
-
-/* Estilos para el menú hamburguesa */
-.hamburger {
-    margin-right: 50px; /* Ajusta el margen para centrar un poco más */
-    margin-left: 150px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    width: 28px; /* Aumenta el ancho del icono */
-    justify-content: space-around;
-    position: relative; /* Asegura que el menú desplegable se posicione en relación a este icono */
-}
-
-.hamburger .bar {
-    width: 100%;
-    height: 4px; /* Aumenta el grosor de las barras */
-    background-color: black;
-    border-radius: 2px;
-}
-
-/* Menú desplegable */
-.dropdown-menu {    
-    position: absolute;
-    top: 62px;
-    left: 150px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.dropdown-menu a {
-    color: black;
-    text-decoration: none;
-    padding: 8px;
-    font-size: 1rem;
-}
-
-.dropdown-menu a:hover {
-    background-color: #f0f0f0;
-    border-radius: 4px;
-}
-
-/* Barra de búsqueda en el centro */
-.search-bar {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    padding: 0 20px;
-    position: relative;
-}
-
-/* Ajustes en la barra de búsqueda */
-.search-bar input {
-    background-color: #f0f0f0;
-    width: 100%;
-    max-width: 350px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-}
-
-/* Botón del icono de búsqueda */
-.search-button {
-    position: relative;
-    right: -10px; /* Aumenta el espacio entre el icono y el borde derecho */
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-}
-
-/* Icono del botón de búsqueda */
-.search-button i {
-    font-size: 1.2rem;
-    color: black;
-}
-
-
-/* Estilos para enlaces de sesión */
-.session-links {
-    display: flex;
-    gap: 10px; /* Reduce el espacio entre enlaces */
-}
-
-.session-link {
-    color: black;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.session-link:hover {
-    color: #555;
-}
-
-/* Icono del carrito en la derecha */
-.cart-icon {
-    font-size: 1.6rem; /* Aumenta el tamaño del carrito */
-    cursor: pointer;
-    margin-right: 150px; /* Ajusta el margen para centrar un poco más */
-    margin-left: 50px;
 }
 
 
