@@ -5,7 +5,7 @@ import ProductGrid from '../components/ProductGrid';
 import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
 import Footer from '../components/Footer';
-import { getCachedProducts } from '../util/CachedProducs';
+import { getCachedProducts } from '../handlers/CachedProducs';
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
 const AllProducts = () => {

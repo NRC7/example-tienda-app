@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ImageCarousel from './ImageCarousel';
 import '../styles/TopBannerGallery.css'
-import { getCachedImages } from '../util/CachedImages';
+import { getCachedImages } from '../handlers/CachedImages';
 
 const TopBannerGallery = () => {
 
@@ -12,8 +12,9 @@ const TopBannerGallery = () => {
     useEffect(() => {
         const fetchImages = async () => {
             const data = await getCachedImages();
+            //console.log('data: ', data.data);
             let args = []
-            data.forEach( item => {
+            data.data.forEach( item => {
                 args.push(item.imageResources);
             });
             setImgs(args);

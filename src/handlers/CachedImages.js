@@ -1,10 +1,11 @@
-import bannerService from '../services/BannerService';
+//import bannerService from '../services/BannerService';
+import { getBannerImages } from '../services/PublicServices';
 
 let bannerCache = null;
 
 export const getCachedImages = async () => {
     if (!bannerCache) {
-        bannerCache = await bannerService.getImages();
+        bannerCache = await getBannerImages();
         console.log("LLAMANDO SERVICIO BANNER")
     }
     return bannerCache;

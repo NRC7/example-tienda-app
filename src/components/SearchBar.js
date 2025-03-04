@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getCachedProducts } from '../util/CachedProducs';
+import { getCachedProducts } from '../handlers/CachedProducs';
 import { formatCurrency } from '../util/FormatCurrency';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { normalizeText } from '../util/NormalText';

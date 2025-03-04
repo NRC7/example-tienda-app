@@ -7,7 +7,7 @@ import StoreInfo from '../components/StoreInfo';
 import PurchasePopup from '../components/PurchasePopup';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
-import { getCachedProducts } from '../util/CachedProducs';
+import { getCachedProducts } from '../handlers/CachedProducs';
 import '../styles/HomeStyle.css'
 
 const Home = () => {
@@ -20,13 +20,8 @@ const Home = () => {
         const fetchData = async () => {
             try {
                 const data = await getCachedProducts();
-                //setProducts(data);
-                // Si la respuesta es válida, asignamos los productos
-                if (Array.isArray(data)) {
-                    setProducts(data);
-                } else {
-                    throw new Error("Error fetching products.");
-                }
+                //console.log('data: ', data.data);
+                setProducts(data.data);
             } catch (error) {
                 console.log('Error fetching products:', error);
                 setProducts([]); // En caso de error, se pasa una lista vacía
