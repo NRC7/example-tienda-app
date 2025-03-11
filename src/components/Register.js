@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import {getRegister} from "../services/PrivateServices"
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
@@ -8,8 +9,6 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
   const verifyPasswordRef = useRef(null);
 
   const [error, setError] = useState("");
-//   const [attempts, setAttempts] = useState(0);
-//   const [isLocked, setIsLocked] = useState(false);
 
   useEffect(() => {
 
@@ -32,38 +31,24 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
       return;
     }
 
-    const URL = process.env.REACT_APP_BACKEND_REGISTER_URL;
-
-    try {
-      const response = await fetch(URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user_name: userName, email: email, password: password }),
-      });
-
-      if (response.status === 201) {
-        // response.json()
-        //     .then(data => {
-        //         console.log('ok');
-        //     })
-        onRegisterSuccess();
-        alert('Registrado exitosamente')
-      } else {
-        handleError(response.status);
-      }
-    } catch (error) {
-      setError("Error de conexión, intenta nuevamente.");
+    const registerResponse = await getRegister(userName, email, password)
+    if (registerResponse.code === "201") {
+      console.log("registerResponse: ", registerResponse )
+      onRegisterSuccess();
+      alert('Registrado exitosamente')
     }
+    else {
+      handleError(registerResponse.code);
+    }
+
   };
 
   const handleError = (status) => {
-    if (status === 400) {
+    if (status === "400") {
       setError("Faltan campos obligatorios.");
-    } else if (status === 401) {
-      setError("Usuario no registrado.");
-    } else if (status === 402) {
-      setError("Contraseña incorrecta.");
-    } else if (status === 429) {
+    } else if (status === "406") {
+      setError("Email ya existe.");
+    } else if (status === "429") {
       setError("Demasiados intentos. Espera 2 minutos.");
     }
     else {
