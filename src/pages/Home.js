@@ -39,7 +39,7 @@ const Home = () => {
     }
 
     if (error) {
-        // Si hay error, no mostrar productos y mostrar un mensaje adecuado
+        // Si hay error, no mostrar productos y mostrar un mensaje adecuado <PurchasePopup productList={products} />
         return <div style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>No se pueden cargar los productos en este momento.</div>;
     }
 
@@ -51,7 +51,7 @@ const Home = () => {
                 <TopSellingGalery productList={products} />
                 <RecommendedProductList productList={products} />
             </div>
-            <PurchasePopup productList={products} />
+            
             <StoreInfo />
             <ChatButton />
             <Footer />
