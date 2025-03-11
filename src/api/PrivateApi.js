@@ -4,7 +4,7 @@ const API_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 const PUBLIC_TIMEOUT = process.env.REACT_APP_PUBLIC_TIMEOUT
 const REJECT_UNAUTHORIZED = process.env.REACT_APP_REJECT_UNAUTHORIZED;
 
-const PublicApi = axios.create({
+const PrivateApi = axios.create({
     baseURL: API_BASE_URL,
     timeout: PUBLIC_TIMEOUT,
     headers: { "Content-Type": "application/json" },
@@ -14,4 +14,4 @@ const PublicApi = axios.create({
       }),
 });
 
-export default PublicApi;
+export default PrivateApi;

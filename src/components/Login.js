@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
+import {getLogin} from "../services/PrivateServices"
 
 const Login = ({ onLoginSuccess, onLoginClose }) => {
 
@@ -29,35 +30,23 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
       return;
     }
 
-    const URL = process.env.REACT_APP_BACKEND_LOGIN_URL;
-
-    try {
-      const response = await fetch(URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email, password: password }),
-      });
-
-      if (response.status === 200) {
-        // response.json()
-        //     .then(data => {
-        //         console.log('ok');
-        //     })
-        onLoginSuccess();
-      } else {
-        handleError(response.status);
-      }
-    } catch (error) {
-      setError("Error de conexión, intenta nuevamente.");
+    const loginResponse = await getLogin(email, password)
+    if (loginResponse.code === "200") {
+      console.log("access_token: ", loginResponse.access_token )
+      onLoginSuccess();
     }
+    else {
+      handleError(loginResponse.code);
+    }
+
   };
 
   const handleError = (status) => {
-    if (status === 400) {
+    if (status === "400") {
       setError("Faltan campos obligatorios.");
-    } else if (status === 401) {
+    } else if (status === "401") {
       setError("Usuario no registrado.");
-    } else if (status === 402) {
+    } else if (status === "402") {
       setError("Contraseña incorrecta.");
     } else {
       setError("Demasiados intentos. Espera 2 minutos.");
