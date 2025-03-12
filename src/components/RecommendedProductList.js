@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import Rating from './ProductRating'; // Importar el componente de Rating
+import Rating from './ProductRating'; 
 import '../styles/ProductList.css'
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from '../util/FormatCurrency';
+import { useDataContext } from "../context/DataContext";
 
-const RecommendedProductList = ({ productList }) => {
+const RecommendedProductList = () => {
+
+    const { productsInContexts } = useDataContext();
 
     const CHANGE_IMAGE_INTERVAL = 5000 // Configura el intervalo para cambiar la imagen cada x milisegundos
 
@@ -16,9 +19,9 @@ const RecommendedProductList = ({ productList }) => {
     const navigate = useNavigate();
 
     const filteredProducts = useMemo(() => {
-        return productList?.filter(product => product.discountPercentage !== "")
+        return productsInContexts?.filter(product => product.discountPercentage !== "")
             .sort((b, a) => b.name.localeCompare(a.name));
-    }, [productList]);
+    }, [productsInContexts]);
 
     useEffect(() => {
         const initialIndices = {};

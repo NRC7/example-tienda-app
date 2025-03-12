@@ -6,10 +6,12 @@ import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
 import Footer from '../components/Footer';
 import { sanitizeCategory } from '../util/SanitizeCategory';
-import { getCachedProducts } from '../handlers/CachedProducs';
+import { useDataContext } from "../context/DataContext";
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
 const Categories = () => {
+
+    const { productsInContexts } = useDataContext();
 
     const location = useLocation();
     const selectedCategory = location.state?.category;
@@ -18,14 +20,10 @@ const Categories = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
-        const fetchCachedProducts = async () => {
-            let data = await getCachedProducts();
-            const filtered = data.filter((item) => item.category === selectedCategory)
-            setFilteredProducts(filtered);
-        };
-        fetchCachedProducts()
+        const filtered = productsInContexts.filter((item) => item.category === selectedCategory)
+        setFilteredProducts(filtered);
         window.scrollTo(0, 0); 
-    }, [selectedCategory]);
+    }, [selectedCategory, productsInContexts]);
   
     return (
         <main>

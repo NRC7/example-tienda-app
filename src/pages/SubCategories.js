@@ -6,10 +6,12 @@ import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
 import Footer from '../components/Footer';
 import { sanitizeCategory } from '../util/SanitizeCategory';
-import { getCachedProducts } from '../handlers/CachedProducs';
+import { useDataContext } from "../context/DataContext";
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
 const SubCategories = () => {
+
+    const { productsInContexts } = useDataContext();
 
     const location = useLocation();
     const selectedSubCategory = location.state?.subCategory;
@@ -19,14 +21,10 @@ const SubCategories = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
-        const fetchCachedProducts = async () => {
-            let data = await getCachedProducts();
-            const filtered = data.filter((item) => item.subCategory === selectedSubCategory)
-            setFilteredProducts(filtered);
-        };
-        fetchCachedProducts()
+        const filtered = productsInContexts.filter((item) => item.subCategory === selectedSubCategory)
+        setFilteredProducts(filtered);
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente
-    }, [selectedSubCategory]);
+    }, [selectedSubCategory, productsInContexts]);
   
     return (
         <main>

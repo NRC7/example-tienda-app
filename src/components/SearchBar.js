@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { getCachedProducts } from '../handlers/CachedProducs';
 import { formatCurrency } from '../util/FormatCurrency';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { normalizeText } from '../util/NormalText';
+import { useDataContext } from "../context/DataContext";
 import '../styles/SearchBar.css'
 
 const SearchBar = () => {
+
+    const { productsInContexts } = useDataContext();
 
     const [products, setProducts] = useState([]);
 
@@ -16,9 +18,8 @@ const SearchBar = () => {
 
     const navigate = useNavigate();
 
-    const fetchCachedProducts = async () => {
-        const data = await getCachedProducts();
-        setProducts(data);
+    const getProductsFromContext = () => {
+        setProducts(productsInContexts);
     };
 
     function handleSearch(event) {
@@ -28,7 +29,7 @@ const SearchBar = () => {
             const searchTerms = userInput.split(' ')
             setSearchTerms(searchTerms)
             // Actualizo el valor de userSearchResults
-            fetchCachedProducts();
+            getProductsFromContext();
             const searchResults = products?.filter(product => 
                 (normalizeText(product.name.toLowerCase()).includes(searchTerms[0].toLowerCase())) ||
                 (product.category.toLowerCase().includes(searchTerms[0].toLowerCase())) ||

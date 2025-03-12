@@ -14,7 +14,7 @@ const TopBannerGallery = () => {
             const data = await getCachedImages();
             //console.log('data: ', data.data);
             let args = []
-            data.data.forEach( item => {
+            data?.data.forEach( item => {
                 args.push(item.imageResources);
             });
             setImgs(args);

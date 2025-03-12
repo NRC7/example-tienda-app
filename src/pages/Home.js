@@ -4,43 +4,26 @@ import TopBannerGallery from '../components/TopBannerGallery';
 import TopSellingGalery from '../components/TopSellingGalery';
 import RecommendedProductList from '../components/RecommendedProductList';
 import StoreInfo from '../components/StoreInfo';
-import PurchasePopup from '../components/PurchasePopup';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
-import { getCachedProducts } from '../handlers/CachedProducs';
+import { useDataContext } from "../context/DataContext";
 import '../styles/HomeStyle.css'
 
 const Home = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true); // Indicador de carga
-    const [error, setError] = useState(false); // Indicador de error
+
+    const { productsInContexts } = useDataContext();
+
+    const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
         document.body.style.marginTop = "80px";
-        const fetchData = async () => {
-            try {
-                const data = await getCachedProducts();
-                //console.log('data: ', data.data);
-                setProducts(data.data);
-            } catch (error) {
-                console.log('Error fetching products:', error);
-                setProducts([]); // En caso de error, se pasa una lista vacía
-                setError(true); // Establecemos el estado de error
-            } finally {
-                setLoading(false); // Deja de cargar independientemente del resultado
-            }
-        };
-        fetchData();
-    }, []);
+        if (productsInContexts.length > 0   ) {
+            setLoading(false)
+        }
+    }, [productsInContexts]);
 
     if (loading) {
-        // Muestra un indicador de carga mientras los datos no están disponibles
         return <div className="loading" style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>Cargando productos...</div>;
-    }
-
-    if (error) {
-        // Si hay error, no mostrar productos y mostrar un mensaje adecuado <PurchasePopup productList={products} />
-        return <div style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>No se pueden cargar los productos en este momento.</div>;
     }
 
     return (
@@ -48,10 +31,9 @@ const Home = () => {
             <Header />
             <TopBannerGallery />
             <div className="container">
-                <TopSellingGalery productList={products} />
-                <RecommendedProductList productList={products} />
+                <TopSellingGalery />
+                <RecommendedProductList />
             </div>
-            
             <StoreInfo />
             <ChatButton />
             <Footer />

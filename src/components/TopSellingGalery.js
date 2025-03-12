@@ -1,12 +1,16 @@
 import React from 'react';
 import '../styles/TopSellingStyle.css'
 import ProductCarousel from './ProductCarousel';
+import { useDataContext } from "../context/DataContext";
 
-const TopSellingGallery = ({ productList }) => {
+const TopSellingGallery = () => {
+
+    const { productsInContexts } = useDataContext();
 
     const CHANGE_INTERVAL = 7000 // Configura el intervalo para cambiar la imagen cada x milisegundos
 
-    const filteredProducts = productList?.filter(product => product.rating === 5)
+    // const filteredProducts = productList?.filter(product => product.rating === 5)
+    const filteredProducts = productsInContexts?.filter(product => product.rating === 5)
         .reduce((acc, product) => {
             // Si aún no hemos agregado dos productos para esta categoría
             if (!acc[product.category]) {
