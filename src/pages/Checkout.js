@@ -9,8 +9,12 @@ import { getCartItems, calculateSubtotal, calculateShippingCost,
 } from '../handlers/CartHandler';
 import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
+import {postCheckout} from "../services/PrivateServices"
+import { useAuth } from "../context/AuthContext";
 
 const Checkout = () => {
+
+  const { authData } = useAuth();
 
   const inputRef = useRef();
   const [selectedDate, setSelectedDate] = useState(getEstimatedDeliveryDate());
@@ -22,6 +26,7 @@ const Checkout = () => {
   const [email, setEmail] = useState("johnkennedy@ejemplo.com");
   const [address, setAddress] = useState("Calle principal #123, Santiago.");
   const [cartItems, setCartItems] = useState(getCartItems());
+  const [error, setError] = useState("");
   //const cuponAplicadoDummy = 'SAVE10';
   const navigate = useNavigate();
 
@@ -51,7 +56,7 @@ const Checkout = () => {
     }
   };
 
-  function handleGoToPayment(
+  const handleGoToPayment = async (
     {
       address,
       deliveryDate,
@@ -67,26 +72,47 @@ const Checkout = () => {
       user,
       trxDate
     }
-  ) {
+  ) => {
     const voucherData =  {
-      address,
-      deliveryDate,
-      email,
-      couponFactor,
-      couponAmount,
-      paymentMethod,
-      cartProducts,
-      subTotalAmount,
-      shippingCost,
-      totalAmount,
-      totalWithDiscountAmount,
-      user,
-      trxDate
+      "address": address,
+      "deliveryDate": deliveryDate,
+      "email": email,
+      "couponFactor": couponFactor,
+      "couponAmount": couponAmount,
+      "paymentMethod": paymentMethod,
+      "cartProducts": cartProducts,
+      "subTotalAmount": subTotalAmount,
+      "shippingCost": shippingCost,
+      "totalAmount": totalAmount,
+      "totalWithDiscountAmount": totalWithDiscountAmount,
+      "trxDate": trxDate,
+      "user": user
     }
-    console.log('voucherData: ', voucherData)
-    alert('Pago ingresado exitosamente!')
-    navigate("/", { replace: true });
+
+    const checkoutResponse = await postCheckout(authData.access_token, voucherData)
+    if (checkoutResponse.code === "201") {
+      console.log("checkoutResponse: ", checkoutResponse)
+      alert('Pago ingresado exitosamente!')
+      navigate("/", { replace: true });
+    }
+    else {
+      console.log('handleError: ', checkoutResponse.code)
+      handleError(checkoutResponse.code);
+    }      
+    // console.log('voucherData: ', voucherData)
+    // alert('Pago ingresado exitosamente!')
+    // navigate("/", { replace: true });
   }
+
+  const handleError = (status) => {
+    if (status === "400") {
+      setError("Faltan campos obligatorios.");
+    } else if (status === "404") {
+      setError("Usuario no registrado.");
+    } else {
+      setError("error durante pago.");
+    }
+  }; 
 
   return (
     <main>
@@ -297,7 +323,7 @@ const Checkout = () => {
                         shippingCost: calculateShippingCost(),
                         totalAmount: calculateTotal(),
                         totalWithDiscountAmount: couponValue === 0 ? 0 : calculateTotalWithCupon(couponValue * calculateTotal()),
-                        user: 'johnjohn',
+                        user: authData.user._id,
                         trxDate: new Date()
                       }
                     )

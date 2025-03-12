@@ -1,7 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import {getLogin} from "../services/PrivateServices"
+import { useAuth } from "../context/AuthContext";
+
 
 const Login = ({ onLoginSuccess, onLoginClose }) => {
+
+  const { saveLoginData } = useAuth();
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -32,7 +36,8 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
 
     const loginResponse = await getLogin(email, password)
     if (loginResponse.code === "200") {
-      console.log("access_token: ", loginResponse.access_token )
+      console.log("access_token: ", loginResponse.access_token)
+      saveLoginData(loginResponse.access_token, loginResponse.data.user)
       onLoginSuccess();
     }
     else {

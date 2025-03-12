@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import Login from '../components/Login';
 import { formatCurrency } from '../util/FormatCurrency';
 import { getCartItems, getCartItemCount,
   incrementProductQuantity, decreaseProductQuantity
 } from '../handlers/CartHandler';
 import '../styles/Cart.css';
-
+import { useAuth } from "../context/AuthContext";
 
 const Cart = () => {
+
+  const { authData } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState(getCartItems());
   const [cartItemCount, setCartItemCount] = useState(getCartItemCount());
+
+  const [showLogin, setShowLogin] = useState(false);
 
   const navigate = useNavigate();
 
@@ -31,6 +36,22 @@ const Cart = () => {
 
   const calculateSubtotal = () => {
     return cartItems.reduce((total, item) => total + item.totalPrice, 0);
+  };
+
+  const handleGoToCheckout = (e) => {
+    e.preventDefault();
+    if (authData.access_token || authData.user) {
+      toggleCartDrawer()
+      navigate('/checkout', { state: { cart: cartItems } })
+    }
+    else {
+      alert('Debes iniciar sesion antes de proceder al checkout')
+      setShowLogin(true);
+    }
+  };
+
+  const handleLoginClose = () => {
+    setShowLogin(false); // Cierra el diálogo después del login
   };
 
   return (
@@ -98,17 +119,14 @@ const Cart = () => {
             </div>
             <button
               className="checkout-button"
-              onClick={() => 
-              {
-                toggleCartDrawer()
-                navigate('/checkout', { state: { cart: cartItems } })}
-              }
+              onClick={(e) => handleGoToCheckout(e)}
             >
             Continuar con tu compra
             </button>
           </div>
         )}
       </div>
+      {showLogin && <Login onLoginSuccess={handleLoginClose} onLoginClose={handleLoginClose} />}
     </>
   );
 };

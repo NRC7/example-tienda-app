@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from "react-router-dom";
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import Login from '../components/Login';
+import Logout from '../components/Logout';
 import Register from '../components/Register';
 import '../styles/Drawer.css';
+import { useAuth } from "../context/AuthContext";
 
 
 const Drawer = () => {
+
+  const { authData } = useAuth();
 
   const [isOpen, setIsOpen] = useState(false);
   const [openProducts, setOpenProducts] = useState(true);
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
   const location = useLocation();
@@ -25,8 +30,14 @@ const Drawer = () => {
   ];
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
+    // setIsOpen(false);
+    if (authData.access_token || authData.user) {
+      setIsAuthenticated(true);
+    }
+    else{
+      setIsAuthenticated(false);
+    }
+  }, [location.pathname, authData]);
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen);
@@ -44,6 +55,15 @@ const Drawer = () => {
   const handleLoginClose = () => {
     setIsAuthenticated(false);
     setShowLogin(false); // Cierra el diálogo después del login
+  };
+
+  const handleLogoutSuccess = () => {
+    setIsAuthenticated(false);
+    setShowLogout(false); // Cierra el diálogo después del login
+  };
+
+  const handleLogoutClose = () => {
+    setShowLogout(false); // Cierra el diálogo después del login
   };
 
   const handleRegisterSuccess = () => {
@@ -116,7 +136,7 @@ const Drawer = () => {
         {/* Resumen al fondo */}
           <div className="drawer-summary">
             {isAuthenticated ?
-             <button className="drawer-button" onClick={() => {setIsAuthenticated(false)}}>Cerrar sesion</button>
+             <button className="drawer-button" onClick={() => {setShowLogout(true)}}>Cerrar sesion</button>
             : (
               <>
                 <button className="drawer-button" onClick={() => {setShowRegister(true)}}>Crear tu cuenta</button>
@@ -129,6 +149,7 @@ const Drawer = () => {
       </div>
 
       {showLogin && <Login onLoginSuccess={handleLoginSuccess} onLoginClose={handleLoginClose} />}
+      {showLogout && <Logout onLogoutSuccess={handleLogoutSuccess} onLogoutClose={handleLogoutClose} />}
       {showRegister && <Register onRegisterSuccess={handleRegisterSuccess} onRegisterClose={handleRegisterClose} />}
     </>
   );
