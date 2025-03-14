@@ -5,7 +5,7 @@ import ModifyDeliveryInfoDialog from '../components/ModifyDeliveryInfoDialog';
 import { formatCurrency } from '../util/FormatCurrency';
 import { getEstimatedDeliveryDate } from '../util/EstimatedDeliveryDate';
 import { getCartItems, calculateSubtotal, calculateShippingCost, 
-  calculateTotalWithCupon, calculateTotal
+  calculateTotalWithCupon, calculateTotal, handleClearCart
 } from '../handlers/CartHandler';
 import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
@@ -69,8 +69,7 @@ const Checkout = () => {
       shippingCost,
       totalAmount,
       totalWithDiscountAmount,
-      user,
-      trxDate
+      user
     }
   ) => {
     const voucherData =  {
@@ -85,7 +84,6 @@ const Checkout = () => {
       "shippingCost": shippingCost,
       "totalAmount": totalAmount,
       "totalWithDiscountAmount": totalWithDiscountAmount,
-      "trxDate": trxDate,
       "user": user
     }
 
@@ -94,6 +92,7 @@ const Checkout = () => {
       console.log("checkoutResponse: ", checkoutResponse)
       alert('Pago ingresado exitosamente!')
       navigate("/", { replace: true });
+      handleClearCart();
     }
     else {
       console.log('handleError: ', checkoutResponse.code)
@@ -323,8 +322,7 @@ const Checkout = () => {
                         shippingCost: calculateShippingCost(),
                         totalAmount: calculateTotal(),
                         totalWithDiscountAmount: couponValue === 0 ? 0 : calculateTotalWithCupon(couponValue * calculateTotal()),
-                        user: authData.user._id,
-                        trxDate: new Date()
+                        user: authData.user._id
                       }
                     )
                   }

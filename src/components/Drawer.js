@@ -130,7 +130,9 @@ const Drawer = () => {
 
             <span>Nosotros</span>
             
-            {isAuthenticated && <span>Mi cuenta</span>}
+            {isAuthenticated && <div className='drawer-content-product'>
+              <Link to={'/dashboard'}>Mi cuenta</Link>
+            </div>}
         </div>
 
         {/* Resumen al fondo */}

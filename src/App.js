@@ -8,6 +8,7 @@ import Categories from './pages/Categories';
 import SubCategories from './pages/SubCategories';
 import AllProducts from './pages/AllProducts';
 import Checkout from './pages/Checkout';
+import Dashboard from './pages/Dashboard';
 import 'font-awesome/css/font-awesome.min.css';
 
 
@@ -21,6 +22,7 @@ const App = () => (
             <Route path="/products/:category/:subCategory" element={<SubCategories />}/>
             <Route path="/products" element={<AllProducts />}/>
             <Route path="/checkout" element={<Checkout />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
         </Routes>
     </Router>
 );

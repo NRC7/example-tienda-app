@@ -6,12 +6,12 @@ import RecommendedProductList from '../components/RecommendedProductList';
 import StoreInfo from '../components/StoreInfo';
 import ChatButton from '../components/ChatButton';
 import Footer from '../components/Footer';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 import '../styles/HomeStyle.css'
 
 const Home = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     const [loading, setLoading] = useState(true); 
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import '../styles/TopSellingStyle.css'
 import ProductCarousel from './ProductCarousel';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 
 const TopSellingGallery = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     const CHANGE_INTERVAL = 7000 // Configura el intervalo para cambiar la imagen cada x milisegundos
 

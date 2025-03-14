@@ -8,3 +8,25 @@
 
           import DatePicker from "react-datepicker";
           import "react-datepicker/dist/react-datepicker.css";
+
+
+<tbody>
+                {orders.map((order, index) => (
+                    <tr key={index}>
+                    <td>{order._id}</td>
+                    <td>{ order.totalWithDiscountAmount > 0 
+                        ? formatCurrency(order.totalWithDiscountAmount) 
+                        : formatCurrency(order.totalAmount)}
+                    </td>
+                    <td>{order.paymentMethod}</td>
+                    <td>{ order.totalWithDiscountAmount > 0 
+                        ? formatCurrency(order.totalWithDiscountAmount) 
+                        : formatCurrency(order.totalAmount)}
+                    </td>
+                    <td>{order.status}</td>
+                    <td>
+                        <button className="details-btn">Ver Detalle</button>
+                    </td>
+                    </tr>
+                ))}
+                </tbody>

@@ -36,8 +36,8 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
 
     const loginResponse = await getLogin(email, password)
     if (loginResponse.code === "200") {
-      console.log("access_token: ", loginResponse.access_token)
-      saveLoginData(loginResponse.access_token, loginResponse.data.user)
+      // console.log("user: ", loginResponse)
+      saveLoginData(loginResponse.access_token, loginResponse.data)
       onLoginSuccess();
     }
     else {
@@ -59,7 +59,7 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
       setTimeout(() => {
         setAttempts(0);
         setIsLocked(false);
-      }, 120000);
+      }, 1000);
     }
     setAttempts((prev) => prev + 1);
   };

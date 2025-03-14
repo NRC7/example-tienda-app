@@ -5,11 +5,11 @@ import { sanitizeCategory } from '../util/SanitizeCategory';
 import { handleAddToCart } from '../handlers/CartHandler';
 import { useNavigate } from "react-router-dom";
 import { formatCurrency } from '../util/FormatCurrency';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 
 const RecommendedProductList = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     const CHANGE_IMAGE_INTERVAL = 5000 // Configura el intervalo para cambiar la imagen cada x milisegundos
 

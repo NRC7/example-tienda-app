@@ -1,4 +1,3 @@
-//import productService from '../services/ProductService';
 import { getProducts } from '../services/PublicServices';
 
 let productCache = null;

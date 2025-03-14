@@ -1,9 +1,9 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { getCachedProducts } from '../handlers/CachedProducs';
 
-const DataContext = createContext([]);
+const ProductContext = createContext([]);
 
-export const DataProvider = ({ children }) => {
+export const ProductProvider = ({ children }) => {
   const [productsInContexts, setProductsInContexts] = useState([]);
 
   const updateProductsInContext = (productsList) => {
@@ -23,10 +23,10 @@ export const DataProvider = ({ children }) => {
   }, []);
 
   return (
-    <DataContext.Provider value={{ productsInContexts, updateProductsInContext }}>
+    <ProductContext.Provider value={{ productsInContexts, updateProductsInContext }}>
       {children}
-    </DataContext.Provider>
+    </ProductContext.Provider>
   );
 };
 
-export const useDataContext = () => useContext(DataContext);
+export const useProductContext = () => useContext(ProductContext);

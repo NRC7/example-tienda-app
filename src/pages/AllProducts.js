@@ -5,12 +5,12 @@ import ProductGrid from '../components/ProductGrid';
 import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
 import Footer from '../components/Footer';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
 const AllProducts = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     useEffect(() => {
         window.scrollTo(0, 0); // Mueve el scroll al inicio cuando se monta el componente

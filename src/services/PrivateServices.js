@@ -4,6 +4,7 @@ const LOGIN_SUFIX = process.env.REACT_APP_BACKEND_LOGIN_SUFIX;
 const LOGOUT_SUFIX = process.env.REACT_APP_BACKEND_LOGOUT_SUFIX;
 const REGISTER_SUFIX = process.env.REACT_APP_BACKEND_REGISTER_SUFIX;
 const CHECKOUT_SUFIX = process.env.REACT_APP_BACKEND_CHECKOUT_SUFIX;
+const ORDERS_SUFIX = process.env.REACT_APP_BACKEND_ORDERS_SUFIX;
 
 export const getLogin = async (_email, _password) => {
     try {
@@ -51,7 +52,7 @@ export const getRegister = async (_userName, _email, _password) => {
 
 export const postCheckout = async (access_token, params) => {
     try {
-        const response = await PrivateApi.post(CHECKOUT_SUFIX, { params }, { 
+        const response = await PrivateApi.post(CHECKOUT_SUFIX, params, { 
             headers: { Authorization: `Bearer ${access_token}`}
         });
         // response.json()
@@ -63,4 +64,20 @@ export const postCheckout = async (access_token, params) => {
         console.log("Error durante registro: ", error.response.data);
         return error.response.data;
       }
+};
+
+export const getOrders = async (access_token) => {
+  try {
+      const response = await PrivateApi.get(ORDERS_SUFIX, { 
+          headers: { Authorization: `Bearer ${access_token}`}
+      });
+      // response.json()
+      //     .then(data => {
+      //         console.log('ok');
+      //     })
+      return response.data;  
+    } catch (error) {
+      console.log("Error al obtener pedidos: ", error.response.data);
+      return error.response.data;
+    }
 };

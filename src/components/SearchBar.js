@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { formatCurrency } from '../util/FormatCurrency';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import { normalizeText } from '../util/NormalText';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 import '../styles/SearchBar.css'
 
 const SearchBar = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     const [products, setProducts] = useState([]);
 

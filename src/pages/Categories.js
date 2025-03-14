@@ -6,12 +6,12 @@ import ChatButton from '../components/ChatButton';
 import BuyingInfo from '../components/BuyingInfo';
 import Footer from '../components/Footer';
 import { sanitizeCategory } from '../util/SanitizeCategory';
-import { useDataContext } from "../context/DataContext";
+import { useProductContext } from "../context/ProductContext";
 import '../styles/ProductGrid.css' // solo para el estilo provisorio de la navegacion
 
 const Categories = () => {
 
-    const { productsInContexts } = useDataContext();
+    const { productsInContexts } = useProductContext();
 
     const location = useLocation();
     const selectedCategory = location.state?.category;
