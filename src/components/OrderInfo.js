@@ -27,39 +27,36 @@ const OrderInfo = () => {
             try {
                 const data = await getOrders(context.access_token);
                 if (data.code === "200") {
-                    console.log('data.code === 200: ', data);
                     setLoading(false);
                     setOrders(data.data);
                 }
                 else if (data.code === "405") {
                     setOrders([]);
                     setShowError(true);
-                    handleError(data.code, data.message)
+                    handleError(data.code)
                     // Aplicar funcion para validar si el refresh_token es valido e intentar nuevamente el call
                 }
                 else {
-                    console.log('else: ', data);
                     setOrders([]);
                     setShowError(true);
-                    handleError(data.code, data.message)
+                    handleError(data.code)
                 }
             } catch (error) {
                 setOrders([]);
                 setShowError(true);
-                handleError("500", error)
+                handleError("500")
             }
         };
         fetchData(authData);
         }, []);
 
-    const handleError = (status, err) => {
-        console.log("error fetching orders: ", err)
+    const handleError = (status) => {
         if (status === "400") {
             setError("Faltan campos obligatorios: ");
         } else if (status === "404") {
             setError("Usuario no registrado.");
         } else if (status === "405") {
-            setError(err);
+            setError("Token expirado");
         } else {
             setError("Error inesperado");
         }
@@ -67,7 +64,7 @@ const OrderInfo = () => {
     }; 
 
     const toggleRowDetail = (index) => {
-        setExpandedRow(expandedRow === index ? null : index); // Alterna la visibilidad del detalle
+        setExpandedRow(expandedRow === index ? null : index);
     };
 
     const getCartQuantity = (arr) => {

@@ -18,7 +18,6 @@ const DashBoard = () => {
   const [showLogout, setShowLogout] = useState(false)
 
   useEffect(() => {
-    // console.log(authData)
     if (!authData.access_token || !authData.user) {
         navigate("/")
     }
@@ -28,35 +27,30 @@ const DashBoard = () => {
     e.preventDefault();
     switch(opt) {
         case 1:
-            console.log("1");
             setShowAccountInfo(true)
             setShowOrderInfo(false)
             setShowChangePassword(false)
             setShowLogout(false)
             break;
         case 2:
-            console.log("2");
             setShowAccountInfo(false)
             setShowOrderInfo(true)
             setShowChangePassword(false)
             setShowLogout(false)
             break;
         case 3:
-            console.log("3");
             setShowAccountInfo(false)
             setShowOrderInfo(false)
             setShowChangePassword(true)
             setShowLogout(false)
             break;
         case 4:
-            console.log("4");
             setShowAccountInfo(false)
             setShowOrderInfo(false)
             setShowChangePassword(false)
             setShowLogout(true)
             break;            
         default:
-            console.log("def");
             setShowAccountInfo(false)
             setShowOrderInfo(false)
             setShowChangePassword(false)
@@ -66,12 +60,12 @@ const DashBoard = () => {
   }
 
   const handleLogoutSuccess = () => {
-    setShowLogout(false); // Cierra el diálogo después del login
+    setShowLogout(false);
     navigate("/")
   };
 
   const handleLogoutClose = () => {
-    setShowLogout(false); // Cierra el diálogo después del login
+    setShowLogout(false);
   };
 
   return (
