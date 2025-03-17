@@ -18,7 +18,7 @@ const DashBoard = () => {
   const [showLogout, setShowLogout] = useState(false)
 
   useEffect(() => {
-    console.log(authData)
+    // console.log(authData)
     if (!authData.access_token || !authData.user) {
         navigate("/")
     }

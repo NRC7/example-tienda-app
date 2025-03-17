@@ -12,36 +12,58 @@ const OrderInfo = () => {
 
     const [orders, setOrders] = useState([]);
 
-    const [error, setError] = useState("");
+    const [showError, setShowError] = useState(false);
+
+    const [error, setError] = useState('');
 
     const [expandedRow, setExpandedRow] = useState(null);
+
+    const [loading, setLoading] = useState(true); 
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async (token) => {
+        const fetchData = async (context) => {
             try {
-                const data = await getOrders(token)
-                //   setProductsInContexts(data.data);
-                console.log(data.data)
-                setOrders(data.data)
+                const data = await getOrders(context.access_token);
+                if (data.code === "200") {
+                    console.log('data.code === 200: ', data);
+                    setLoading(false);
+                    setOrders(data.data);
+                }
+                else if (data.code === "405") {
+                    setOrders([]);
+                    setShowError(true);
+                    handleError(data.code, data.message)
+                    // Aplicar funcion para validar si el refresh_token es valido e intentar nuevamente el call
+                }
+                else {
+                    console.log('else: ', data);
+                    setOrders([]);
+                    setShowError(true);
+                    handleError(data.code, data.message)
+                }
             } catch (error) {
-                console.log("error fetching orders: ", error)
-                //   setProductsInContexts([]);
+                setOrders([]);
+                setShowError(true);
+                handleError("500", error)
             }
         };
-        fetchData(authData.access_token);
-        
+        fetchData(authData);
         }, []);
 
-    const handleError = (status) => {
+    const handleError = (status, err) => {
+        console.log("error fetching orders: ", err)
         if (status === "400") {
-        setError("Faltan campos obligatorios.");
+            setError("Faltan campos obligatorios: ");
         } else if (status === "404") {
-        setError("Usuario no registrado.");
+            setError("Usuario no registrado.");
+        } else if (status === "405") {
+            setError(err);
         } else {
-        setError("error durante pago.");
+            setError("Error inesperado");
         }
+        setLoading(false);
     }; 
 
     const toggleRowDetail = (index) => {
@@ -57,7 +79,8 @@ const OrderInfo = () => {
     }
 
     return (
-            <div style={{ width: "98%", height: "90vh", marginTop: "30px", overflowY:"auto" }}>
+        <>
+            {orders.length > 0 && <div style={{ width: "98%", height: "90vh", marginTop: "30px", overflowY:"auto" }}>
                 <table className="orders-table">
                     <thead>
                         <tr>
@@ -138,8 +161,10 @@ const OrderInfo = () => {
                     ))}
                     </tbody>
                 </table>
-            </div>
-        
+            </div>}
+            {showError && <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}><span>{error}.</span></div>}
+            {loading && <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}>Cargando pedidos...</div>}
+        </>
     );
 };
 

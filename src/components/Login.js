@@ -53,6 +53,8 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
       setError("Usuario no registrado.");
     } else if (status === "402") {
       setError("Contraseña incorrecta.");
+    } else if (status === "404") {
+      setError("Email incorrecto.");
     } else {
       setError("Demasiados intentos. Espera 2 minutos.");
       setIsLocked(true);
