@@ -9,12 +9,12 @@ import { getCartItems, calculateSubtotal, calculateShippingCost,
 } from '../handlers/CartHandler';
 import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
-import {postCheckout} from "../services/PrivateServices"
+import {postCheckout, getRefresh} from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
 
 const Checkout = () => {
 
-  const { authData } = useAuth();
+  const { authData,saveLoginData, saveLogoutData } = useAuth();
 
   const inputRef = useRef();
   const [selectedDate, setSelectedDate] = useState(getEstimatedDeliveryDate());
@@ -27,7 +27,7 @@ const Checkout = () => {
   const [address, setAddress] = useState("Calle principal #123, Santiago.");
   const [cartItems, setCartItems] = useState(getCartItems());
   const [error, setError] = useState("");
-  //const cuponAplicadoDummy = 'SAVE10';
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -94,13 +94,13 @@ const Checkout = () => {
       navigate("/", { replace: true });
       handleClearCart();
     }
+    else if (checkoutResponse.code === "405") {
+      await handleRefresh()
+    }
     else {
       console.log('handleError: ', checkoutResponse.code)
       handleError(checkoutResponse.code);
     }      
-    // console.log('voucherData: ', voucherData)
-    // alert('Pago ingresado exitosamente!')
-    // navigate("/", { replace: true });
   }
 
   const handleError = (status) => {
@@ -111,7 +111,21 @@ const Checkout = () => {
     } else {
       setError("error durante pago.");
     }
-  }; 
+  };
+  
+  const handleRefresh = async () => {
+          const response = await getRefresh();
+          if (response.code === "200") {
+              saveLoginData(response.access_token, authData.user)
+              alert('Intenta nuevamente')
+          }
+          else {
+              handleError("500")
+              saveLogoutData()
+              alert('La sesion ha expirado')
+              navigate("/")
+          }
+      }
 
   return (
     <main>

@@ -8,7 +8,7 @@ const PrivateApi = axios.create({
     baseURL: API_BASE_URL,
     timeout: PUBLIC_TIMEOUT,
     headers: { "Content-Type": "application/json" },
-    withCredentials: false, // Permite enviar cookies si el backend lo necesita
+    withCredentials: true, // Permite enviar cookies si el backend lo necesita
     httpsAgent: new (require('https')).Agent({  
         rejectUnauthorized: REJECT_UNAUTHORIZED  // Deshabilita la verificación de certificados (solo en desarrollo)
       }),

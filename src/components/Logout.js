@@ -21,12 +21,10 @@ const Logout = ({ onLogoutSuccess, onLogoutClose }) => {
 
     const logoutResponse = await getLogout(_access_token, _user)
     if (logoutResponse.code === "200") {
-      console.log("logoutResponse: ", logoutResponse)
       saveLogoutData()
       onLogoutSuccess();
     }
     else {
-      console.log(`Error durante logout ${logoutResponse.code}.`)
       setError(logoutResponse.message)
     }
 

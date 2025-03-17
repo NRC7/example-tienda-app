@@ -19,7 +19,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     if (!authData.access_token || !authData.user) {
-        navigate("/")
+        navigate("/", { replace: true });
     }
   }, [authData]);
 
@@ -61,7 +61,7 @@ const DashBoard = () => {
 
   const handleLogoutSuccess = () => {
     setShowLogout(false);
-    navigate("/")
+    navigate("/", { replace: true });
   };
 
   const handleLogoutClose = () => {
@@ -97,7 +97,7 @@ const DashBoard = () => {
 
         <div className='section-content'>
             {showAccountInfo && <h2>ACCOUNT INFO</h2>}
-            {showOrderInfo && <OrderInfo />}
+            {showOrderInfo && <OrderInfo onRefreshFailed={handleLogoutSuccess} />}
             {showChangePassword && <h2>CHANGE PASSWORD</h2>}
             {showLogout && <Logout onLogoutSuccess={handleLogoutSuccess} onLogoutClose={handleLogoutClose} />}
         </div>

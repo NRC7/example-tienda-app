@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { formatCurrency } from '../util/FormatCurrency';
 import { sanitizeCategory } from '../util/SanitizeCategory';
-import { getOrders } from '../services/PrivateServices';
+import { getOrders, getRefresh } from '../services/PrivateServices';
 import { useAuth } from '../context/AuthContext';
 import '../styles/OrderInfo.css';
 
-const OrderInfo = () => {
+const OrderInfo = ({ onRefreshFailed }) => {
 
-    const { authData } = useAuth();
+    const { authData, saveLoginData, saveLogoutData } = useAuth();
 
     const [orders, setOrders] = useState([]);
 
@@ -20,37 +19,37 @@ const OrderInfo = () => {
 
     const [loading, setLoading] = useState(true); 
 
-    const navigate = useNavigate();
-
     useEffect(() => {
-        const fetchData = async (context) => {
-            try {
-                const data = await getOrders(context.access_token);
-                if (data.code === "200") {
-                    setLoading(false);
-                    setOrders(data.data);
-                }
-                else if (data.code === "405") {
-                    setOrders([]);
-                    setShowError(true);
-                    handleError(data.code)
-                    // Aplicar funcion para validar si el refresh_token es valido e intentar nuevamente el call
-                }
-                else {
-                    setOrders([]);
-                    setShowError(true);
-                    handleError(data.code)
-                }
-            } catch (error) {
+        fetchData(authData.access_token);
+    }, [authData]);
+
+    const fetchData = async (access_token) => {
+        try {
+            const data = await getOrders(access_token);
+            if (data.code === "200") {
+                setLoading(false);
+                const ors = data.data;
+                setOrders(ors.sort((a, b) => new Date(b.trxDate) - new Date(a.trxDate)));
+            }
+            else if (data.code === "405") {
+                setOrders([]);
+                setLoading(true);
+                await handleRefresh();
+            }
+            else {
                 setOrders([]);
                 setShowError(true);
-                handleError("500")
+                handleError(data.code)
             }
-        };
-        fetchData(authData);
-        }, []);
+        } catch (error) {
+            setOrders([]);
+            setShowError(true);
+            handleError("500")
+        }
+    };
 
     const handleError = (status) => {
+        setShowError(true)
         if (status === "400") {
             setError("Faltan campos obligatorios: ");
         } else if (status === "404") {
@@ -58,10 +57,21 @@ const OrderInfo = () => {
         } else if (status === "405") {
             setError("Token expirado");
         } else {
-            setError("Error inesperado");
+            setError("Error inesperado intenta nuevamente más tarde");
         }
         setLoading(false);
-    }; 
+    };
+    
+    const handleRefresh = async () => {
+        const response = await getRefresh();
+        if (response.code === "200") {
+            saveLoginData(response.access_token, authData.user)
+        }
+        else {
+            saveLogoutData()
+            onRefreshFailed()
+        }
+    }
 
     const toggleRowDetail = (index) => {
         setExpandedRow(expandedRow === index ? null : index);
@@ -159,7 +169,10 @@ const OrderInfo = () => {
                     </tbody>
                 </table>
             </div>}
-            {showError && <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}><span>{error}.</span></div>}
+            {showError && 
+                <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}>
+                    <span onClick={handleRefresh}>{error}.</span>
+                </div>}
             {loading && <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}>Cargando pedidos...</div>}
         </>
     );
