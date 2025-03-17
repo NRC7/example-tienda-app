@@ -1,14 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import {getRegister} from "../services/PrivateServices"
+import {isAbove18} from "../util/ValidateDateOfBirth"
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
   const userNameRef = useRef(null);
   const emailRef = useRef(null);
+  const addressRef = useRef(null);
+  const dateOfBirthRef = useRef(null);
   const passwordRef = useRef(null);
   const verifyPasswordRef = useRef(null);
 
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
 
@@ -16,31 +20,42 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
     const userName = userNameRef.current.value;
     const email = emailRef.current.value;
+    const address = addressRef.current.value;
+    const dateOfBirth = dateOfBirthRef.current.value;
     const password = passwordRef.current.value;
     const verifyPassword = verifyPasswordRef.current.value;
 
-    if (!email || !password || !userName || !verifyPassword) {
+    if (!email || !password || !userName || !address || !dateOfBirth || !verifyPassword) {
       setError("Todos los campos son requeridos.");
+      setLoading(false);
+      return;
+    }
+    else if (!isAbove18(dateOfBirth)) {
+      setError("Debes tener al menos 18 años para registrarte.");
+      setLoading(false);
       return;
     }
     else if (password !== verifyPassword) {
       setError("Las contraseñas no coinciden.");
+      setLoading(false);
       return;
     }
 
-    const registerResponse = await getRegister(userName, email, password)
+    const registerResponse = await getRegister(userName, email, address, dateOfBirth, password)
     if (registerResponse.code === "201") {
-      console.log("registerResponse: ", registerResponse )
       onRegisterSuccess();
       alert('Registrado exitosamente')
+      setLoading(false);
     }
     else {
       handleError(registerResponse.code);
+      setLoading(false);
     }
-
   };
 
   const handleError = (status) => {
@@ -62,13 +77,15 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
       <div className="modal-content">
         <h2>Crea tu cuenta</h2>
         <form onSubmit={handleRegister}>
-          <input ref={userNameRef} type="text" placeholder="Nombre de usuario" className="input-field" />
+          <input ref={userNameRef} type="text" placeholder="Nombre y apellido" className="input-field" />
           <input ref={emailRef} type="email" placeholder="Email" className="input-field" />
+          <input ref={addressRef} type="text" placeholder="Direccion para envío: Calle n°, Comuna, Region" className="input-field" />
+          <input ref={dateOfBirthRef} type="date" placeholder="Fecha de nacimiento" className="input-field" />
           <input ref={passwordRef} type="password" placeholder="Contraseña" className="input-field" />
           <input ref={verifyPasswordRef} type="password" placeholder="Repite contraseña" className="input-field" />
           <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px', alignItems:'center'}}>
             <button type="submit" className="login-button">
-              Registrarse
+              {(!loading) ? "Registrarse" : "Procesando..."}
             </button>
             <button type="button" className="cancel-button" onClick={() => onRegisterClose()}>Volver</button>
           </div>

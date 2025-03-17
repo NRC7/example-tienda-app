@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import Logout from '../components/Logout';
 import OrderInfo from '../components/OrderInfo';
+import UserInfo from '../components/UserInfo';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import '../styles/dashboard.css';
 import { useAuth } from "../context/AuthContext";
@@ -96,7 +97,7 @@ const DashBoard = () => {
         </div>
 
         <div className='section-content'>
-            {showAccountInfo && <h2>ACCOUNT INFO</h2>}
+            {showAccountInfo && <UserInfo />}
             {showOrderInfo && <OrderInfo onRefreshFailed={handleLogoutSuccess} />}
             {showChangePassword && <h2>CHANGE PASSWORD</h2>}
             {showLogout && <Logout onLogoutSuccess={handleLogoutSuccess} onLogoutClose={handleLogoutClose} />}

@@ -14,8 +14,7 @@ import { useAuth } from "../context/AuthContext";
 
 const Checkout = () => {
 
-  const { authData,saveLoginData, saveLogoutData } = useAuth();
-
+  const { authData, saveLoginData, saveLogoutData } = useAuth();
   const inputRef = useRef();
   const [selectedDate, setSelectedDate] = useState(getEstimatedDeliveryDate());
   const [couponValue, setCouponValue] = useState(0);
@@ -23,10 +22,11 @@ const Checkout = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isModifyEmailDialogOpen, setIsModifyEmailDialogOpen] = useState(false);
   const [isModifyDeliveryInfoDialogOpen, setIsModifyDeliveryInfoDialogOpen] = useState(false);
-  const [email, setEmail] = useState("johnkennedy@ejemplo.com");
-  const [address, setAddress] = useState("Calle principal #123, Santiago.");
+  const [email, setEmail] = useState(authData.user.email);
+  const [address, setAddress] = useState(authData.user.address);
   const [cartItems, setCartItems] = useState(getCartItems());
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -72,6 +72,7 @@ const Checkout = () => {
       user
     }
   ) => {
+    setLoading(true);
     const voucherData =  {
       "address": address,
       "deliveryDate": deliveryDate,
@@ -89,7 +90,6 @@ const Checkout = () => {
 
     const checkoutResponse = await postCheckout(authData.access_token, voucherData)
     if (checkoutResponse.code === "201") {
-      console.log("checkoutResponse: ", checkoutResponse)
       alert('Pago ingresado exitosamente!')
       navigate("/", { replace: true });
       handleClearCart();
@@ -340,7 +340,10 @@ const Checkout = () => {
                       }
                     )
                   }
-                  className="pay-button">Pagar {formatCurrency(couponValue > 0 ? calculateTotalWithCupon(couponValue) : calculateTotal())}</button>
+                    className="pay-button">
+                      {(!loading) ? `Pagar ${formatCurrency(couponValue > 0 ? calculateTotalWithCupon(couponValue) : calculateTotal())}` 
+                        : "Procesando..."}
+                  </button>
               </div>
         </div>
 

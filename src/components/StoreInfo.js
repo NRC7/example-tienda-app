@@ -1,6 +1,5 @@
 import React from 'react';
-import '../styles/StoreInfo.css'; // Si usas archivo CSS separado
-
+import '../styles/StoreInfo.css';
 const StoreInfo = () => {
   return (
     <div className="col-full">

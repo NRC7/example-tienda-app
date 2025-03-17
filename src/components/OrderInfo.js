@@ -169,6 +169,7 @@ const OrderInfo = ({ onRefreshFailed }) => {
                     </tbody>
                 </table>
             </div>}
+            {(orders.length == 0 && !loading) && <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}>Aún no tienes pedidos</div>}
             {showError && 
                 <div style={{display:'flex', width:'70%', alignItems:'center', justifyContent:'center', marginTop:'150px'}}>
                     <span onClick={handleRefresh}>{error}.</span>
