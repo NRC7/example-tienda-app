@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { postRegister } from "../services/PrivateServices"
-import { validateEmail, isAbove18, validateInfo } from '../util/ValidateUserInfo'
+import { validateEmail, isAbove18, validateInfo, validateAddress, validateFullName } from '../util/ValidateUserInfo'
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
@@ -32,6 +32,24 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
     if (!email || !info || !userName || !address || !dateOfBirth || !verifyInfo) {
       setError("Todos los campos son requeridos.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateFullName(userName)) {
+      setError("El nombre no es válido, debe tener mínimo 5 caracteres, máximo 50.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateFullName(userName)) {
+      setError("El nombre no es válido, debe tener mínimo 5 caracteres, máximo 50.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateAddress(address)) {
+      setError("La direccion no es válida.");
       setLoading(false);
       return;
     }
@@ -91,7 +109,7 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
       <div className="modal-content">
         <h2>Crea tu cuenta</h2>
         <form onSubmit={handleRegister}>
-          <input ref={userNameRef} type="text" placeholder="Nombre y apellido" className="input-field" />
+          <input ref={userNameRef} type="text" placeholder="Primer nombre y apellido" className="input-field" />
           <input ref={emailRef} type="email" placeholder="Email" className="input-field" />
           <input ref={addressRef} type="text" placeholder="Direccion para envío: Calle n°, Comuna, Region" className="input-field" />
           <input ref={dateOfBirthRef} type="date" placeholder="Fecha de nacimiento" className="input-field" />

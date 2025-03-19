@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { putUser } from "../services/PrivateServices"
 import { useAuth } from '../context/AuthContext';
-import { validateEmail, isAbove18 } from '../util/ValidateUserInfo'
+import { validateEmail, isAbove18, validateAddress,validateFullName } from '../util/ValidateUserInfo'
 
 const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
 
@@ -34,6 +34,18 @@ const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
 
         if (!email || !userName || !address || !dateOfBirth) {
             setError("Todos los campos son requeridos.");
+            setLoading(false);
+            return;
+        }
+
+        if (!validateFullName(userName)) {
+            setError("El nombre no es válido, debe tener mínimo 5 caracteres, máximo 50.");
+            setLoading(false);
+            return;
+        }
+
+        if (!validateAddress(address)) {
+            setError("La direccion no es válida.");
             setLoading(false);
             return;
         }
@@ -82,7 +94,7 @@ const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
         <div className="modal-content">
             <h2>Modificar datos personales</h2>
             <form onSubmit={handleUpdateInfo}>
-            <input ref={userNameRef} type="text" placeholder="Nombre y apellido" className="input-field" />
+            <input ref={userNameRef} type="text" placeholder="Primer nombre y apellido" className="input-field" />
             <input ref={emailRef} type="email" placeholder="Email" className="input-field" />
             <input ref={addressRef} type="text" placeholder="Direccion para envío: Calle n°, Comuna, Region" className="input-field" />
             <input ref={dateOfBirthRef} type="date" placeholder="Fecha de nacimiento, mayor de 18 años" className="input-field" />

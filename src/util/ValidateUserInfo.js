@@ -9,16 +9,21 @@ export const validateInfo = (info) => {
 };
 
 export const isAbove18 = (user_date) => {
-  // Obtener la fecha actual
   const actualDate = new Date();
-
-  // Calcular la fecha límite (fecha actual menos 18 años)
   const limitDate = new Date(
       actualDate.getFullYear() - 18,
       actualDate.getMonth(),
       actualDate.getDate()
   );
-
-  // Comparar la fecha de nacimiento con la fecha límite
   return new Date(user_date) <= limitDate;
 }
+
+export const validateFullName = (fullName) => {
+  const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ]+ [A-Za-zÁÉÍÓÚáéíóúÑñ]+$/;
+  return regex.test(fullName) && fullName.length >= 5 && fullName.length <= 50;
+};
+
+export const validateAddress = (address) => {
+  const regex = /^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9#,\s]+$/;
+  return regex.test(address) && address.length >= 10 && address.length <= 100;
+};

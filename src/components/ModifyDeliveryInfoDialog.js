@@ -1,5 +1,6 @@
 import { useState } from "react";
-import {formatDate, isWeekday} from "../util/EstimatedDeliveryDate"
+import { formatDate, isWeekday } from "../util/EstimatedDeliveryDate"
+import { validateAddress } from "../util/ValidateUserInfo"
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -41,7 +42,7 @@ const ModifyDeliveryInfoDialog = ({ isOpen, onClose, address, setAddress, date, 
                 onClose()}
               }>Cancelar</button>
             <button className="save-btn" onClick={() => 
-              {address !== '' ? onClose() : alert('Ingresa una dirección');}
+              {validateAddress(address) ? onClose() : alert('Ingresa una dirección');}
               }>Guardar</button>  
           </div>
             
