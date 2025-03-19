@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { putUser } from "../services/PrivateServices"
-import {isAbove18} from "../util/ValidateDateOfBirth"
 import { useAuth } from '../context/AuthContext';
+import { isAbove18 } from "../util/ValidateDateOfBirth"
+import { validateEmail } from '../util/ValidateEmail'
 
 const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
 
@@ -37,8 +38,15 @@ const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
             setLoading(false);
             return;
         }
-        else if (!isAbove18(dateOfBirth)) {
+
+        if (!isAbove18(dateOfBirth)) {
             setError("Debes tener al menos 18 años para usar esta cuenta.");
+            setLoading(false);
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError("El email ingresado no es válido.");
             setLoading(false);
             return;
         }

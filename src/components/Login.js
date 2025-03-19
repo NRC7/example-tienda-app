@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { postLogin } from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
+import { validateEmail } from '../util/ValidateEmail'
 
 
 const Login = ({ onLoginSuccess, onLoginClose }) => {
@@ -35,6 +36,12 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
     if (!email || !info) {
       setLoading(false)
       setError("Email y contraseña son requeridos.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setLoading(false)
+      setError("El email ingresado no es válido.");
       return;
     }
 

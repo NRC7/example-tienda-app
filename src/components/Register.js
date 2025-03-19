@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { postRegister } from "../services/PrivateServices"
 import { isAbove18 } from "../util/ValidateDateOfBirth"
+import { validateEmail } from '../util/ValidateEmail'
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
@@ -35,13 +36,21 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
       setLoading(false);
       return;
     }
-    else if (!isAbove18(dateOfBirth)) {
+    
+    if (!isAbove18(dateOfBirth)) {
       setError("Debes tener al menos 18 años para registrarte.");
       setLoading(false);
       return;
     }
-    else if (info !== verifyInfo) {
+    
+    if (info !== verifyInfo) {
       setError("Las contraseñas no coinciden.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setError("El email ingresado no es válido.");
       setLoading(false);
       return;
     }
