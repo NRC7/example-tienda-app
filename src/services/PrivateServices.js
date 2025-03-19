@@ -7,11 +7,12 @@ const CHECKOUT_SUFIX = process.env.REACT_APP_BACKEND_CHECKOUT_SUFIX;
 const ORDERS_SUFIX = process.env.REACT_APP_BACKEND_ORDERS_SUFIX;
 const REFRESH_SUFIX = process.env.REACT_APP_BACKEND_REFRESH_SUFIX;
 const PUT_USER_SUFIX = process.env.REACT_APP_BACKEND_PUT_USER_SUFIX;
+const PUT_USER_DATA_SUFIX = process.env.REACT_APP_BACKEND_PUT_USER__DATA_SUFIX;
 
-export const getLogin = async (_email, _password) => {
+export const getLogin = async (_email, _info) => {
   console.log("LLAMANDO SERVICIO LOGIN")
     try {
-        const response = await PrivateApi.post(LOGIN_SUFIX, {email: _email, password: _password});
+        const response = await PrivateApi.post(LOGIN_SUFIX, {email: _email, info: _info});
         // response.json()
         //     .then(data => {
         //         console.log('ok');
@@ -75,6 +76,25 @@ export const putUser = async (access_token, id, _userName, _email, _address, _da
         return response.data;  
       } catch (error) {
         console.log("Error durante modificacion usuario: ", error.response.data);
+        return error.response.data;
+      }
+};
+
+export const putUserData = async (access_token, id, _info) => {
+  console.log("LLAMANDO SERVICIO PUT USER DATA")
+    try {
+        const response = await PrivateApi.put(PUT_USER_DATA_SUFIX, 
+          { _id: id, info: _info },
+          { headers: { Authorization: `Bearer ${access_token}`} }
+        );
+        // response.json()
+        //     .then(data => {
+        //         console.log('ok');
+        //     })
+        console.log("RESULTADO PUT USER DATA: ", response.data?.code);
+        return response.data;  
+      } catch (error) {
+        console.log("Error durante modificacion data usuario: ", error.response.data);
         return error.response.data;
       }
 };

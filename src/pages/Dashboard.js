@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Logout from '../components/Logout';
 import OrderInfo from '../components/OrderInfo';
 import UserInfo from '../components/UserInfo';
+import ModifyUserDataDialog from '../components/ModifyUserDataDialog';
 import { sanitizeCategory } from '../util/SanitizeCategory';
 import '../styles/dashboard.css';
 import { useAuth } from "../context/AuthContext";
@@ -15,7 +16,7 @@ const DashBoard = () => {
 
   const [showAccountInfo, setShowAccountInfo] = useState(true)
   const [showOrderInfo, setShowOrderInfo] = useState(false)
-  const [showChangePassword, setShowChangePassword] = useState(false)
+  const [showModifyUserData, setShowModifyUserData] = useState(false)
   const [showLogout, setShowLogout] = useState(false)
 
   useEffect(() => {
@@ -30,31 +31,31 @@ const DashBoard = () => {
         case 1:
             setShowAccountInfo(true)
             setShowOrderInfo(false)
-            setShowChangePassword(false)
+            setShowModifyUserData(false)
             setShowLogout(false)
             break;
         case 2:
             setShowAccountInfo(false)
             setShowOrderInfo(true)
-            setShowChangePassword(false)
+            setShowModifyUserData(false)
             setShowLogout(false)
             break;
         case 3:
             setShowAccountInfo(false)
             setShowOrderInfo(false)
-            setShowChangePassword(true)
+            setShowModifyUserData(true)
             setShowLogout(false)
             break;
         case 4:
             setShowAccountInfo(false)
             setShowOrderInfo(false)
-            setShowChangePassword(false)
+            setShowModifyUserData(false)
             setShowLogout(true)
             break;            
         default:
             setShowAccountInfo(false)
             setShowOrderInfo(false)
-            setShowChangePassword(false)
+            setShowModifyUserData(false)
             setShowLogout(false)
             break;    
     }
@@ -67,6 +68,10 @@ const DashBoard = () => {
 
   const handleLogoutClose = () => {
     setShowLogout(false);
+  };
+
+  const handleModifyUserDataClose = () => {
+    setShowModifyUserData(false);
   };
 
   return (
@@ -99,7 +104,7 @@ const DashBoard = () => {
         <div className='section-content'>
             {showAccountInfo && <UserInfo />}
             {showOrderInfo && <OrderInfo onRefreshFailed={handleLogoutSuccess} />}
-            {showChangePassword && <h2>CHANGE PASSWORD</h2>}
+            {showModifyUserData && <ModifyUserDataDialog onModifyUserDataClose={handleModifyUserDataClose} />}
             {showLogout && <Logout onLogoutSuccess={handleLogoutSuccess} onLogoutClose={handleLogoutClose} />}
         </div>
     </>

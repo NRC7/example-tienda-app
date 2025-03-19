@@ -130,7 +130,7 @@ const OrderInfo = ({ onRefreshFailed }) => {
                                             <span>Dirección: {order.address}</span>
                                             <span>Correo para envío boleta: {order.email}</span>
                                             <span>Fecha de entrega estimada: {order.deliveryDate}</span>
-                                            <span>Fecha de compra: {order.trxDate.slice(0, 19)} hrs.</span>
+                                            <span>Fecha de compra: {order.trxDate.slice(0, 19).replaceAll('-',' ')} hrs.</span>
                                             <span>Cantidad de productos: {getCartQuantity(order.cartProducts)}</span>
                                             <span>costo de envío: {formatCurrency(order.shippingCost)}</span>
                                             <span>Sub total: {formatCurrency(order.subTotalAmount)}</span>
@@ -143,7 +143,7 @@ const OrderInfo = ({ onRefreshFailed }) => {
                                                 <span>Total: {formatCurrency(order.totalAmount)}</span>
                                             )}
                                             <span>Estado: {order.status}</span>
-                                            <span>Ultima actualizacion de estado: {order.lastStatusModificationDate}</span>
+                                            <span>Ultima actualizacion de estado: {order.lastStatusModificationDate.replace('GMT', '').substring('4')}</span>
                                         </div>
                                         <div className="cart-products">
                                             <h4>Productos en el carrito:</h4>

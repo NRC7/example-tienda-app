@@ -8,10 +8,11 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
   const { saveLoginData } = useAuth();
 
   const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const infoRef = useRef(null);
   const [error, setError] = useState("");
   const [attempts, setAttempts] = useState(0);
   const [isLocked, setIsLocked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
 
@@ -19,28 +20,32 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true)
     if (isLocked) return;
 
     if (attempts >= 3) {
+        setLoading(false)
         setError("Demasiados intentos. Espera 2 minutos.");
         return;
       }
 
     const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+    const info = infoRef.current.value;
 
-    if (!email || !password) {
+    if (!email || !info) {
+      setLoading(false)
       setError("Email y contraseña son requeridos.");
       return;
     }
 
-    const loginResponse = await getLogin(email, password)
+    const loginResponse = await getLogin(email, info)
     if (loginResponse.code === "200") {
-      // console.log("user: ", loginResponse)
+      setLoading(false)
       saveLoginData(loginResponse.access_token, loginResponse.data)
       onLoginSuccess();
     }
     else {
+      setLoading(false)
       handleError(loginResponse.code);
     }
 
@@ -73,10 +78,10 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
         <h2>Iniciar Sesion</h2>
         <form onSubmit={handleLogin}>
           <input ref={emailRef} type="email" placeholder="Email" className="input-field" />
-          <input ref={passwordRef} type="password" placeholder="Contraseña" className="input-field" />
+          <input ref={infoRef} type="password" placeholder="Contraseña" className="input-field" />
           <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px', alignItems:'center'}}>
             <button type="submit" disabled={isLocked} className="login-button">
-              {isLocked ? "Esperando..." : "Iniciar sesión"}
+              {loading ? "Procesando..." : isLocked ? "Esperando..." : "Iniciar sesión"}
             </button>
             <button type="button" className="cancel-button" onClick={() => onLoginClose()}>Volver</button>
           </div>
