@@ -25,13 +25,6 @@ const Drawer = () => {
 
   const location = useLocation();
 
-  // const categories = [
-  //   { name: "gamers", subcategories: ["consolas", "monitores_gamer", "sillas_gamer", "notebook_gamer"] },
-  //   { name: "computacion", subcategories: ["computadores", "mouse", "teclados"] },
-  //   { name: "componentes_pc", subcategories: ["almacenamiento", "memoria_ram", "procesadores", "tarjeta_video"] },
-  //   { name: "audio", subcategories: ["audifonos","microfonos", "audifonos_gamer"] }
-  // ];
-
   useEffect(() => {
     const fetchData = async () => {
       try {
