@@ -36,7 +36,7 @@
   }
   
   /* Botón Detalle */
-  .details-btn {
+  .action-btn {
     background-color: #3498db;
     color: white;
     padding: 5px 10px;
@@ -45,7 +45,7 @@
     cursor: pointer;
   }
   
-  .details-btn:hover {
+  .action-btn:hover {
     background-color: #2980b9;
   }
 

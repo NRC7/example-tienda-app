@@ -114,18 +114,18 @@ const Checkout = () => {
   };
   
   const handleRefresh = async () => {
-          const response = await postRefresh();
-          if (response.code === "200") {
-              saveLoginData(response.access_token, authData.user)
-              alert('Intenta nuevamente')
-          }
-          else {
-              handleError("500")
-              saveLogoutData()
-              alert('La sesion ha expirado')
-              navigate("/")
-          }
-      }
+    const response = await postRefresh();
+    if (response.code === "200") {
+      saveLoginData(response.access_token, authData.user)
+      alert('Intenta nuevamente')
+    }
+    else {
+      handleError("500")
+      saveLogoutData()
+      alert('La sesion ha expirado')
+      navigate("/")
+    }
+  }
 
   return (
     <main>

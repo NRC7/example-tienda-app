@@ -114,7 +114,7 @@ const OrderInfo = ({ onRefreshFailed }) => {
                             <td>{sanitizeCategory(order.status)}</td>
                             <td>
                             <button
-                                className="details-btn"
+                                className="action-btn"
                                 onClick={() => toggleRowDetail(index)}
                             >
                                 {expandedRow === index ? "Ocultar Detalle" : "Ver Detalle"}
