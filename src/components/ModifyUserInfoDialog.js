@@ -1,8 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { putUser } from "../services/PrivateServices"
 import { useAuth } from '../context/AuthContext';
-import { isAbove18 } from "../util/ValidateDateOfBirth"
-import { validateEmail } from '../util/ValidateEmail'
+import { validateEmail, isAbove18 } from '../util/ValidateUserInfo'
 
 const ModifyUserInfoDialog = ({ onUpdateInfoSuccess, onUpdateInfoClose }) => {
 

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { postRegister } from "../services/PrivateServices"
-import { isAbove18 } from "../util/ValidateDateOfBirth"
-import { validateEmail } from '../util/ValidateEmail'
+import { validateEmail, isAbove18, validateInfo } from '../util/ValidateUserInfo'
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
@@ -39,6 +38,12 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
     
     if (!isAbove18(dateOfBirth)) {
       setError("Debes tener al menos 18 años para registrarte.");
+      setLoading(false);
+      return;
+    }
+
+    if (!validateInfo(info)) {
+      setError("La contraseña ingresada no es válida");
       setLoading(false);
       return;
     }
@@ -91,6 +96,7 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
           <input ref={addressRef} type="text" placeholder="Direccion para envío: Calle n°, Comuna, Region" className="input-field" />
           <input ref={dateOfBirthRef} type="date" placeholder="Fecha de nacimiento" className="input-field" />
           <input ref={infoRef} type="password" placeholder="Contraseña" className="input-field" />
+          <span>Mínimo 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, al menos un número, no permite caracteres especiales</span>
           <input ref={verifyInfoRef} type="password" placeholder="Repite contraseña" className="input-field" />
           <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px', alignItems:'center'}}>
             <button type="submit" className="login-button">
