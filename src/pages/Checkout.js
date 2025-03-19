@@ -9,7 +9,7 @@ import { getCartItems, calculateSubtotal, calculateShippingCost,
 } from '../handlers/CartHandler';
 import { getCuponValue } from '../handlers/CuponHandler';
 import '../styles/Checkout.css';
-import {postCheckout, getRefresh} from "../services/PrivateServices"
+import {postCheckout, postRefresh} from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
 
 const Checkout = () => {
@@ -114,7 +114,7 @@ const Checkout = () => {
   };
   
   const handleRefresh = async () => {
-          const response = await getRefresh();
+          const response = await postRefresh();
           if (response.code === "200") {
               saveLoginData(response.access_token, authData.user)
               alert('Intenta nuevamente')

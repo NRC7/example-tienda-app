@@ -9,7 +9,7 @@ const REFRESH_SUFIX = process.env.REACT_APP_BACKEND_REFRESH_SUFIX;
 const PUT_USER_SUFIX = process.env.REACT_APP_BACKEND_PUT_USER_SUFIX;
 const PUT_USER_DATA_SUFIX = process.env.REACT_APP_BACKEND_PUT_USER__DATA_SUFIX;
 
-export const getLogin = async (_email, _info) => {
+export const postLogin = async (_email, _info) => {
   console.log("LLAMANDO SERVICIO LOGIN")
     try {
         const response = await PrivateApi.post(LOGIN_SUFIX, {email: _email, info: _info});
@@ -25,7 +25,7 @@ export const getLogin = async (_email, _info) => {
       }
 };
 
-export const getLogout = async (access_token, _user) => {
+export const postLogout = async (access_token, _user) => {
   console.log("LLAMANDO SERVICIO LOGOUT")
   try {
       const response = await PrivateApi.post(LOGOUT_SUFIX, {}, { 
@@ -43,7 +43,7 @@ export const getLogout = async (access_token, _user) => {
     }
 };
 
-export const getRegister = async (_userName, _email, _address, _dateOfBirth, _password) => {
+export const postRegister = async (_userName, _email, _address, _dateOfBirth, _password) => {
   console.log("LLAMANDO SERVICIO REGISTER")
     try {
         const response = await PrivateApi.post(REGISTER_SUFIX, 
@@ -135,7 +135,7 @@ export const getOrders = async (access_token) => {
     }
 };
 
-export const getRefresh = async () => {
+export const postRefresh = async () => {
   console.log("LLAMANDO SERVICIO REFRESH")
   try {
     const response = await PrivateApi.post(REFRESH_SUFIX);

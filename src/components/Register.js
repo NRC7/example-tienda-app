@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import {getRegister} from "../services/PrivateServices"
-import {isAbove18} from "../util/ValidateDateOfBirth"
+import { postRegister } from "../services/PrivateServices"
+import { isAbove18 } from "../util/ValidateDateOfBirth"
 
 const Register = ({ onRegisterSuccess, onRegisterClose }) => {
 
@@ -46,7 +46,7 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
       return;
     }
 
-    const registerResponse = await getRegister(userName, email, address, dateOfBirth, info)
+    const registerResponse = await postRegister(userName, email, address, dateOfBirth, info)
     if (registerResponse.code === "201") {
       onRegisterSuccess();
       alert('Registrado exitosamente')

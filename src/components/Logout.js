@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {getLogout} from "../services/PrivateServices"
+import { postLogout } from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
 
 
@@ -19,7 +19,7 @@ const Logout = ({ onLogoutSuccess, onLogoutClose }) => {
     const _user = authData.user;
     const _access_token = authData.access_token;
 
-    const logoutResponse = await getLogout(_access_token, _user)
+    const logoutResponse = await postLogout(_access_token, _user)
     if (logoutResponse.code === "200") {
       saveLogoutData()
       onLogoutSuccess();

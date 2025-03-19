@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { formatCurrency } from '../util/FormatCurrency';
 import { sanitizeCategory } from '../util/SanitizeCategory';
-import { getOrders, getRefresh } from '../services/PrivateServices';
+import { getOrders, postRefresh } from '../services/PrivateServices';
 import { useAuth } from '../context/AuthContext';
 import '../styles/OrderInfo.css';
 
@@ -63,7 +63,7 @@ const OrderInfo = ({ onRefreshFailed }) => {
     };
     
     const handleRefresh = async () => {
-        const response = await getRefresh();
+        const response = await postRefresh();
         if (response.code === "200") {
             saveLoginData(response.access_token, authData.user)
         }

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import {getLogin} from "../services/PrivateServices"
+import { postLogin } from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
 
 
@@ -38,7 +38,7 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
       return;
     }
 
-    const loginResponse = await getLogin(email, info)
+    const loginResponse = await postLogin(email, info)
     if (loginResponse.code === "200") {
       setLoading(false)
       saveLoginData(loginResponse.access_token, loginResponse.data)
