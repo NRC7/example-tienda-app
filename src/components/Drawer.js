@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, Link } from "react-router-dom";
-import { sanitizeCategory } from '../util/SanitizeCategory';
 import Login from '../components/Login';
 import Logout from '../components/Logout';
 import Register from '../components/Register';
-import '../styles/Drawer.css';
 import { useAuth } from "../context/AuthContext";
+import { getCachedCategories } from '../handlers/CachedCategories';
+import { sanitizeCategory } from '../util/SanitizeCategory';
+import '../styles/Drawer.css';
 
 
 const Drawer = () => {
 
   const { authData } = useAuth();
+
+  const [categories, setCategories] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [openProducts, setOpenProducts] = useState(true);
@@ -22,12 +25,24 @@ const Drawer = () => {
 
   const location = useLocation();
 
-  const categories = [
-    { name: "gamers", subcategories: ["consolas", "monitores_gamer", "sillas_gamer", "notebook_gamer"] },
-    { name: "computacion", subcategories: ["computadores", "mouse", "teclados"] },
-    { name: "componentes_pc", subcategories: ["almacenamiento", "memoria_ram", "procesadores", "tarjeta_video"] },
-    { name: "audio", subcategories: ["audifonos","microfonos", "audifonos_gamer"] }
-  ];
+  // const categories = [
+  //   { name: "gamers", subcategories: ["consolas", "monitores_gamer", "sillas_gamer", "notebook_gamer"] },
+  //   { name: "computacion", subcategories: ["computadores", "mouse", "teclados"] },
+  //   { name: "componentes_pc", subcategories: ["almacenamiento", "memoria_ram", "procesadores", "tarjeta_video"] },
+  //   { name: "audio", subcategories: ["audifonos","microfonos", "audifonos_gamer"] }
+  // ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCachedCategories();
+        setCategories(data.data);
+      } catch (error) {
+        setCategories([]);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     // setIsOpen(false);

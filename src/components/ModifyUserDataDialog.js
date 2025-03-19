@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { putUserData } from "../services/PrivateServices"
 import { useAuth } from "../context/AuthContext";
+import { validateInfo } from '../util/ValidateUserInfo'
 
 
 const ModifyUserDataDialog = ({ onModifyUserDataClose }) => {

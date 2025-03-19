@@ -1,4 +1,3 @@
-//import bannerService from '../services/BannerService';
 import { getBannerImages } from '../services/PublicServices';
 
 let bannerCache = null;

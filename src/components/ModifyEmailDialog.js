@@ -1,5 +1,6 @@
-import {validateEmail} from '../util/ValidateEmail'
 import { useState } from "react";
+import { validateEmail } from '../util/ValidateUserInfo'
+
 
 const ModifyEmailDialog = ({ isOpen, onClose, email, setEmail }) => {
 
