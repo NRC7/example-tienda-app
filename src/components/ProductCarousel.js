@@ -43,23 +43,23 @@ const ProductCarousel = ({ products, mHeight, contWidth, autoplayEnabled, autopl
                             </div>
                             <div className="product-info" >
                                 <h3 onClick={() =>  navigate(`/products/${product?.category}/${product?.subCategory}/${product?.sku}`, { state: { product: product } })} 
-                                style={{ margin: '6px 2px', fontSize: '1.8rem' }}>{product?.name}</h3>
+                                >{product?.name}</h3>
                                 {product?.discountPercentage !== "" ? (
                                     <>
-                                        <span style={{ textDecoration: 'line-through', color: 'red', margin: '6px 2px', fontSize: '1rem' }}>
+                                        <span className="product-info-price-before">
                                             Antes: {formatCurrency(product?.normalPrice)}
                                         </span>
-                                        <span style={{ fontWeight: 'bold', color: 'green', fontSize: '1.4rem', margin: '6px 2px' }}>
+                                        <span className="product-info-price-after">
                                             Oferta: {formatCurrency(product?.dealPrice)}
                                         </span>
-                                        <span style={{ color: 'black', margin: '6px 2px', fontSize: '1.1rem', }}>
+                                        <span className="product-info-price-disc">
                                             ({product?.discountPercentage} de desct.)
                                         </span>
                                     </>
                                 ) : (
-                                    <span style={{ fontWeight: 'bold', color: 'black', fontSize: '1.3rem', margin: '20px 2px' }}>{formatCurrency(product?.normalPrice)}</span>
+                                    <span className="product-info-price-normal">{formatCurrency(product?.normalPrice)}</span>
                                 )}
-                                <p style={{ margin: '6px 2px', fontSize: '0.9rem' }}>Categoria: {sanitizeCategory(product.category)}</p>
+                                <p className="product-info-price-category">Categoria: {sanitizeCategory(product.category)}</p>
                                 {/* Mostrar las estrellas de calificación */}
                                 <Rating rating={5}></Rating>
                                 <button onClick={() => handleAddToCart(product, 1)}>

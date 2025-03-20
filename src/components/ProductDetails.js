@@ -141,8 +141,8 @@ const ProductDetails = ({ selectedProduct }) => {
                     </span>
 
                     <div className='details-product-descriptiono-mob'>
-                        <span style={{ fontSize: '1rem', width: '98%', textAlign: 'center', fontWeight:'bold'}}>Caracteristicas</span>
-                        <ul style={{ width: '98%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 0', display: 'block' }}>
+                        <span style={{ fontSize: '1.1rem', width: '98%', textAlign: 'justify', fontWeight:'bold'}}>Caracteristicas:</span>
+                        <ul style={{ width: '98%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '4px 0px', display: 'block' }}>
                             {descriptionList.map((item, index) => (
                                 <li style={{ fontSize: '1rem', width: '100%', textAlign: 'justify', margin: '4px 0px'}} key={index}>{item}</li>
                             ))}

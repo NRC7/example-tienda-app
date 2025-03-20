@@ -251,22 +251,23 @@
 
     .details-product-info-container h2 {
         font-size: 1.2rem;
-        width: 96%;
+        width: 98%;
         display: flex;
-        margin: 20px 0px;   
+        flex-direction: column;
+        margin: 20px 0px; 
     }
 
     .details-product-info {
         flex-direction: column;
-        width: 98%;
+        width: 100%;
         margin: 2px 0px;  
     }
 
     .details-product-category {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        width: 98%;
+        justify-content: space-evenly;
+        width: 100%;
         font-size: 0.9rem;
         margin: 8px 0px;
     }

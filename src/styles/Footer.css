@@ -31,3 +31,11 @@
     color: white; /* Cambia el color al pasar el mouse */
   }
   
+  @media (max-width: 480px) {
+
+    .footer-content p {
+      width: 90%;
+      text-align: center;
+    }
+
+  }
