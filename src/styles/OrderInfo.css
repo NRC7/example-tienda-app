@@ -101,4 +101,21 @@
   .cart-product-name {
     font-weight: bold;
   }
+
+
+  
+  @media (max-width: 480px) {
+    .table-container{
+      width: 100%;
+    }
+
+    .orders-table th {
+      padding: 0px;
+      width: fit-content;
+      text-align: center;
+    }
+  
+  } 
+
+
   

@@ -91,7 +91,6 @@ const OrderInfo = ({ onRefreshFailed }) => {
                 <table className="orders-table">
                     <thead>
                         <tr>
-                            <th>N° DE ORDEN</th>
                             <th>FECHA COMPRA</th>
                             <th>MEDIO PAGO</th>
                             <th>TOTAL</th>
@@ -103,7 +102,6 @@ const OrderInfo = ({ onRefreshFailed }) => {
                     {orders.map((order, index) => (
                         <React.Fragment key={index}>
                         <tr>
-                            <td>{order._id.slice(-4)}</td>
                             <td>{order.trxDate.slice(0, 19)} hrs.</td>
                             <td>{order.paymentMethod.replaceAll("*", "")}</td>
                             <td>

@@ -75,7 +75,7 @@ const DashBoard = () => {
   };
 
   return (
-    <>
+    <div className='dashboard-container'>
         <div className='dashboard'>
             {/* Encabezado */}
             <div className="dashboard-heading">
@@ -107,7 +107,7 @@ const DashBoard = () => {
             {showModifyUserData && <ModifyUserDataDialog onModifyUserDataClose={handleModifyUserDataClose} />}
             {showLogout && <Logout onLogoutSuccess={handleLogoutSuccess} onLogoutClose={handleLogoutClose} />}
         </div>
-    </>
+    </div>
   );
 };
 
