@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ImageCarousel from './ImageCarousel';
+import BannerCarousel from './BannerCarousel';
 import '../styles/TopBannerGallery.css'
 import { getCachedImages } from '../handlers/CachedImages';
 
@@ -24,7 +24,7 @@ const TopBannerGallery = () => {
 
     return (
         <div className="top-banner-gallery">
-            <ImageCarousel
+            <BannerCarousel
                 images={imgs}
                 mHeight={'100%'}
                 contWidth={'100%'}

@@ -1,0 +1,64 @@
+/* Estilizar los dots de Swiper */
+.swiper-pagination-bullet {
+    background-color: grey;
+    opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: black;
+}
+
+/* Estilizar las flechas de Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+    color: white; /* Cambia el color de las flechas */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    padding: 10px;
+    border-radius: 50%; /* Forma circular */
+    width: 40px;
+    height: 40px;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 20px; /* Tamaño del ícono de la flecha */
+    font-weight: bold;
+}
+
+.swiper-button-prev {
+    left: 10px; /* Ajusta la posición de la flecha izquierda */
+}
+
+.swiper-button-next {
+    right: 10px; /* Ajusta la posición de la flecha derecha */
+}
+
+
+.banner-swiper {
+    object-fit: scale-down;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.banner-swiper-image {
+    object-fit: scale-down;
+    height: 100%;
+    width: 100%;
+}
+
+
+@media (max-width: 480px) {
+    .banner-swiper {
+        object-fit: scale-down;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .banner-swiper-image {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+}
