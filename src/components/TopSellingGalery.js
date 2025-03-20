@@ -28,7 +28,7 @@ const TopSellingGallery = () => {
     const topSellingProducts = Object.values(filteredProducts).flat();    
 
     return (
-        <div >
+        <div className='top-selling-carousel'>
             <h2 style={{ textAlign: 'center', fontWeight: 'bold', margin: '30px 0px' }}>Los más vistos & recién llegados</h2>
             <div className="top-selling-gallery">
                 <ProductCarousel

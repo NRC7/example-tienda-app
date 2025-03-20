@@ -90,6 +90,12 @@
 }
 
 @media (max-width: 480px) {
+    .top-banner-gallery {
+        height: auto; 
+    }
 
-
+    .swiper-button-prev, .swiper-button-next {
+        display: none;
+        z-index: 0;
+    }
 }

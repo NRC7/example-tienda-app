@@ -43,11 +43,11 @@ export const postLogout = async (access_token, _user) => {
     }
 };
 
-export const postRegister = async (_userName, _email, _address, _dateOfBirth, _password) => {
+export const postRegister = async (_userName, _email, _address, _dateOfBirth, _info) => {
   console.log("LLAMANDO SERVICIO REGISTER")
     try {
         const response = await PrivateApi.post(REGISTER_SUFIX, 
-          { user_name: _userName, email: _email, address: _address, dateOfBirth: _dateOfBirth, password: _password }
+          { user_name: _userName, email: _email, address: _address, dateOfBirth: _dateOfBirth, info: _info }
         );
         // response.json()
         //     .then(data => {

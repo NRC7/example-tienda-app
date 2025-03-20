@@ -114,8 +114,8 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
           <input ref={addressRef} type="text" placeholder="Direccion para envío: Calle n°, Comuna, Region" className="input-field" />
           <input ref={dateOfBirthRef} type="date" placeholder="Fecha de nacimiento" className="input-field" />
           <input ref={infoRef} type="password" placeholder="Contraseña" className="input-field" />
-          <span>Mínimo 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, al menos un número, no permite caracteres especiales</span>
-          <input ref={verifyInfoRef} type="password" placeholder="Repite contraseña" className="input-field" />
+          <input ref={verifyInfoRef} type="password" placeholder="Repite contraseña" className="input-field" /> 
+          <p className="hint-label">* Mínimo 8 caracteres, al menos una letra minúscula, al menos un número, no permite caracteres especiales</p>
           <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px', alignItems:'center'}}>
             <button type="submit" className="login-button">
               {(!loading) ? "Registrarse" : "Procesando..."}
@@ -137,6 +137,7 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                z-index: 1;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
             .modal-content {
@@ -157,6 +158,12 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
               border-radius: 5px;
               outline: none;
               transition: border-color 0.3s;
+            }
+            .hint-label {
+              width: 85%;
+              padding: 8px;
+              margin: 5px 0px;
+              font-size: 0.8rem;
             }
             .input-field:focus { border-color: #007bff; }
             .login-button {
@@ -185,6 +192,16 @@ const Register = ({ onRegisterSuccess, onRegisterClose }) => {
             .login-button:hover { background-color: #0056b3; }
             .cancel-button:hover { opacity: 0.7; }
             .error-message { color: red; font-size: 14px; margin-top: 5px; }
+            @media (max-width: 480px) {
+              .login-button {
+                width: 50%;
+                padding: 10px;
+              }
+              .input-field {
+                width: 300px;
+                padding: 10px 12px;
+              }
+            }
           `}
         </style>
     </div>

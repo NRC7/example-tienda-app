@@ -81,15 +81,15 @@ const Cart = () => {
               {cartItems.map((item) => (
                 <div className="cart-item" key={item.sku}>
                   <h3 onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
-                  className="product-name">{item.name}</h3>
+                  className="cart-product-name">{item.name}</h3>
                   <img
                     src={item.imageResources[0]}
                     alt={item.name}
-                    style={{ width: '100%', height: '180px', objectFit: 'scale-down' }}
+                    className='cart-item-img'
                     onClick={() =>  navigate(`/products/${item.category}/${item.subCategory}/${item.sku}`, { state: { product: item } })}
                   />
                   <p>Cantidad: {item.quantity}</p>
-                  <p>{formatCurrency(item.totalPrice)}</p>
+                  <span className='item-total-price'>{formatCurrency(item.totalPrice)}</span>
                   <div className="cart-item-controls">
                     <button
                       onClick={() => decreaseProductQuantity(item.sku)}

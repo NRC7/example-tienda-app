@@ -39,16 +39,15 @@ const Details = () => {
         return <div style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>No se puede cargar el producto seleccionado en este momento.</div>;
     }
 
+    
     // Layout
     return (
         <main>
             <Header />
-            <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
+            <div className='categories-container'>
                 <ProductDetails selectedProduct={selectedProduct} />
             </div>
-            <ChatButton />
-            <BuyingInfo/>
-            <Footer />
+            
         </main>
     );
 

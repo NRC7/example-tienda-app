@@ -83,8 +83,8 @@ const ModifyUserDataDialog = ({ onModifyUserDataClose }) => {
         <h2>Modificar</h2>
         <form onSubmit={handleModifyData}>
           <input ref={infoRef} type="password" placeholder="Contraseña" className="input-field" />
-          <span>Mínimo 8 caracteres, al menos una letra minúscula, al menos una letra mayúscula, al menos un número, no permite caracteres especiales</span>
           <input ref={verifyInfoRef} type="password" placeholder="Verifica tu contraseña" className="input-field" />
+          <p className="hint-label">* Mínimo 8 caracteres, al menos una letra minúscula, al menos un número, no permite caracteres especiales</p>
           <div style={{display: 'flex', width:'100%', justifyContent:'space-between', margin:'12px 0px', alignItems:'center'}}>
             <button type="submit" disabled={isLocked} className="login-button">
               {loading ? "Procesando..." : isLocked ? "Esperando..." : "Iniciar sesión"}
@@ -117,6 +117,12 @@ const ModifyUserDataDialog = ({ onModifyUserDataClose }) => {
                 padding: 40px 80px;
                 border-radius: 5px;
                 text-align: center;
+            }
+            .hint-label {
+              width: 98%;
+              padding: 8px;
+              margin: 5px 0;
+              font-size: 0.8rem;
             }
             .input-field {
               width: 95%;

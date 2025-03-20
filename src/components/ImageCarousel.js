@@ -15,7 +15,7 @@ const ImageCarousel = ({ images, mHeight, contWidth, imgWidth,  autoplayEnabled,
     return (
 
         <Swiper
-         style={{ objectFit: 'scale-down', height: mHeight, width: contWidth, textAlign: 'center' }}
+         className="carousel-swiper"
          pagination={{ clickable: true }} // Activa los dots
          navigation modules={[Navigation, Pagination, Autoplay]}
          slidesPerView={1}
@@ -26,8 +26,7 @@ const ImageCarousel = ({ images, mHeight, contWidth, imgWidth,  autoplayEnabled,
 
                 <SwiperSlide key={index} style={{alignItems: 'center'}}>
 
-                    <img src={src} alt={`img-${index}`} style={{
-                         objectFit: 'scale-down', height: mHeight, width: imgWidth }} />
+                    <img src={src} alt={`img-${index}`} className="carousel-swiper-image" />
 
                 </SwiperSlide>
 

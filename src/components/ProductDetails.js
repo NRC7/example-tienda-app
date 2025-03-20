@@ -43,8 +43,11 @@ const ProductDetails = ({ selectedProduct }) => {
     const selectedSubCategory = selectedProduct.subCategory
 
     return (
-        <>
-            <div className='detailsNavegation'>
+        <div>
+
+        
+
+            <div className='product-details-navegation'>
                 <Link to={`/`}>Home -</Link>
                 <Link to={`/products/${selectedProduct.category}`} state={{category: selectedCategory, label: `Todos los productos en ${sanitizeCategory(selectedCategory)}`}}
                 > {sanitizeCategory(selectedProduct.category)} - </Link>
@@ -58,9 +61,9 @@ const ProductDetails = ({ selectedProduct }) => {
                 </Link>
             </div>
             
-            <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', height: '100%', width: '100%', backgroundColor: '#f0f0f0', marginTop: '12px'}}>
+            <div className='details-product-container'>
                 
-                <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', height: '100%'}}>
+                <div className='details-image-container'>
                         <ImageCarousel
                             images={selectedProduct?.imageResources}
                             mHeight={'600px'}
@@ -70,11 +73,11 @@ const ProductDetails = ({ selectedProduct }) => {
                         />
                 </div>
 
-                <div style={{display:'flex', flexDirection: 'column', alignItems: 'center', width:'50%', minHeight:'100%', fontSize: '0.9rem'}}>
+                <div className='details-product-info-container'>
 
-                    <h2 style={{ fontSize: '1.8rem', width: '70%', textAlign: 'center'}}>{selectedProduct?.name}</h2>
+                    <h2>{selectedProduct?.name}</h2>
 
-                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%', alignItems: 'center', margin: '8px 0px',}}>
+                    <div className='details-product-info'>
                         <span>SKU: {selectedProduct?.sku}</span>
                         <span style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                             Reseñas:
@@ -83,26 +86,26 @@ const ProductDetails = ({ selectedProduct }) => {
                         </span>
                     </div>
 
-                    <div style={{display:'flex', flexDirection: 'row', justifyContent: 'space-between', width: '60%', margin: '10px 0px'}}>
+                    <div className='details-product-category'>
                         <span>Categoria: </span>
                         <span className='review'>{sanitizeCategory(selectedProduct?.category)} / {sanitizeCategory(selectedProduct?.subCategory)}</span>
                     </div>
 
                     {selectedProduct?.discountPercentage !== "" ? (
                         <>
-                            <div style={{display: 'flex', flexDirection: 'column', margin: '10px 0px', width: '60%'}}>
+                            <div className='details-product-discount'>
 
-                                <span style={{ textAlign: 'center', width: '100%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{fontSize: '0.8rem'}}>Normal:</span>
-                                        <span style={{textDecoration: 'line-through', fontSize: '0.8rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
+                                <span className='details-product-discount-through'>
+                                        <span >Normal:</span>
+                                        <span style={{textDecoration: 'line-through'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
                                 </span>
 
-                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{fontSize: '0.9rem'}}>Desc:</span> <span style={{fontSize: '0.9rem'}}>-{selectedProduct?.discountPercentage}</span>
+                                <span className='details-product-discount-percentage'>
+                                        <span >Desc:</span> <span >-{selectedProduct?.discountPercentage}</span>
                                 </span>
 
-                                <span style={{ fontWeight: 'bold', textAlign: 'center', width: '100%', color: '#25d366', margin: '12px 0px', display: 'flex', justifyContent: 'space-between' }}>
-                                        <span style={{fontSize: '1.1rem'}}>Ahora:</span> <span style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.dealPrice)}</span>
+                                <span className='details-product-discount-price'>
+                                        <span >Ahora:</span> <span >{formatCurrency(selectedProduct?.dealPrice)}</span>
                                 </span>
 
                             </div>
@@ -110,38 +113,47 @@ const ProductDetails = ({ selectedProduct }) => {
                         </>
                     ) : (
 
-                        <span style={{ fontWeight: 'bold', textAlign: 'center', width: '60%', color: 'gris', margin: '20px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                        <span className='details-product-normal'>
 
-                            <span style={{fontSize: '1.1rem'}}>Normal:</span>
+                            <span >Normal:</span>
 
-                            <span style={{fontSize: '1.1rem'}}>{formatCurrency(selectedProduct?.normalPrice)}</span>
+                            <span >{formatCurrency(selectedProduct?.normalPrice)}</span>
 
                         </span>
 
                         )
                     }
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '10px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span className='details-product-envio'>
 
-                        <span style={{fontSize: '0.9rem'}}>Envio gratis:</span>
+                        <span >Envio gratis:</span>
                         
-                        <span style={{fontSize: '0.9rem'}}>{selectedProduct.freeShiping === 'true' ? 'Si' : 'No'}</span>
+                        <span >{selectedProduct.freeShiping === 'true' ? 'Si' : 'No'}</span>
 
                     </span>
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', margin: '16px 0px', display: 'flex', justifyContent: 'space-between' }}>
+                    <span className='details-product-date'>
 
-                        <span style={{fontSize: '0.9rem'}}>Fecha estimada de entrega aprox 48 hrs. hábiles:</span>
+                        <span >Fecha estimada de entrega aprox 48 hrs. hábiles:</span>
                         
-                        <span style={{fontSize: '0.9rem'}}>{getEstimatedDeliveryDate().replaceAll('/', ' ')}</span>
+                        <span >{getEstimatedDeliveryDate().replaceAll('/', ' ')}</span>
 
                     </span>
 
-                    <span style={{ textAlign: 'center', width: '60%', color: 'gris', display: 'flex', justifyContent: 'space-between', margin: '25px 0px'  }}>
+                    <div className='details-product-descriptiono-mob'>
+                        <span style={{ fontSize: '1rem', width: '98%', textAlign: 'center', fontWeight:'bold'}}>Caracteristicas</span>
+                        <ul style={{ width: '98%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 0', display: 'block' }}>
+                            {descriptionList.map((item, index) => (
+                                <li style={{ fontSize: '1rem', width: '100%', textAlign: 'justify', margin: '4px 0px'}} key={index}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <span className='details-product-controls'>
 
                         <button className='qt-btn' onClick={() => handleDecrease()} disabled={quantity === 1}>-</button>
 
-                        <span style={{fontSize: '0.8rem', alignSelf: 'center'}}>{quantity}</span>
+                        <span style={{ alignSelf: 'center'}}>{quantity}</span>
 
                         <button className='qt-btn' onClick={() => handleIncrease()} disabled={quantity === 10}>+</button>
                         
@@ -151,14 +163,15 @@ const ProductDetails = ({ selectedProduct }) => {
 
                     </span>
 
+                    
+
                 </div>
 
             </div>
 
-            <h2 style={{ fontSize: '1.4rem', width: '91%', textAlign: 'center'}}>Descripcion</h2>
-
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <ul style={{ width: '27%', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 auto', display: 'block' }}>
+            <div className='details-product-description'>
+                <h2 style={{ fontSize: '1.4rem', width: '91%', textAlign: 'center'}}>Descripcion</h2>
+                <ul style={{ width: 'max-content', backgroundColor: '#f0f0f0', textAlign: 'center', margin: '0 auto', display: 'flex', alignItems:'center', flexDirection:'column' }}>
                     {descriptionList.map((item, index) => (
                         <li style={{ fontSize: '0.9rem', width: '100%', textAlign: 'justify', margin: '8px 0px'}} key={index}>{item}</li>
                     ))}
@@ -167,7 +180,7 @@ const ProductDetails = ({ selectedProduct }) => {
 
             
 
-        </>  
+        </div> 
     )
 };
 

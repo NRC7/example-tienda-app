@@ -67,9 +67,6 @@ body {
 @media (max-width: 480px) {
     .navbar {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 20px;
         background-color: white;
         color: black;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -78,34 +75,12 @@ body {
         left: 0;
         right: 0;
         width: 100%;
-        z-index: 1000; /* Mantiene el navbar encima de otros elementos */
         font-size: 1.2rem;
-    }
-
-    .hamburger {
-        margin: 0; /* Separar el menú hamburguesa de otros elementos */
-    }
-
-    .dropdown-menu {
-        top: 62px;
-        left: 10px;
-    }
-
-    .session-links {
-        margin-left: 6px;
-        margin-top: 0px; /* Separar el enlace de sesión del carrito */
-        justify-content: flex-start; /* Alinear los enlaces hacia la izquierda */
+        max-width: 480px;
     }
 
     .cart-icon {
-        margin: 0px 40px;
+        right: 20px;
     }
 
-    .dropdown-menu {
-        width: 100%; /* 100% del ancho de la pantalla */
-        height: 20vh; /* 30% del largo de la pantalla */
-        left: 0; /* Mantener alineado a la izquierda */
-        right: 0;
-        top: 60px; /* Se ajusta ligeramente si es necesario para el navbar */
-    }
 }

@@ -53,9 +53,9 @@ const ProductGrid = ({ selectedProducts, label }) => {
 
     return (
         <>
-            <div style={{display:'flex', marginBottom:'28px', marginInlineStart:'10%',marginInlineEnd:'10%', justifyContent:'space-between', alignItems:'center'}}>
-                <h3 style={{textAlign:'start', fontSize:'1.2rem'}}>{label}</h3>
-                <select style={{height:'40px', width:'18%', textAlign:'start', fontSize:'1rem', padding:'4px 6px', borderRadius:'5px'}} onChange={(e) =>{
+            <div className='grid-filter-container'>
+                <h3 className='grid-filter-label'>{label}</h3>
+                <select className='grid-filter-select' onChange={(e) =>{
                     setSelectedFilterOption(e.target.value)}
                 }>
                     <option value="0">Mejor puntuación</option>
@@ -66,7 +66,7 @@ const ProductGrid = ({ selectedProducts, label }) => {
                 </select>
             </div>
         
-            <div style={{display:'flex', flexDirection: 'row', justifyContent: 'center', height: '100%', width: '100%', backgroundColor: '#f0f0f0', minHeight:'80vh'}}>  
+            <div className='grid-content'>  
             
                 <div className="grid-container">
 

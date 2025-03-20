@@ -96,3 +96,19 @@
 .arrow.right {
     right: 10px;
 }
+
+@media (max-width: 480px) {
+
+    .pr-card {
+        width: 200px;
+    }
+
+    .pr-cont {
+        margin: 10px 42px;
+    }
+
+    .arrow {
+        display: none;
+    }
+
+}

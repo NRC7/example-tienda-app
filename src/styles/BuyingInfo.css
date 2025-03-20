@@ -41,4 +41,17 @@
     max-width: 100%; /* Limitar el ancho del texto */
     word-wrap: break-word; /* Asegura que el texto no se desborde */
   }
+
+
+@media (max-width: 480px) {
+  .col-full-dit {
+    background-color: #25d366;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 50px;
+    flex-direction: column;
+  }
+}
   

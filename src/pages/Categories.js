@@ -28,7 +28,7 @@ const Categories = () => {
     return (
         <main>
             <Header />
-            <div style={{ padding: '0 100px', backgroundColor: '#f0f0f0' }}>
+            <div className='categories-container'>
                 <div className='detailsNavegation'>
                     <Link className='' to={`/`}>Home - </Link>
                     <span className='highlight'>{sanitizeCategory(selectedCategory)}</span>

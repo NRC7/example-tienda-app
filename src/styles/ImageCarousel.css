@@ -32,3 +32,37 @@
 .swiper-button-next {
     right: 10px; /* Ajusta la posición de la flecha derecha */
 }
+
+
+.carousel-swiper {
+    object-fit: scale-down;
+    height: 600px;
+    width: 700px;
+    text-align: center;
+}
+
+.carousel-swiper-image {
+    object-fit: scale-down;
+    height: 600px;
+    width: 500px;
+}
+
+
+@media (max-width: 480px) {
+    .carousel-swiper {
+        object-fit: scale-down;
+        height: 250px;
+        width: 300px;
+    }
+    
+    .carousel-swiper-image {
+        object-fit: scale-down;
+        height: 250px;
+        width: 300px;
+    }
+
+    .swiper-slide {
+        height: 250px;
+    }
+
+}

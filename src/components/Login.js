@@ -113,6 +113,7 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                z-index: 1;
                 box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             }
             .modal-content {
@@ -161,6 +162,16 @@ const Login = ({ onLoginSuccess, onLoginClose }) => {
             .login-button:hover { background-color: #0056b3; }
             .cancel-button:hover { opacity: 0.7; }
             .error-message { color: red; font-size: 14px; margin-top: 5px; }
+            @media (max-width: 480px) {
+              .login-button {
+                width: 50%;
+                padding: 10px;
+              }
+              .input-field {
+                width: 300px;
+                padding: 10px 12px;
+              }
+            }
           `}
         </style>
     </div>
