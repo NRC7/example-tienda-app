@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/example-tienda-app/static/css/main.be0d8e5f.css",
-    "main.js": "/example-tienda-app/static/js/main.b009c4a2.js",
+    "main.css": "/example-tienda-app/static/css/main.4e6bb97a.css",
+    "main.js": "/example-tienda-app/static/js/main.034ff4d3.js",
     "static/js/206.24308b00.chunk.js": "/example-tienda-app/static/js/206.24308b00.chunk.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/example-tienda-app/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/example-tienda-app/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
@@ -11,7 +11,7 @@
     "index.html": "/example-tienda-app/index.html"
   },
   "entrypoints": [
-    "static/css/main.be0d8e5f.css",
-    "static/js/main.b009c4a2.js"
+    "static/css/main.4e6bb97a.css",
+    "static/js/main.034ff4d3.js"
   ]
 }
