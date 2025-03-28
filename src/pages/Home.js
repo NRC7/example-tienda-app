@@ -23,7 +23,15 @@ const Home = () => {
     }, [productsInContexts]);
 
     if (loading) {
-        return <div className="loading" style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>Cargando productos...</div>;
+        return <div style={{ display:'flex', flexDirection: 'column', jusifyContent:'space-between' }}>
+            <span style={{ textAlign: 'center', marginTop: '200px', fontSize: '18px', color: '#333' }}>Cargando productos...</span>;
+            <div className="loading-screen">
+                <div className="roller">
+                    <div className="handle"></div>
+                </div>
+                <div className="paint"></div>
+            </div>
+        </div>
     }
 
     return (

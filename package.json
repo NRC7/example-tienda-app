@@ -29,7 +29,6 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "build-pwa": "workbox generateSW workbox-config.js",
     "start": "cross-env HTTPS=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
